@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "baseUrl": "..",
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "skipLibCheck": true,
+//    "allowJs": true,
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "lib": ["esnext", "dom"],
+    "types": [
+      "web-bluetooth",
+      "vite/client"
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "compilerOptions": {
+      "types": ["vite-plugin-svg-icons/client"]
+    }
+  },
+  "include": [
+    "admin/src/**/*.ts",
+    "admin/src/**/*.d.ts",
+    "admin/src/**/*.tsx",
+    "admin/src/**/*.vue"
+  ],
+  "exclude": ["node_modules"]
+}
