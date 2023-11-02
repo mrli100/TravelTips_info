@@ -12,6 +12,9 @@ import { useI18n } from 'vue-i18n'
 import { messages } from '@/i18n'
 import { handleThemeStyle } from '@/utils/theme'
 import { useAppStore } from '@/store/modules/app'
+import 'vant/lib/index.css'
+// 引入模块后自动生效
+import '@vant/touch-emulator'
 
 const appStore = useAppStore()
 const { t } = useI18n()
