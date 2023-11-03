@@ -2,6 +2,10 @@
 	<el-config-provider :locale="locale" :size="size">
 		<router-view />
 	</el-config-provider>
+	<van-nav-bar safe-area-inset-top />
+
+	<!-- 开启底部安全区适配 -->
+	<van-number-keyboard safe-area-inset-bottom />
 </template>
 
 <script setup lang="ts">
