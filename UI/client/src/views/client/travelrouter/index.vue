@@ -1,7 +1,16 @@
 <template>
 	<!-- 搜索内容 -->
 	<van-row>
-		<van-col span="24"><van-search shape="round" v-model="value" placeholder="请输入搜索关键词" /></van-col>
+		<van-col span="24">
+			<van-nav-bar fixed @click-left="onClickLocation">
+				<template #left>
+					<van-icon name="location-o" size="18">北京</van-icon>
+				</template>
+				<template #title>
+					<van-search shape="round" v-model="value" placeholder="请输入搜索关键词" />
+				</template>
+			</van-nav-bar>
+		</van-col>
 	</van-row>
 	<!-- 轮播图 -->
 	<van-row>
@@ -80,7 +89,7 @@ const onLoad = () => {
 
 		for (let i = 0; i < 10; i++) {
 			list.value.push(list.value.length + 1)
-			showToast('加载' + (list.value.length))
+			showToast('加载' + list.value.length)
 		}
 		loading.value = false
 		if (list.value.length >= 60) {

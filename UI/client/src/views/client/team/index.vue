@@ -28,22 +28,24 @@
 		</van-col>
 	</van-row>
 	<!-- 列表和下拉刷新 -->
-	<van-row>
-		<van-col span="24">
-			<van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-				<van-list offset="400" v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-					<van-cell v-for="item in list" :key="item" :title="item">ASDAS</van-cell>
-				</van-list>
-			</van-pull-refresh>
-		</van-col>
-	</van-row>
+	<div ref="listRow" style="height: 100%">
+		<van-row>
+			<van-col span="24">
+				<van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+					<van-list offset="400" v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+						<van-cell v-for="item in list" :key="item" :title="item">ASDAS</van-cell>
+					</van-list>
+				</van-pull-refresh>
+			</van-col>
+		</van-row>
+	</div>
 	<!-- 底部导航 -->
 	<van-row>
 		<van-col span="24">
 			<tabbar>底部聊天</tabbar>
 		</van-col>
 	</van-row>
-	<!-- 底部导航 -->
+	<!-- 弹窗界面 -->
 	<van-row>
 		<van-col span="24">
 			<van-action-sheet v-model:show="areaShow" title="标题"><div class="content">内容</div></van-action-sheet>
@@ -52,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, reactive } from 'vue'
 import { showToast } from 'vant'
 import tabbar from '@/layout/components/client/tabbar/index.vue'
 //变量定义
@@ -66,10 +68,17 @@ const list = ref([])
 const loading = ref(false)
 const finished = ref(false)
 const refreshing = ref(false)
+const listRow = ref(null)
 
 const onClickLocation = () => {
 	showToast('你选择了位置')
 }
+
+onMounted(() => {
+	const height = listRow.value.offsetHeight
+	let lisRowtHeight = height - 54 - 150 - 40 - 44 - 50
+	document.getElementsByClassName('van-list')[0].style.height = lisRowtHeight + 'px'
+})
 
 const onLoad = () => {
 	setTimeout(() => {
@@ -80,7 +89,7 @@ const onLoad = () => {
 
 		for (let i = 0; i < 10; i++) {
 			list.value.push(list.value.length + 1)
-			showToast('加载' + (list.value.length))
+			showToast('加载' + list.value.length)
 		}
 		loading.value = false
 		if (list.value.length >= 60) {
@@ -119,7 +128,7 @@ const onRefresh = () => {
 }
 
 :deep(.van-list) {
-	height: 30vh;
+	height: 100px;
 	overflow-y: scroll;
 }
 </style>
