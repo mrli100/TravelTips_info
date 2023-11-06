@@ -33,7 +33,7 @@
 			<van-col span="24">
 				<van-pull-refresh v-model="refreshing" @refresh="onRefresh">
 					<van-list offset="400" v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-						<van-cell v-for="item in list" :key="item" :title="item">ASDAS</van-cell>
+						<cardList :list="list"></cardList>
 					</van-list>
 				</van-pull-refresh>
 			</van-col>
@@ -57,6 +57,8 @@
 import { ref, onMounted, reactive } from 'vue'
 import { showToast } from 'vant'
 import tabbar from '@/layout/components/client/tabbar/index.vue'
+//引入组件
+import cardList from './components/cardList.vue'
 //变量定义
 const value = ''
 const images = ['https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg', 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-2.jpeg']
