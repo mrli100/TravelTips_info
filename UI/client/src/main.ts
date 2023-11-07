@@ -17,6 +17,9 @@ import 'xe-utils'
 import VXETable from 'vxe-table'
 import 'vxe-table/lib/style.css'
 
+//瀑布流
+import { VueMasonryPlugin } from 'vue-masonry'
+
 import FastTableColumn from '@/components/fast-table-column'
 import FastRadioGroup from '@/components/fast-radio-group'
 import FastSelect from '@/components/fast-select'
@@ -64,6 +67,8 @@ app.use(FastUser)
 app.use(SvgIcon)
 app.use(ElementPlus)
 app.use(VXETable)
+//瀑布流
+app.use(VueMasonryPlugin)
 
 // 增强了 Vue Router v4 的滚动行为
 

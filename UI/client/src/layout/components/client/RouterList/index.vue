@@ -1,9 +1,5 @@
-<template>
-	<van-pull-refresh v-model="refreshing" @refresh="onRefresh" .class="refreshDiv">
-		<van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-			<van-cell v-for="item in list" :key="item" :title="item" />
-		</van-list>
-	</van-pull-refresh>
+<!-- <template>
+
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
@@ -46,4 +42,4 @@ const onRefresh = () => {
 	onLoad()
 }
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped></style> -->

@@ -30,7 +30,7 @@ public class TcentMapUtil {
         String s = SecureUtil.md5(sigUrl);
         //是否需要编码处理 开始
         try {
-            params.put("address", URLEncoder.encode(address, "UTF-8" ));
+            params.put("address", URLEncoder.encode(address, "UTF-8"));
         } catch (UnsupportedEncodingException e) {
             throw new RuntimeException(e);
         }
@@ -40,6 +40,20 @@ public class TcentMapUtil {
         return result;
     }
 
+    /**
+     * 获取省市区信息
+     */
+    public static String district() {
+        String url = "/ws/district/v1/list?";
+        TreeMap params = new TreeMap<>();
+        params.put("key", KEY_PRAME);
+        String sigUrl = url + treeMapToURl(params) + SECRET_KEY;
+        String s = SecureUtil.md5(sigUrl);
+        //是否需要编码处理 结束
+        String reqUrl = HOST_URL + url + treeMapToURl(params) + "&sig=" + s;
+        String result = HttpUtil.get(reqUrl);
+        return result;
+    }
 
     /**
      * 通过地址获取定位信息
@@ -88,7 +102,7 @@ public class TcentMapUtil {
             Map.Entry entry = (Map.Entry) it.next();
             Object key = entry.getKey();
             Object value = entry.getValue();
-            stringBuffer.append(entry.getKey() + "=" + entry.getValue()).append("&" );
+            stringBuffer.append(entry.getKey() + "=" + entry.getValue()).append("&");
         }
         return stringBuffer.toString().substring(0, stringBuffer.length() - 1);
     }
@@ -107,8 +121,9 @@ public class TcentMapUtil {
 //        } catch (Exception e) {
 //            throw new RuntimeException(e);
 //        }
-        System.out.println(geocoder_address("金塔沙漠胡杨林景区" ));
-
-        System.out.println(geocoder_location("45.136723,124.816696", 1, "address_format=short;radius=1000;policy=1" ));
+//        System.out.println(geocoder_address("金塔沙漠胡杨林景区" ));
+//
+//        System.out.println(geocoder_location("45.136723,124.816696", 1, "address_format=short;radius=1000;policy=1" ));
+        System.out.println(district());
     }
 }

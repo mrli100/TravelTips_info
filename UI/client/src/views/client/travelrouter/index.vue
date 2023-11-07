@@ -5,7 +5,9 @@
 				<van-tab title="攻略">
 					<travelPage />
 				</van-tab>
-				<van-tab title="路线">内容 2</van-tab>
+				<van-tab title="路线">
+					<routerPage />
+				</van-tab>
 			</van-tabs>
 		</van-col>
 	</van-row>
@@ -23,6 +25,7 @@ import { showToast } from 'vant'
 import tabbar from '@/layout/components/client/tabbar/index.vue'
 //攻略页面
 import travelPage from './travle/index.vue'
+import routerPage from './router/index.vue'
 //变量定义
 let active = ref(0)
 const onClickTab = ({ title }) => {

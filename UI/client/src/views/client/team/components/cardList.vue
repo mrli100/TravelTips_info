@@ -1,11 +1,7 @@
 <template>
 	<div>
-		<van-card
-			v-for="(item, index) in list"
-			:key="index"
-			class="Van_card"
-			thumb="https://img1.baidu.com/it/u=3370980328,2295504291&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500"
-		>
+		<van-card v-for="(item, index) in list" :key="index" class="Van_card"
+			thumb="https://img1.baidu.com/it/u=3370980328,2295504291&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500">
 			<!-- 标题 -->
 			<template #title>
 				<div class="title">咖自助餐厅 A区</div>
@@ -55,9 +51,11 @@ const processPrice = price => {
 	.title {
 		font-size: 15px;
 	}
+
 	.desc {
 		color: #908888;
 	}
+
 	.dot {
 		display: inline-block;
 		width: 6px;
@@ -66,11 +64,13 @@ const processPrice = price => {
 		border-radius: 100%;
 		vertical-align: middle;
 	}
+
 	.tags {
 		span {
 			margin-right: 5px;
 		}
 	}
+
 	.tag {
 		padding: 2px 5px;
 		font-size: 11px;
@@ -80,6 +80,7 @@ const processPrice = price => {
 		top: -5px;
 		left: -2px;
 	}
+
 	.rightTag {
 		position: absolute;
 		top: -7px;
@@ -92,28 +93,35 @@ const processPrice = price => {
 		line-height: 20px;
 		color: #fff;
 	}
+
 	.one {
 		background: #ff5a57;
 	}
+
 	.two {
 		background: #ff9800;
 	}
+
 	.three {
 		background: #ffd502;
 	}
-	::v-deep .van-card__num {
+
+	:deep(.van-card__num) {
 		width: 100%;
 		display: flex;
 		justify-content: space-between;
 	}
-	::v-deep .van-card__thumb {
+
+	:deep(.van-card__thumb) {
 		flex: 3;
 	}
-	::v-deep .van-card__content {
+
+	:deep(.van-card__content) {
 		flex: 6;
 		margin-left: 10px;
 	}
-	::v-deep .van-card__tag {
+
+	:deep(.van-card__tag) {
 		position: static !important;
 	}
 }

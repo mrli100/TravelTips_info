@@ -19,14 +19,16 @@
 			</van-nav-bar>
 		</van-col>
 	</van-row> -->
-	<!-- 列表和下拉刷新 -->
+	<!-- 瀑布流 -->
 	<van-row>
-		<van-col span="24">
-			<van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-				<van-list offset="400" v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-					<van-cell v-for="item in list" :key="item" :title="item">ASDAS</van-cell>
-				</van-list>
-			</van-pull-refresh>
+		<van-col>
+			<div style="overflow-y: scroll">
+				<div v-masonry fit-width="true" transition-duration="0.3s" item-selector=".card" origin-left="false">
+					<div v-for="pet in listwaterfall" :key="pet['code']" v-masonry-tile class="card">
+						{{ pet.code }}
+					</div>
+				</div>
+			</div>
 		</van-col>
 	</van-row>
 	<!-- 底部导航 -->
@@ -55,11 +57,34 @@ const value1 = ref(0)
 
 //地区选择
 let areaShow = ref(false)
-//查询列表
-const list = ref([])
-const loading = ref(false)
-const finished = ref(false)
-const refreshing = ref(false)
+//瀑布流
+const listwaterfall = [
+	{
+		code: 1,
+		pic: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
+	},
+	{
+		code: 2,
+		pic: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
+	},
+	{
+		code: 3,
+		pic: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
+	},
+	{
+		code: 4,
+		pic: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
+	},
+	{
+		code: 5,
+		pic: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
+	},
+	{
+		code: 6,
+		pic: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
+	}
+]
+const url = 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
 //地区选择代码
 const activeId = ref(1)
 const activeIndex = ref(0)
@@ -90,54 +115,14 @@ const onClickLocation = () => {
 		areaShow.value = false
 	}
 }
-
-const onLoad = () => {
-	setTimeout(() => {
-		if (refreshing.value) {
-			list.value = []
-			refreshing.value = false
-		}
-
-		for (let i = 0; i < 10; i++) {
-			list.value.push(list.value.length + 1)
-			showToast('加载' + list.value.length)
-		}
-		loading.value = false
-		if (list.value.length >= 60) {
-			finished.value = true
-		}
-	}, 1000)
-}
-const onRefresh = () => {
-	// 清空列表数据
-	finished.value = false
-
-	// 重新加载数据
-	// 将 loading 设置为 true，表示处于加载状态
-	loading.value = true
-	onLoad()
-}
 </script>
 <style lang="less" scoped>
-.van-swipe {
-	top: 5px;
-	height: 150px;
-	text-align: center;
-
-	img {
-		max-height: 100%;
-		max-width: 100%;
-	}
+//瀑布流样式
+.card {
+	background-color: red;
 }
 
-.my-swipe .van-swipe-item {
-	color: #fff;
-	font-size: 20px;
-	line-height: 150px;
-	text-align: center;
-	background-color: #39a9ed;
-}
-
+//强制修改滚动列表
 :deep(.van-list) {
 	height: 30vh;
 	overflow-y: scroll;
