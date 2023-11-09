@@ -13,6 +13,7 @@
     "@vant/area-data": "^1.5.1",
     "@vant/touch-emulator": "^1.4.0",
     "@vant/use": "^1.6.0",
+    "@varlet/ui": "^2.18.2",
     "@vueuse/core": "9.1.1",
     "@wangeditor/editor": "5.1.1",
     "@wangeditor/editor-for-vue": "5.1.12",

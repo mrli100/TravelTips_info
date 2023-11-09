@@ -41,6 +41,10 @@ const constantRoutes: RouteRecordRaw[] = [
 		component: () => import('../views/client/team/index.vue')
 	},
 	{
+		path: '/user',
+		component: () => import('../views/client/user/index.vue')
+	},
+	{
 		path: '/404',
 		component: () => import('../views/404.vue')
 	}
@@ -159,7 +163,7 @@ export const router = createRouter({
 })
 
 // 白名单列表
-const whiteList = ['/login', '/client', '/travelrouter', '/team']
+const whiteList = ['/login', '/client', '/travelrouter', '/team', '/user']
 
 // 路由跳转前
 router.beforeEach(async (to, from, next) => {
