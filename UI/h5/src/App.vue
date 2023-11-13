@@ -1,30 +1,28 @@
-<script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
-</script>
-
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
-  </div>
-  <HelloWorld msg="Vite + Vue" />
+  <van-row>
+    <van-col span="24">
+      <van-tabs v-model:active="active" @click-tab="onClickTab">
+        <van-tab title="攻略"></van-tab>
+        <van-tab title="路线"></van-tab>
+      </van-tabs>
+    </van-col>
+  </van-row>
+  <van-row>
+    <van-col span="24">
+      <tabbar>底部聊天</tabbar>
+    </van-col>
+  </van-row>
+  <!-- 开启底部安全区适配 -->
+  <van-number-keyboard safe-area-inset-bottom />
 </template>
 
-<style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+<script setup lang="ts">
+import { ref } from 'vue'
+import { showToast } from 'vant'
+//变量定义
+let active = ref(0)
+const onClickTab = ({ title }) => {
+  showToast(title)
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
-</style>
+</script>
+<style scoped></style>
