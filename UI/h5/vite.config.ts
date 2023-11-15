@@ -16,15 +16,22 @@ export default defineConfig({
   resolve: {
     // 配置别名
     alias: {
-      '@': resolve(__dirname, './src'),
+      '@': resolve(__dirname, './src/*'),
     }
   },
   plugins: [vue(),
   AutoImport({
     resolvers: [ElementPlusResolver(), VantResolver()],
+    imports: [
+      'vue',
+      'vue-router',
+    ]
   }),
+
   Components({
     resolvers: [ElementPlusResolver(), VantResolver()],
+    dts: true,
+    types: []
   })],
   server: {
     host: '0.0.0.0',

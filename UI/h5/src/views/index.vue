@@ -19,13 +19,14 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import { ref } from 'vue'
 import { showToast } from 'vant'
+import tabbar from '@/view/tabbar/index.vue'
 //底部菜单
-import tabbar from '@/layout/components/client/tabbar/index.vue'
 //攻略页面
-import travelPage from './travle/index.vue'
-import routerPage from './router/index.vue'
+import travelPage from '@/view/travle/index.vue'
+import routerPage from '@/view/router/index.vue'
+showToast("aaaaaaaaaaaaaaaaa")
 //变量定义
 let active = ref(0)
 const onClickTab = ({ title }) => {

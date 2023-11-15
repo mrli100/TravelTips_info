@@ -11,24 +11,30 @@ const routes = [
 	{
 		path: '/',
 		name: 'main',
-		component: () => import('../views/travelrouter/travle/index.vue'),
-	}
+		component: () => import('../views/index.vue'),
+	},
+	{
+		path: '/tabbar',
+		name: 'tabbar',
+		component: () => import('@/views/tabbar/index.vue'),
+	},
 ]
 
 // 创建路由实例并传递 `routes` 配置
 const router = createRouter({
-	// eslint-disable-next-line node/prefer-global/process
 	history: createWebHistory(),
 	routes,
 })
 
 router.beforeEach((_to, _from, next) => {
-	NProgress.start() // start progress bar
+	// start progress bar
+	NProgress.start()
 	next()
 })
 
 router.afterEach(() => {
-	NProgress.done() // finish progress bar
+	// finish progress bar
+	NProgress.done()
 })
 
 // 导出路由实例，并在 `main.ts` 挂载
