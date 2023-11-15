@@ -18,7 +18,7 @@ const routes = [
 // 创建路由实例并传递 `routes` 配置
 const router = createRouter({
 	// eslint-disable-next-line node/prefer-global/process
-	history: createWebHistory(process.env.VUE_APP_PUBLIC_PATH),
+	history: createWebHistory(),
 	routes,
 })
 
