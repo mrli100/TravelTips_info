@@ -1,28 +1,69 @@
 <template>
+	<van-row class="user-settings">
+		<van-col span="24" class="settings">
+			<van-icon name="setting-o" size="1.6rem" />
+		</van-col>
+	</van-row>
 	<van-row class="user-info">
-		<van-col span="24">
-			<van-icon name="pending-payment"></van-icon>
-			待付款
+		<van-col span="4" class="avatar">
+			<van-image round width="6rem" height="6rem" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg" />
+		</van-col>
+		<van-col span="20" class="info">
+			<van-row>
+				<van-col span="24" class="introduce">
+					<van-row>
+						<van-col span="4">
+							<span>南栀</span>
+						</van-col>
+						<van-col span="20" style="text-align: left;font-size: 14px;margin-top: 2px;">
+							<span>ID: 10001</span>
+						</van-col>
+					</van-row>
+				</van-col>
+				<van-col span="24" class="introduce">
+					<span>简介：我去旅行是因为我决定了要去，并不是因为对风景的兴趣。</span>
+				</van-col>
+				<van-col span="24" class="introduce">
+					<var-badge class="label" type="info" value="旅游达人" />
+					<var-badge class="label" type="info" value="科技博主" />
+				</van-col>
+			</van-row>
 		</van-col>
 	</van-row>
+	<van-divider />
 	<van-row class="user-link">
-		<van-col span="6">
-			<van-icon name="pending-payment"></van-icon>
-			待付款
+		<van-col span="8">
+			<van-row>
+				<van-col span="24">
+					<span>12</span>
+				</van-col>
+				<van-col span="24">
+					<span>关注</span>
+				</van-col>
+			</van-row>
 		</van-col>
-		<van-col span="6">
-			<van-icon name="pending-orders"></van-icon>
-			待接单
+		<van-col span="8">
+			<van-row>
+				<van-col span="24">
+					<span>1288</span>
+				</van-col>
+				<van-col span="24">
+					<span>粉丝</span>
+				</van-col>
+			</van-row>
 		</van-col>
-		<van-col span="6">
-			<van-icon name="pending-deliver"></van-icon>
-			待发货
-		</van-col>
-		<van-col span="6">
-			<van-icon name="logistics"></van-icon>
-			待收货
+		<van-col span="8">
+			<van-row>
+				<van-col span="24">
+					<span>6665</span>
+				</van-col>
+				<van-col span="24">
+					<span>获赞和收藏</span>
+				</van-col>
+			</van-row>
 		</van-col>
 	</van-row>
+	<van-divider />
 	<van-cell-group class="user-group">
 		<van-cell title="全部订单" icon="records" is-link to="/OrderList" /></van-cell-group>
 	<van-cell-group>
@@ -41,23 +82,32 @@
 import tabbar from "@/views/tabbar/index.vue";
 </script>
 
-<style lang="stylus" scoped>
-.user-poster
-  width 100%
-  height auto
-  display block
+<style lang="less" scoped>
+.user-info {
+	.avatar {
+		text-align: center;
+		margin-top: 1px;
+	}
 
-.user-link
-  text-align center
-  font-size 12px
-  padding 15px 0
-  background-color #fff
+	.info {
+		.introduce {
+			margin-top: 0.5rem;
 
-  .van-icon
-    display block
-    margin-bottom 4px
-    font-size 24px
+			.var--box {
+				margin-right: 0.4rem;
+			}
+		}
+	}
 
-.user-group
-  margin-bottom 0.3rem
+}
+
+
+.user-link {
+	text-align: center;
+}
+
+.user-settings {
+	text-align: right;
+	margin: 0.5rem;
+}
 </style>

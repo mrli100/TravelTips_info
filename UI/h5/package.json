@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@varlet/ui": "^2.18.4",
     "nprogress": "^0.2.0",
     "vant": "^4.7.3",
     "vue": "^3.3.4",
