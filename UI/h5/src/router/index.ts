@@ -3,6 +3,9 @@ import { createRouter, createWebHistory } from 'vue-router'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 
+import main from '../views/index.vue'
+import tabbar from '../views/tabbar/index.vue'
+
 // 导入路由组件
 NProgress.configure({ showSpinner: true, parent: '#app' })
 
@@ -11,12 +14,12 @@ const routes = [
 	{
 		path: '/',
 		name: 'main',
-		component: () => import('../views/index.vue'),
+		component: main,
 	},
 	{
 		path: '/tabbar',
 		name: 'tabbar',
-		component: () => import('@/views/tabbar/index.vue'),
+		component: tabbar,
 	},
 ]
 
