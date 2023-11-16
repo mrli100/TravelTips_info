@@ -23,6 +23,11 @@ const routes = [
     name: "gonglve",
     component: () => import("@/views/gonglve/index.vue"),
   },
+  {
+    path: "/user",
+    name: "user",
+    component: () => import("@/views/user/index.vue"),
+  },
 ];
 
 // 创建路由实例并传递 `routes` 配置

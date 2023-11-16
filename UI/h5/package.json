@@ -22,6 +22,7 @@
     "@vant/auto-import-resolver": "^1.0.2",
     "@vitejs/plugin-vue": "^4.2.3",
     "less": "^4.2.0",
+    "stylus": "^0.61.0",
     "typescript": "^5.0.2",
     "unplugin-auto-import": "^0.16.7",
     "unplugin-vue-components": "^0.25.2",
