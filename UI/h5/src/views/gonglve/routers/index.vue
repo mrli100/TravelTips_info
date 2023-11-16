@@ -19,18 +19,6 @@
 			</van-nav-bar>
 		</van-col>
 	</van-row> -->
-	<!-- 瀑布流 -->
-	<van-row>
-		<van-col>
-			<div style="overflow-y: scroll">
-				<div v-masonry fit-width="true" transition-duration="0.3s" item-selector=".card" origin-left="false">
-					<div v-for="pet in listwaterfall" :key="pet['code']" v-masonry-tile class="card">
-						{{ pet.code }}
-					</div>
-				</div>
-			</div>
-		</van-col>
-	</van-row>
 	<!-- 底部导航 -->
 	<van-row>
 		<van-col span="24">
@@ -44,9 +32,8 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
-import { showToast } from 'vant'
-import tabbar from '@/layout/components/client/tabbar/index.vue'
+import { ref } from 'vue'
+import tabbar from "@/views/tabbar/index.vue";
 // 变量定义
 const option1 = [
 	{ text: '最新排序', value: 0 },
@@ -54,37 +41,8 @@ const option1 = [
 	{ text: '查看排序', value: 2 }
 ]
 const value1 = ref(0)
-
 //地区选择
 let areaShow = ref(false)
-//瀑布流
-const listwaterfall = [
-	{
-		code: 1,
-		pic: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
-	},
-	{
-		code: 2,
-		pic: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
-	},
-	{
-		code: 3,
-		pic: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
-	},
-	{
-		code: 4,
-		pic: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
-	},
-	{
-		code: 5,
-		pic: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
-	},
-	{
-		code: 6,
-		pic: 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
-	}
-]
-const url = 'https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg'
 //地区选择代码
 const activeId = ref(1)
 const activeIndex = ref(0)

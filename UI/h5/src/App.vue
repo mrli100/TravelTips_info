@@ -1,5 +1,4 @@
 <template>
-  <div>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaasdsd</div>
   <RouterView />
   <!-- 开启底部安全区适配 -->
   <van-number-keyboard safe-area-inset-bottom />

@@ -16,6 +16,7 @@
     "vue-router-better-scroller": "^0.0.0"
   },
   "devDependencies": {
+    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@types/node": "^20.9.0",
     "@types/nprogress": "^0.2.3",
     "@vant/auto-import-resolver": "^1.0.2",

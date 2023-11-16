@@ -11,6 +11,9 @@
     "skipLibCheck": true,
     "baseUrl": "./",
     "paths": {
+      "@": [
+        "src"
+      ],
       "@/*": [
         "src/*"
       ]
@@ -21,12 +24,16 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "types": ["node"],
+    "types": [
+      "node"
+    ],
     "jsx": "preserve",
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true, 
+    "noUnusedLocals": false,
+    "noUnusedParameters": true,
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
     "noFallthroughCasesInSwitch": true
   },
   "include": [
