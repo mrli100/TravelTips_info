@@ -1,6 +1,5 @@
 <template>
 	<!-- 搜索内容 -->
-
 	<van-row>
 		<van-col span="24">
 			<div ref="serachElement">

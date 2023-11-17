@@ -5,10 +5,10 @@
 		</van-col>
 	</van-row>
 	<van-row class="user-info">
-		<van-col span="4" class="avatar">
+		<van-col span="5" class="avatar">
 			<van-image round width="6rem" height="6rem" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg" />
 		</van-col>
-		<van-col span="20" class="info">
+		<van-col span="19" class="info">
 			<van-row>
 				<van-col span="24" class="introduce">
 					<van-row>
@@ -90,6 +90,9 @@ import tabbar from "@/views/tabbar/index.vue";
 	}
 
 	.info {
+
+		padding-left: 10px;
+
 		.introduce {
 			margin-top: 0.5rem;
 

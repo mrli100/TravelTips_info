@@ -6,31 +6,18 @@
       </van-dropdown-menu>
     </van-col>
   </van-row>
-  <!-- 搜索内容 -->
-  <!-- <van-row>
-		<van-col span="24">
-			<van-nav-bar fixed @click-left="onClickLocation">
-				<template #left>
-					<van-icon name="location-o" size="18">北京</van-icon>
-				</template>
-				<template #title>
-					<van-search shape="round" v-model="value" placeholder="请输入搜索关键词" />
-				</template>
-			</van-nav-bar>
-		</van-col>
-  </van-row>-->
   <!-- 瀑布流 -->
   <van-row>
     <van-col>
-      <div>
-        <Waterfall
-          :images="images"
-          :columnCount="2"
-          :columnGap="30"
-          :width="1100"
-          mode="CSS"
-          backgroundColor="#F2F4F8"
-        />
+      <div class="content">
+        <vue-grid-waterfall :data-list="dataList" :columns="2" @getMoreData="getMoreData" :loading="isLoading"
+          :height="waterFallHeight" :width="waterFallWidth">
+          <template #slot-scope="{ slotProps }">
+            <div class="item" :style="{ height: slotProps.data.height, background: slotProps.data.color }">{{
+              slotProps.data.color
+            }}</div>
+          </template>
+        </vue-grid-waterfall>
       </div>
     </van-col>
   </van-row>
@@ -42,17 +29,12 @@
   </van-row>
   <!-- 地区选择 -->
   <van-action-sheet v-model:show="areaShow" title="请选择城市">
-    <van-tree-select
-      v-model:active-id="activeId"
-      v-model:main-active-index="activeIndex"
-      :items="items"
-    />
+    <van-tree-select v-model:active-id="activeId" v-model:main-active-index="activeIndex" :items="items" />
   </van-action-sheet>
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeMount } from "vue";
-import Waterfall from "./Waterfall.vue";
+import { ref, onMounted, reactive } from "vue";
 import tabbar from "@/views/tabbar/index.vue";
 // 变量定义
 const option1 = [
@@ -60,22 +42,71 @@ const option1 = [
   { text: "点赞排序", value: 1 },
   { text: "查看排序", value: 2 }
 ];
+//瀑布流的高宽
+let waterFallHeight = ref(100);
+let waterFallWidth = ref(100);
+
+const dataList = ref<any>([]);
+//获取随机颜色
+const getRandomColor = () => {
+  const getColor: any = (color: any) => {
+    return (color += '0123456789abcdef'[Math.floor(Math.random() * 16)]) && (color.length == 6) ? color : getColor(color);
+  };
+  return '#' + getColor('')
+}
+const getMoreData = () => {
+  isLoading.value = true;
+  getData()
+}
+
+const isLoading = ref(true);
+
+//获取数据
+const getData = () => {
+  for (let i = 0; i < 100; i++) {
+    dataList.value.push({ height: 100 + Math.random() * 250 + 'px', color: getRandomColor() })
+  }
+  setTimeout(() => {
+    isLoading.value = false;
+  })
+}
+
+onMounted(() => {
+  //获取窗口高度
+  waterFallHeight = ref(window.innerHeight)
+  console.log(waterFallHeight, '' + window.innerWidth + "px")
+  let widths = '' + window.innerWidth + "px";
+  // document.getElementsByClassName('grid-content')[0].style.width = widths
+  document.getElementsByClassName('grid-content')[0].style.width = '300px !important'
+  console.log(document.getElementsByClassName('grid-content')[0].style.width)
+  getData()
+
+})
+
+const data = reactive({
+  list: [{ image: 'https://via.placeholder.com/200x500.png/ff0000', title: '我是标题1', desc: '描述描述描述描述描述描述描述描述1' },
+  { image: 'https://via.placeholder.com/200x200.png/2878ff', title: '我是标题2', desc: '描述描述描述描述描述描述描述描述2' },
+  { image: 'https://via.placeholder.com/200x100.png/FFB6C1', title: '我是标题3', desc: '描述描述描述描述描述描述描述描述3' },
+  { image: 'https://via.placeholder.com/200x300.png/9400D3', title: '我是标题4', desc: '描述描述描述描述描述描述描述描述4' },
+  { image: 'https://via.placeholder.com/100x240.png/B0E0E6', title: '我是标题5', desc: '描述描述描述描述描述描述描述描述5' },
+  { image: 'https://via.placeholder.comnpm i water-fall3 --save-dev /140x280.png/7FFFAA', title: '我是标题6', desc: '描述描述描述描述描述描述描述描述6' },
+  { image: 'https://via.placeholder.com/40x60.png/EEE8AA', title: '我是标题7', desc: '描述描述描述描述描述描述描述描述7' }]
+});
+
+const listwaterfallList = reactive([{ image: 'https://via.placeholder.com/200x500.png/ff0000', title: '我是标题1', desc: '描述描述描述描述描述描述描述描述1' },
+{ image: 'https://via.placeholder.com/200x200.png/2878ff', title: '我是标题2', desc: '描述描述描述描述描述描述描述描述2' },
+{ image: 'https://via.placeholder.com/200x100.png/FFB6C1', title: '我是标题3', desc: '描述描述描述描述描述描述描述描述3' },
+{ image: 'https://via.placeholder.com/200x300.png/9400D3', title: '我是标题4', desc: '描述描述描述描述描述描述描述描述4' },
+{ image: 'https://via.placeholder.com/100x240.png/B0E0E6', title: '我是标题5', desc: '描述描述描述描述描述描述描述描述5' },
+{ image: 'https://via.placeholder.comnpm i water-fall3 --save-dev /140x280.png/7FFFAA', title: '我是标题6', desc: '描述描述描述描述描述描述描述描述6' },
+{ image: 'https://via.placeholder.com/40x60.png/EEE8AA', title: '我是标题7', desc: '描述描述描述描述描述描述描述描述7' }]
+);
+
+
 const value1 = ref(0);
 //图片
 const images = ref<any[]>([]);
 
-function loadImages() {
-  listwaterfall.forEach(i => {
-    images.value.push({
-      title: `image-${i.code}`,
-      src: i.pic
-    });
-  });
-}
-onBeforeMount(() => {
-  // 组件已完成响应式状态设置，但未创建DOM节点
-  loadImages();
-});
 //地区选择
 let areaShow = ref(false);
 //瀑布流
@@ -149,21 +180,9 @@ const items = [
 ];
 </script>
 <style lang="less" scoped>
-//瀑布流样式
-
 //强制修改滚动列表
 :deep(.van-list) {
   height: 30vh;
   overflow-y: scroll;
-}
-
-.box {
-}
-.box .card {
-  width: 40%;
-  float: left;
-}
-.box img {
-  width: 100%;
 }
 </style>

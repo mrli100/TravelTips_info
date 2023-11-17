@@ -16,6 +16,7 @@
 			<tabbar>底部聊天</tabbar>
 		</van-col>
 	</van-row>
+	<van-floating-bubble axis="xy" v-model:offset="floating_offset" magnetic="x" icon="plus" @click="onClick" />
 </template>
 
 <script setup lang="ts">
@@ -28,8 +29,17 @@ import travelPage from '@/views/gonglve/travle/index.vue'
 import routerPage from '@/views/gonglve/routers/index.vue'
 //变量定义
 let active = ref(0)
+//气泡定位
+const floating_offset = ref({
+	x: window.innerWidth - 50,
+	y: (window.innerHeight - 110)
+})
 const onClickTab = ({ title }) => {
 	showToast(title)
+}
+
+const onClick = () => {
+	showToast('点击气泡');
 }
 </script>
 <style lang="less" scoped></style>

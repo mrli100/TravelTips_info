@@ -3,15 +3,18 @@ import "./style.css";
 import App from "./App.vue";
 import router from "./router";
 import { createRouterScroller } from "vue-router-better-scroller";
+//瀑布流
+import VueGridWaterfall from "@fcli/vue-grid-waterfall";
 
 //导入vant样式
-import 'vant/es/toast/style';
-import 'vant/es/dialog/style';
-import 'vant/es/notify/style';
-import 'vant/es/image-preview/style';
+import "vant/es/toast/style";
+import "vant/es/dialog/style";
+import "vant/es/notify/style";
+import "vant/es/image-preview/style";
 
 const app = createApp(App);
 app.use(router);
+app.use(VueGridWaterfall);
 // 增强了 Vue Router v4 的滚动行为
 app.use(
   createRouterScroller({
