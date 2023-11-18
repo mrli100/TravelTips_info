@@ -75,11 +75,9 @@ onMounted(() => {
   //获取窗口高度
   waterFallHeight = ref(window.innerHeight)
   console.log(waterFallHeight, '' + window.innerWidth + "px")
-  let widths = '' + window.innerWidth + "px";
-  // document.getElementsByClassName('grid-content')[0].style.width = widths
-  document.getElementsByClassName('grid-content')[0].style.width = '300px !important'
-  console.log(document.getElementsByClassName('grid-content')[0].style.width)
-  getData()
+  let widths = window.innerWidth;
+  waterFallWidth.value = widths;
+	getData()
 
 })
 
