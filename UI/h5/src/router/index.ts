@@ -19,9 +19,33 @@ const routes = [
     component: () => import("@/views/team/index.vue"),
   },
   {
-    path: "/gonglve",
+    path: "/gonglve",//攻略
     name: "gonglve",
     component: () => import("@/views/gonglve/index.vue"),
+    children: [
+      {
+        path: "travle",
+        name: "travle",//攻略
+        children: [
+          {
+            path: "add",
+            name: "travle_add",
+            component: () => import("@/views/gonglve/index.vue"),
+          },
+        ],
+      },
+      {
+        path: "routers",//路线
+        name: "routers",
+        children: [
+          {
+            path: "add",
+            name: "routers_add",
+            component: () => import("@/views/gonglve/routers/add/index.vue"),
+          },
+        ],
+      },
+    ],
   },
   {
     path: "/user",

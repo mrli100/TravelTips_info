@@ -1,9 +1,11 @@
 <template>
   <van-row>
     <van-col span="24">
-      <van-dropdown-menu>
-        <van-dropdown-item v-model="value1" :options="option1" />
-      </van-dropdown-menu>
+      <div ref="menuElement">
+        <van-dropdown-menu>
+          <van-dropdown-item v-model="OrderIndexVal" :options="OrderIndex" />
+        </van-dropdown-menu>
+      </div>
     </van-col>
   </van-row>
   <!-- 瀑布流 -->
@@ -34,18 +36,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, reactive } from "vue";
+import { ref, onMounted } from "vue";
+import { showToast } from 'vant'
 import tabbar from "@/views/tabbar/index.vue";
-// 变量定义
-const option1 = [
+//** 排序选择 */
+const OrderIndexVal = ref(0);
+const OrderIndex = [
   { text: "最新排序", value: 0 },
   { text: "点赞排序", value: 1 },
   { text: "查看排序", value: 2 }
 ];
+
+//** 瀑布流  */
 //瀑布流的高宽
 let waterFallHeight = ref(100);
 let waterFallWidth = ref(100);
-
+//定义组件
+const menuElement = ref(null)
 const dataList = ref<any>([]);
 //获取随机颜色
 const getRandomColor = () => {
@@ -70,43 +77,6 @@ const getData = () => {
     isLoading.value = false;
   })
 }
-
-onMounted(() => {
-  //获取窗口高度
-  waterFallHeight = ref(window.innerHeight)
-  console.log(waterFallHeight, '' + window.innerWidth + "px")
-  let widths = window.innerWidth;
-  waterFallWidth.value = widths;
-	getData()
-
-})
-
-const data = reactive({
-  list: [{ image: 'https://via.placeholder.com/200x500.png/ff0000', title: '我是标题1', desc: '描述描述描述描述描述描述描述描述1' },
-  { image: 'https://via.placeholder.com/200x200.png/2878ff', title: '我是标题2', desc: '描述描述描述描述描述描述描述描述2' },
-  { image: 'https://via.placeholder.com/200x100.png/FFB6C1', title: '我是标题3', desc: '描述描述描述描述描述描述描述描述3' },
-  { image: 'https://via.placeholder.com/200x300.png/9400D3', title: '我是标题4', desc: '描述描述描述描述描述描述描述描述4' },
-  { image: 'https://via.placeholder.com/100x240.png/B0E0E6', title: '我是标题5', desc: '描述描述描述描述描述描述描述描述5' },
-  { image: 'https://via.placeholder.comnpm i water-fall3 --save-dev /140x280.png/7FFFAA', title: '我是标题6', desc: '描述描述描述描述描述描述描述描述6' },
-  { image: 'https://via.placeholder.com/40x60.png/EEE8AA', title: '我是标题7', desc: '描述描述描述描述描述描述描述描述7' }]
-});
-
-const listwaterfallList = reactive([{ image: 'https://via.placeholder.com/200x500.png/ff0000', title: '我是标题1', desc: '描述描述描述描述描述描述描述描述1' },
-{ image: 'https://via.placeholder.com/200x200.png/2878ff', title: '我是标题2', desc: '描述描述描述描述描述描述描述描述2' },
-{ image: 'https://via.placeholder.com/200x100.png/FFB6C1', title: '我是标题3', desc: '描述描述描述描述描述描述描述描述3' },
-{ image: 'https://via.placeholder.com/200x300.png/9400D3', title: '我是标题4', desc: '描述描述描述描述描述描述描述描述4' },
-{ image: 'https://via.placeholder.com/100x240.png/B0E0E6', title: '我是标题5', desc: '描述描述描述描述描述描述描述描述5' },
-{ image: 'https://via.placeholder.comnpm i water-fall3 --save-dev /140x280.png/7FFFAA', title: '我是标题6', desc: '描述描述描述描述描述描述描述描述6' },
-{ image: 'https://via.placeholder.com/40x60.png/EEE8AA', title: '我是标题7', desc: '描述描述描述描述描述描述描述描述7' }]
-);
-
-
-const value1 = ref(0);
-//图片
-const images = ref<any[]>([]);
-
-//地区选择
-let areaShow = ref(false);
 //瀑布流
 const listwaterfall = [
   {
@@ -125,35 +95,20 @@ const listwaterfall = [
   {
     pic:
       "https://www.androidonline.net/uploads/allimg/c191026/15H0DVT5240-224408.jpg"
-  },
-  {
-    pic:
-      "https://img1.baidu.com/it/u=834894649,3086306884&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=1422"
-  },
-  {
-    pic: "https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg"
-  },
-  {
-    pic: "https://lmg.jj20.com/up/allimg/tp06/20120222122H618-0-lp.jpg"
-  },
-  {
-    pic: "https://pic.616pic.com/photoone/00/03/74/618ce3d196a7d6996.jpg"
-  },
-  {
-    pic: "https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg"
-  },
-  {
-    pic:
-      "https://www.androidonline.net/uploads/allimg/c191026/15H0DVT5240-224408.jpg"
-  },
-  {
-    pic:
-      "https://img1.baidu.com/it/u=834894649,3086306884&fm=253&fmt=auto&app=120&f=JPEG?w=800&h=1422"
-  },
-  {
-    pic: "https://fastly.jsdelivr.net/npm/@vant/assets/apple-1.jpeg"
   }
 ];
+//** 初始化方法  */
+onMounted(() => {
+  //获取窗口高度-剪掉其它组件高度
+  let waterHeight = window.innerHeight - menuElement.value.offsetHeight - 50 - 44
+  waterFallHeight.value = waterHeight
+  waterFallWidth.value = window.innerWidth
+  getData()
+
+})
+
+//地区选择
+let areaShow = ref(false);
 //地区选择代码
 const activeId = ref(1);
 const activeIndex = ref(0);
@@ -176,11 +131,17 @@ const items = [
   },
   { text: "福建", disabled: true }
 ];
+
 </script>
 <style lang="less" scoped>
 //强制修改滚动列表
 :deep(.van-list) {
   height: 30vh;
+  overflow-y: scroll;
+}
+
+//强制修改滚动列表
+:deep(.grid-content) {
   overflow-y: scroll;
 }
 </style>

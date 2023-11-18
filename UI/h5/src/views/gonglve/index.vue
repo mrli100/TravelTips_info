@@ -17,6 +17,8 @@
 		</van-col>
 	</van-row>
 	<van-floating-bubble axis="xy" v-model:offset="floating_offset" magnetic="x" icon="plus" @click="onClick" />
+	<!-- 选择发布内容 -->
+	<van-action-sheet v-model:show="addshow" :actions="actions" @select="onSelect" />
 </template>
 
 <script setup lang="ts">
@@ -27,6 +29,7 @@ import tabbar from "@/views/tabbar/index.vue";
 //攻略页面
 import travelPage from '@/views/gonglve/travle/index.vue'
 import routerPage from '@/views/gonglve/routers/index.vue'
+import router from '@/router';
 //变量定义
 let active = ref(0)
 //气泡定位
@@ -39,7 +42,24 @@ const onClickTab = ({ title }) => {
 }
 
 const onClick = () => {
-	showToast('点击气泡');
+	addshow.value = true;
 }
+
+//** 选择发布内容 */
+const addshow = ref(false);
+const actions = [
+	{ name: '发布攻略' },
+	{ name: '发布线路' },
+];
+const onSelect = (item) => {
+	addshow.value = false;
+	if (item.name == '发布攻略') {
+
+	} else if (item.name == '发布线路') {
+		router.push({ path: '/gonglve/routers/add' })
+	}
+
+	showToast(item.name);
+};
 </script>
 <style lang="less" scoped></style>
