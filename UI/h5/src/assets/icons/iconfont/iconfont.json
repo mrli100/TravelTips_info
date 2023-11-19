@@ -1,0 +1,72 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "486799",
+      "name": "酒店",
+      "font_class": "jiudian",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    },
+    {
+      "icon_id": "622484",
+      "name": "住宿",
+      "font_class": "zhusu",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "749787",
+      "name": "美食",
+      "font_class": "meishi",
+      "unicode": "e60c",
+      "unicode_decimal": 58892
+    },
+    {
+      "icon_id": "1985021",
+      "name": "美食",
+      "font_class": "meishi1",
+      "unicode": "e63c",
+      "unicode_decimal": 58940
+    },
+    {
+      "icon_id": "2121725",
+      "name": "美食",
+      "font_class": "meishi2",
+      "unicode": "e60d",
+      "unicode_decimal": 58893
+    },
+    {
+      "icon_id": "6961533",
+      "name": "景点",
+      "font_class": "jingdian",
+      "unicode": "e63d",
+      "unicode_decimal": 58941
+    },
+    {
+      "icon_id": "14994867",
+      "name": "休息区",
+      "font_class": "xiuxiqu",
+      "unicode": "e60e",
+      "unicode_decimal": 58894
+    },
+    {
+      "icon_id": "22162279",
+      "name": "旅行酒店",
+      "font_class": "lvhangjiudian",
+      "unicode": "e605",
+      "unicode_decimal": 58885
+    },
+    {
+      "icon_id": "35321648",
+      "name": "旅游景点",
+      "font_class": "a-Group181",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    }
+  ]
+}

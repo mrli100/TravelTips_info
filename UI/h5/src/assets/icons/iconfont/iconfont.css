@@ -1,0 +1,44 @@
+@font-face {
+  font-family: "my-icons"; /* Project id  */
+  src: url("../iconfont/iconfont.ttf?t=1700395208726") format("truetype");
+}
+
+.my-icons {
+  font-family: "my-icons" !important;
+}
+
+.my-icons-jiudian:before {
+  content: "\e614";
+}
+
+.my-icons-zhusu:before {
+  content: "\e668";
+}
+
+.my-icons-meishi:before {
+  content: "\e60c";
+}
+
+.my-icons-meishi1:before {
+  content: "\e63c";
+}
+
+.my-icons-meishi2:before {
+  content: "\e60d";
+}
+
+.my-icons-jingdian:before {
+  content: "\e63d";
+}
+
+.my-icons-xiuxiqu:before {
+  content: "\e60e";
+}
+
+.my-icons-lvhangjiudian:before {
+  content: "\e605";
+}
+
+.my-icons-a-Group181:before {
+  content: "\e60a";
+}
