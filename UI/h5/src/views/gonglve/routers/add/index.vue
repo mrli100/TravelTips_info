@@ -51,15 +51,15 @@
 						</van-col>
 						<van-col span="24">
 							<div style="width: 300px;">
-								<van-space :align="text_align" fill>
+								<van-space :align="text_align" fill class="jingdian">
 									<label>08:00</label>
 									<van-image width="22" height="22" :src="img_jingdian" />
-									<van-text-ellipsis :content="text" />
+									<div>{{ text }}</div>
 									<van-icon name="location-o" />
 								</van-space>
 							</div>
 						</van-col>
-						<van-col span="24"><van-divider content-position="left">驾车</van-divider></van-col>
+						<van-col span="24"><van-divider content-position="left">驾车{{kilometer}} | {{ time }}</van-divider></van-col>
 					</van-row>
 
 
@@ -90,6 +90,10 @@ let qqmap = null;
 import img_jingdian from '@/assets/icons/iconfont/png/jingdian.png'
 const text = ref('北京市海淀区');
 const text_align = ref('center')
+
+/** 驾车时间及路程 */
+const time = ref('30分钟')
+const kilometer = ref('5公里')
 
 //** 地图相关 */
 const initMap = () => {
@@ -213,6 +217,29 @@ const onClickLocation = () => {
 
 	.addDayLabel {
 		margin-left: 4px;
+	}
+}
+
+</style>
+<style lang="less">
+.jingdian{
+	.van-space-item:nth-child(1){
+		flex: 1;
+	}
+	.van-space-item:nth-child(2){
+		flex: 1;
+	}
+	.van-space-item:nth-child(3){
+		flex: 6;
+		width: 60%;
+		div{
+			white-space: nowrap;
+    		text-overflow: ellipsis;
+    		overflow: hidden;
+		}
+	}
+	.van-space-item:nth-child(4){
+		flex: 1;
 	}
 }
 </style>
