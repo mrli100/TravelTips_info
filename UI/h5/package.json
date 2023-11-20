@@ -10,7 +10,10 @@
   },
   "dependencies": {
     "@varlet/ui": "^2.18.4",
+    "axios": "^1.6.2",
     "nprogress": "^0.2.0",
+    "pinia": "^2.1.7",
+    "qs": "^6.11.2",
     "vant": "^4.7.3",
     "vue": "^3.3.4",
     "vue-router": "^4.2.5",
