@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
+import { useUserStore } from "@/store/modules/user.ts";
 
 // 导入路由组件
 NProgress.configure({ showSpinner: true, parent: "#app" });
@@ -12,6 +13,11 @@ const routes = [
     path: "/",
     name: "main",
     component: () => import("@/views/home/index.vue"),
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: () => import("@/views/login/index.vue"),
   },
   {
     path: "/team",
@@ -41,10 +47,25 @@ const router = createRouter({
   routes,
 });
 
+//需要登录列表
+const useLoginList = ["/user"];
+
 router.beforeEach((_to, _from, next) => {
   // start progress bar
   NProgress.start();
-  next();
+  const userStore = useUserStore();
+  // token存在的情况
+  if (userStore.token) {
+    next();
+  } else {
+    // 没有token的情况下，可以进入白名单
+    if (useLoginList.indexOf(_to.path) > -1) {
+      next("/login");
+    } else {
+      next();
+    }
+  }
+  console.log(userStore);
 });
 
 router.afterEach(() => {

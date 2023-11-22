@@ -33,8 +33,6 @@ export default defineConfig({
 
     Components({
       resolvers: [ElementPlusResolver(), VantResolver(), VarletUIResolver()],
-      dts: true,
-      types: [],
     }),
   ],
   server: {
