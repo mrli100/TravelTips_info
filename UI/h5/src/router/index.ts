@@ -50,12 +50,23 @@ const router = createRouter({
 //需要登录列表
 const useLoginList = ["/user"];
 
-router.beforeEach((_to, _from, next) => {
+router.beforeEach(async (_to, _from, next) => {
   // start progress bar
   NProgress.start();
   const userStore = useUserStore();
   // token存在的情况
   if (userStore.token) {
+    if (!userStore.user.id) {
+      try {
+        await userStore.getUserInfoAction();
+        await userStore.getAuthorityListAction();
+      } catch (error) {
+        // 请求异常，则跳转到登录页
+        userStore?.setToken("");
+        next("/login");
+        return Promise.reject(error);
+      }
+    }
     next();
   } else {
     // 没有token的情况下，可以进入白名单

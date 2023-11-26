@@ -6,17 +6,17 @@
 	</van-row>
 	<van-row class="user-info">
 		<van-col span="5" class="avatar">
-			<van-image round width="6rem" height="6rem" src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg" />
+			<van-image round width="6rem" height="6rem" :src="userStore.user.avatar" />
 		</van-col>
 		<van-col span="19" class="info">
 			<van-row>
 				<van-col span="24" class="introduce">
 					<van-row>
 						<van-col span="4">
-							<span>南栀</span>
+							<span>{{ userStore.user.username }}</span>
 						</van-col>
 						<van-col span="20" style="text-align: left;font-size: 14px;margin-top: 2px;">
-							<span>ID: 10001</span>
+							<span>ID: {{ userStore.user.id }}</span>
 						</van-col>
 					</van-row>
 				</van-col>
@@ -80,6 +80,10 @@
 
 <script  setup lang="ts">
 import tabbar from "@/views/tabbar/index.vue";
+import { useUserStore } from '@/store/modules/user'
+const userStore = useUserStore()
+
+console.log(JSON.stringify(userStore), userStore)
 </script>
 
 <style lang="less" scoped>
