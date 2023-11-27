@@ -5,31 +5,24 @@
 		</van-col>
 	</van-row>
 	<van-row class="user-info">
-		<van-col span="5" class="avatar">
+		<van-col span="24" class="avatar">
 			<van-image round width="6rem" height="6rem" :src="userStore.user.avatar" />
 		</van-col>
-		<van-col span="19" class="info">
-			<van-row>
-				<van-col span="24" class="introduce">
-					<van-row>
-						<van-col span="4">
-							<span>{{ userStore.user.username }}</span>
-						</van-col>
-						<van-col span="20" style="text-align: left;font-size: 14px;margin-top: 2px;">
-							<span>ID: {{ userStore.user.id }}</span>
-						</van-col>
-					</van-row>
-				</van-col>
-				<van-col span="24" class="introduce">
-					<span>简介：我去旅行是因为我决定了要去，并不是因为对风景的兴趣。</span>
-				</van-col>
-				<van-col span="24" class="introduce">
-					<var-badge class="label" type="info" value="旅游达人" />
-					<var-badge class="label" type="info" value="科技博主" />
-				</van-col>
-			</van-row>
+		<van-col span="24" class="info">
+			<van-col span="24" class="introduce">
+				<span>{{ userStore.user.username }}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+				<span>ID: {{ userStore.user.id }}</span>
+			</van-col>
+			<van-col span="24" class="introduce">
+				<span>简介：我去旅行是因为我决定了要去，并不是因为对风景的兴趣。</span>
+			</van-col>
+			<van-col span="24" class="introduce">
+				<var-badge class="label" type="info" value="旅游达人" />
+				<var-badge class="label" type="info" value="科技博主" />
+			</van-col>
 		</van-col>
 	</van-row>
+
 	<van-divider />
 	<van-row class="user-link">
 		<van-col span="8">
@@ -64,12 +57,12 @@
 		</van-col>
 	</van-row>
 	<van-divider />
-	<van-cell-group class="user-group">
-		<van-cell title="全部订单" icon="records" is-link to="/OrderList" /></van-cell-group>
-	<van-cell-group>
-		<van-cell title="我的积分" icon="exchange" is-link />
-		<van-cell title="我的优惠卷" icon="gold-coin" is-link />
-		<van-cell title="我收到的礼物" icon="gift" is-link />
+	<van-cell-group class="user-group" inset>
+		<van-cell title="我的点赞" icon="records" is-link to="/OrderList" /></van-cell-group>
+	<van-cell-group inset>
+		<van-cell title="我的行程" icon="exchange" is-link />
+		<van-cell title="我的路线" icon="gold-coin" is-link />
+		<van-cell title="退出登录" icon="gold-coin" is-link />
 	</van-cell-group>
 	<van-row>
 		<van-col span="24">
@@ -84,6 +77,15 @@ import { useUserStore } from '@/store/modules/user'
 const userStore = useUserStore()
 
 console.log(JSON.stringify(userStore), userStore)
+
+const logout = () => {
+	userStore.logoutAction().then(() => {
+		// router.push({ path: '/home' })
+
+		// 刷新页面
+		location.reload()
+	})
+}
 </script>
 
 <style lang="less" scoped>
@@ -94,8 +96,8 @@ console.log(JSON.stringify(userStore), userStore)
 	}
 
 	.info {
-
 		padding-left: 10px;
+		text-align: center;
 
 		.introduce {
 			margin-top: 0.5rem;

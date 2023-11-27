@@ -1,9 +1,9 @@
 import axios, { AxiosResponse } from "axios";
 import qs from "qs";
-import { ElMessage } from "element-plus";
+import { showToast } from "vant";
 import { useUserStore } from "@/store/modules/user";
 import cache from "@/utils/cache";
-import { ElMessageBox } from "element-plus/es";
+import { showDialog } from "vant";
 
 // axios实例
 const service = axios.create({
@@ -121,23 +121,21 @@ service.interceptors.response.use(
     }
 
     // 错误提示
-    ElMessage.error(res.msg);
-
+    showToast({
+      message: res.msg,
+      position: "top",
+    });
     return Promise.reject(new Error(res.msg || "Error"));
   },
   (error) => {
-    ElMessage.error(error.message);
+    showDialog(error.message);
     return Promise.reject(error);
   }
 );
 
 const handleAuthorized = () => {
-  ElMessageBox.confirm("登录超时，请重新登录", "提示", {
-    showCancelButton: false,
-    closeOnClickModal: false,
-    showClose: false,
-    confirmButtonText: "重新登录",
-    type: "warning",
+  showDialog({
+    message: "登录超时，请重新登录",
   }).then(() => {
     const userStore = useUserStore();
 
