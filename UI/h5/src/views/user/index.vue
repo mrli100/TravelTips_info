@@ -10,15 +10,14 @@
 		</van-col>
 		<van-col span="24" class="info">
 			<van-col span="24" class="introduce">
-				<span>{{ userStore.user.username }}</span>&nbsp;&nbsp;&nbsp;&nbsp;
-				<span>ID: {{ userStore.user.id }}</span>
+				<span>{{ userStore.user.realName }}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+				<span>ID: {{ userStore.user.userId }}</span>
 			</van-col>
 			<van-col span="24" class="introduce">
-				<span>简介：我去旅行是因为我决定了要去，并不是因为对风景的兴趣。</span>
+				<span>简介：{{ userStore.user.signature }}</span>
 			</van-col>
 			<van-col span="24" class="introduce">
-				<var-badge class="label" type="info" value="旅游达人" />
-				<var-badge class="label" type="info" value="科技博主" />
+				<var-badge type="info" class="label" v-for="(item, i) in userStore.user.tags" :key="i" :value="item" />
 			</van-col>
 		</van-col>
 	</van-row>

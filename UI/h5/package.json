@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vant/area-data": "^1.5.1",
     "@varlet/ui": "^2.18.4",
     "axios": "^1.6.2",
     "element-plus": "^2.4.2",
