@@ -5,13 +5,31 @@
 		</van-col>
 	</van-row>
 	<van-form @submit="onSubmit">
+		<!-- 名称标题 -->
 		<van-cell-group inset>
 			<van-field v-model="planMain.name" name="name" label="路线名称" placeholder="路线名称"
-				:rules="[{ required: true, message: '请填写路线名称' }]" />
+				:rules="[{ required: true, message: '请填写路线名称' }]" maxlength="20" />
 		</van-cell-group>
+		<!-- 简介信息 -->
 		<van-cell-group inset>
 			<van-field v-model="planMain.content" rows="4" name="content" autosize label="路线简介" placeholder="请描述线路简介信息"
 				type="textarea" maxlength="50" />
+		</van-cell-group>
+		<!-- 选择目的地 -->
+		<van-cell-group inset>
+			<van-field v-model="planMain.destination" is-link readonly name="destination" label="目的地" placeholder="点击选择省市"
+				@click="showArea = true" />
+			<van-popup v-model:show="showArea" position="bottom">
+				<van-area :area-list="areaList" @confirm="onAreaConfirm" @cancel="showArea = false" :columns-num="2" />
+			</van-popup>
+		</van-cell-group>
+		<!-- 背景图片 -->
+		<van-cell-group inset>
+			<van-field name="bg_image" label="图片介绍">
+				<template #input>
+					<van-uploader v-model="planMain.bg_image" :max-count="9" multiple/>
+				</template>
+			</van-field>
 		</van-cell-group>
 		<!-- 开始时间 -->
 		<van-cell-group inset>
@@ -28,15 +46,7 @@
 			<van-calendar v-model:show="showEndTimePicker" @confirm="onEndConfirm" />
 		</van-cell-group>
 
-		<!-- 选择目的地 -->
-		<van-cell-group inset>
-			<van-field v-model="planMain.destination" is-link readonly name="destination" label="地区选择" placeholder="点击选择省市区"
-				@click="showArea = true" />
-			<van-popup v-model:show="showArea" position="bottom">
-				<van-area :area-list="areaList" @confirm="onAreaConfirm" @cancel="showArea = false" />
-			</van-popup>
 
-		</van-cell-group>
 		<!-- 保存按钮 -->
 		<div style="margin: 16px;">
 			<van-button round block type="primary" native-type="submit">
@@ -61,11 +71,12 @@ const onClickLeft = () => history.back();
 
 //** 提交表单对象 */
 const planMain = ref({
-	"name": "旅游攻略",
+	"name": "",
 	"content": "",
 	"img": "",
 	"destination": "",
 	"type": 1,
+	"bg_image": [],
 	"createTime": "2021-01-01",
 	"endTime": "2021-01-01",
 	"updateTime": "2021-01-01"
