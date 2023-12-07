@@ -11,10 +11,12 @@ import net.maku.framework.common.utils.DateUtils;
 import net.maku.framework.security.user.SecurityUser;
 import net.maku.framework.security.user.UserDetail;
 import net.sf.jsqlparser.JSQLParserException;
-import net.sf.jsqlparser.expression.DateValue;
 import net.sf.jsqlparser.expression.Expression;
+import net.sf.jsqlparser.expression.LongValue;
 import net.sf.jsqlparser.expression.StringValue;
+import net.sf.jsqlparser.expression.operators.arithmetic.Addition;
 import net.sf.jsqlparser.expression.operators.conditional.AndExpression;
+import net.sf.jsqlparser.expression.operators.relational.ExpressionList;
 import net.sf.jsqlparser.parser.CCJSqlParserUtil;
 import net.sf.jsqlparser.schema.Column;
 import net.sf.jsqlparser.statement.Statement;
@@ -35,9 +37,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.sql.Connection;
-import java.util.Date;
-import java.util.Enumeration;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 数据权限
@@ -47,6 +47,49 @@ import java.util.Map;
  */
 @Slf4j
 public class DataScopeInnerInterceptor implements InnerInterceptor {
+
+    //系统初始化的表不需要过滤，例如：工作流自带的表
+    protected static List<String> noInitFilterTables = new ArrayList<>();
+
+    static {
+        //去掉这些系统表，不更改
+        noInitFilterTables.add("QRTZ_CALENDARS");
+        noInitFilterTables.add("QRTZ_FIRED_TRIGGERS");
+        noInitFilterTables.add("QRTZ_JOB_DETAILS");
+        noInitFilterTables.add("QRTZ_LOCKS");
+        noInitFilterTables.add("QRTZ_PAUSED_TRIGGER_GRPS");
+        noInitFilterTables.add("QRTZ_SCHEDULER_STATE");
+        noInitFilterTables.add("QRTZ_TRIGGERS");
+        noInitFilterTables.add("QRTZ_BLOB_TRIGGERS");
+        noInitFilterTables.add("QRTZ_CRON_TRIGGERS");
+        noInitFilterTables.add("QRTZ_SIMPLE_TRIGGERS");
+        noInitFilterTables.add("QRTZ_SIMPROP_TRIGGERS");
+        noInitFilterTables.add("gen_base_class");
+        noInitFilterTables.add("gen_datasource");
+        noInitFilterTables.add("gen_field_type");
+        noInitFilterTables.add("gen_project_modify");
+        noInitFilterTables.add("gen_table");
+        noInitFilterTables.add("gen_table_field");
+        noInitFilterTables.add("gen_test_student");
+        noInitFilterTables.add("schedule_job");
+        noInitFilterTables.add("schedule_job_log");
+        noInitFilterTables.add("sys_attachment");
+        noInitFilterTables.add("sys_dict_data");
+        noInitFilterTables.add("sys_dict_type");
+        noInitFilterTables.add("sys_log_login");
+        noInitFilterTables.add("sys_log_operate");
+        noInitFilterTables.add("sys_menu");
+        noInitFilterTables.add("sys_org");
+        noInitFilterTables.add("sys_params");
+        noInitFilterTables.add("sys_post");
+        noInitFilterTables.add("sys_role");
+        noInitFilterTables.add("sys_role_data_scope");
+        noInitFilterTables.add("sys_role_menu");
+        noInitFilterTables.add("sys_user");
+        noInitFilterTables.add("sys_user_post");
+        noInitFilterTables.add("sys_user_role");
+        noInitFilterTables.add("sys_user_token");
+    }
 
     @Override
     public void beforeQuery(Executor executor, MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
@@ -119,16 +162,48 @@ public class DataScopeInnerInterceptor implements InnerInterceptor {
         if (sct == SqlCommandType.INSERT || sct == SqlCommandType.UPDATE || sct == SqlCommandType.DELETE) {
             PluginUtils.MPBoundSql mpBs = mpSh.mPBoundSql();
             DataChangeRecorderInnerInterceptor.OperationResult operationResult;
-            long startTs = System.currentTimeMillis();
             try {
                 Statement statement = JsqlParserGlobal.parse(mpBs.sql());
                 if (statement instanceof Insert) {
+                    Insert insertStmt = (Insert) statement;
+                    if (!noInitFilterTables.contains(insertStmt.getTable().getName().toUpperCase())) {
+                        if (null != user) {
+                            List<Column> columns = insertStmt.getColumns();
+                            ExpressionList items = (ExpressionList) insertStmt.getItemsList();
+                            List<Expression> exprs = items.getExpressions();
+                            //创建时间
+                            columns.add(new Column("create_time"));
+                            items.addExpressions(new StringValue(DateUtils.format(new Date())));
+                            //创建人
+                            columns.add(new Column("creator"));
+                            items.addExpressions(new LongValue(user.getId()));
+                            //设置版本号
+                            columns.add(new Column("version"));
+                            items.addExpressions(new LongValue(1));
+
+                            insertStmt.setColumns(columns);
+                            insertStmt.setSetExpressionList(exprs);
+                            PluginUtils.mpBoundSql(boundSql).sql(insertStmt.toString());
+                        }
+                    }
                 } else if (statement instanceof Update) {
                     Update updateStmt = (Update) statement;
-                    //添加更新时间
-                    UpdateSet updateSet = new UpdateSet(new Column("update_time"), new StringValue(DateUtils.format(new Date())));
-                    //updateStmt.getUpdateSets().add(updateSet);
-                    //PluginUtils.mpBoundSql(boundSql).sql(updateStmt.toString());
+                    if (!noInitFilterTables.contains(updateStmt.getTable().getName().toUpperCase())) {
+                        if (null != user) {
+                            //添加更新时间
+                            UpdateSet updateTimeSet = new UpdateSet(new Column("update_time"), new StringValue(DateUtils.format(new Date())));
+                            UpdateSet updater = new UpdateSet(new Column("updater"), new LongValue(user.getId()));
+                            //更新时候对版本号+1
+                            Addition expr = new Addition();
+                            expr.setLeftExpression(new Column(updateStmt.getTable(), "version"));
+                            expr.setRightExpression(new LongValue(1));
+                            UpdateSet version = new UpdateSet(new Column("version"), expr);
+                            updateStmt.getUpdateSets().add(updateTimeSet);
+                            updateStmt.getUpdateSets().add(updater);
+                            updateStmt.getUpdateSets().add(version);
+                            PluginUtils.mpBoundSql(boundSql).sql(updateStmt.toString());
+                        }
+                    }
                 } else if (statement instanceof Delete) {
                 } else {
                     log.info("other operation sql={}", mpBs.sql());
@@ -138,7 +213,6 @@ public class DataScopeInnerInterceptor implements InnerInterceptor {
                 log.error("Unexpected error for mappedStatement={}, sql={}", ms.getId(), mpBs.sql(), e);
                 return;
             }
-            long costThis = System.currentTimeMillis() - startTs;
         }
     }
 }
