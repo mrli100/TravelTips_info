@@ -2,9 +2,9 @@ spring:
   data:
     redis:
       database: 1
-      host: localhost
+      host: 175.27.232.31
       port: 6379
-      #password:
+      password: docker@Redis@123
       #timeout: 6000ms  # 连接超时时长（毫秒）
   datasource:
     dynamic:
@@ -20,9 +20,9 @@ spring:
         master:
           # MySQL8
           driver-class-name: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://localhost:3306/maku_boot?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
-          username: maku
-          password: 123456
+          url: jdbc:mysql://55c48ae2316cd.sh.cdb.myqcloud.com:5223/traveltips?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
+          username: traveltips
+          password: traveltips@123
           # 达梦
           #    driver-class-name: dm.jdbc.driver.DmDriver
           #    url: jdbc:dm://192.168.3.19:5236/maku_boot?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&nullCatalogMeansCurrent=true
@@ -33,3 +33,15 @@ spring:
           #    url: jdbc:postgresql://192.168.3.19:5432/postgres
           #    username: postgres
           #    password: 123456
+
+
+storage:
+  enabled: true
+  config:
+    type: tencent
+    domain: https://travel-tips-1251586900.cos.ap-nanjing.myqcloud.com
+  tencent:
+    access-key: XXX
+    secret-key: XXX
+    region: ap-nanjing
+    bucket-name: travel-tips-1251586900
