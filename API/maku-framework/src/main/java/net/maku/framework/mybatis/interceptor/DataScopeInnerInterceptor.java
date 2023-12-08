@@ -64,31 +64,31 @@ public class DataScopeInnerInterceptor implements InnerInterceptor {
         noInitFilterTables.add("QRTZ_CRON_TRIGGERS");
         noInitFilterTables.add("QRTZ_SIMPLE_TRIGGERS");
         noInitFilterTables.add("QRTZ_SIMPROP_TRIGGERS");
-        noInitFilterTables.add("gen_base_class");
-        noInitFilterTables.add("gen_datasource");
-        noInitFilterTables.add("gen_field_type");
-        noInitFilterTables.add("gen_project_modify");
-        noInitFilterTables.add("gen_table");
-        noInitFilterTables.add("gen_table_field");
-        noInitFilterTables.add("gen_test_student");
-        noInitFilterTables.add("schedule_job");
-        noInitFilterTables.add("schedule_job_log");
-        noInitFilterTables.add("sys_attachment");
-        noInitFilterTables.add("sys_dict_data");
-        noInitFilterTables.add("sys_dict_type");
-        noInitFilterTables.add("sys_log_login");
-        noInitFilterTables.add("sys_log_operate");
-        noInitFilterTables.add("sys_menu");
-        noInitFilterTables.add("sys_org");
-        noInitFilterTables.add("sys_params");
-        noInitFilterTables.add("sys_post");
-        noInitFilterTables.add("sys_role");
-        noInitFilterTables.add("sys_role_data_scope");
-        noInitFilterTables.add("sys_role_menu");
-        noInitFilterTables.add("sys_user");
-        noInitFilterTables.add("sys_user_post");
-        noInitFilterTables.add("sys_user_role");
-        noInitFilterTables.add("sys_user_token");
+        noInitFilterTables.add("GEN_BASE_CLASS");
+        noInitFilterTables.add("GEN_DATASOURCE");
+        noInitFilterTables.add("GEN_FIELD_TYPE");
+        noInitFilterTables.add("GEN_PROJECT_MODIFY");
+        noInitFilterTables.add("GEN_TABLE");
+        noInitFilterTables.add("GEN_TABLE_FIELD");
+        noInitFilterTables.add("GEN_TEST_STUDENT");
+        noInitFilterTables.add("SCHEDULE_JOB");
+        noInitFilterTables.add("SCHEDULE_JOB_LOG");
+        noInitFilterTables.add("SYS_ATTACHMENT");
+        noInitFilterTables.add("SYS_DICT_DATA");
+        noInitFilterTables.add("SYS_DICT_TYPE");
+        noInitFilterTables.add("SYS_LOG_LOGIN");
+        noInitFilterTables.add("SYS_LOG_OPERATE");
+        noInitFilterTables.add("SYS_MENU");
+        noInitFilterTables.add("SYS_ORG");
+        noInitFilterTables.add("SYS_PARAMS");
+        noInitFilterTables.add("SYS_POST");
+        noInitFilterTables.add("SYS_ROLE");
+        noInitFilterTables.add("SYS_ROLE_DATA_SCOPE");
+        noInitFilterTables.add("SYS_ROLE_MENU");
+        noInitFilterTables.add("SYS_USER");
+        noInitFilterTables.add("SYS_USER_POST");
+        noInitFilterTables.add("SYS_USER_ROLE");
+        noInitFilterTables.add("SYS_USER_TOKEN");
     }
 
     @Override
@@ -149,11 +149,14 @@ public class DataScopeInnerInterceptor implements InnerInterceptor {
     @Override
     public void beforePrepare(StatementHandler sh, Connection connection, Integer transactionTimeout) {
         //获取到当前线程绑定的请求对象
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if (null == requestAttributes) {
+            return;
+        }
+        HttpServletRequest request = requestAttributes.getRequest();
         //已经拿到session,就可以拿到session中保存的用户信息了。
         Enumeration<String> headerNames = request.getHeaderNames();
         UserDetail user = SecurityUser.getUser();
-        System.out.println(headerNames.toString());
 
         PluginUtils.MPStatementHandler mpSh = PluginUtils.mpStatementHandler(sh);
         MappedStatement ms = mpSh.mappedStatement();
