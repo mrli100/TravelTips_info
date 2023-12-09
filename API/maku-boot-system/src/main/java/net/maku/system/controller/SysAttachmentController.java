@@ -35,7 +35,6 @@ public class SysAttachmentController {
     @PreAuthorize("hasAuthority('sys:attachment:page')")
     public Result<PageResult<SysAttachmentVO>> page(@ParameterObject @Valid SysAttachmentQuery query) {
         PageResult<SysAttachmentVO> page = sysAttachmentService.page(query);
-
         return Result.ok(page);
     }
 
@@ -45,7 +44,6 @@ public class SysAttachmentController {
     @PreAuthorize("hasAuthority('sys:attachment:save')")
     public Result<String> save(@RequestBody SysAttachmentVO vo) {
         sysAttachmentService.save(vo);
-
         return Result.ok();
     }
 
@@ -55,7 +53,6 @@ public class SysAttachmentController {
     @PreAuthorize("hasAuthority('sys:attachment:delete')")
     public Result<String> delete(@RequestBody List<Long> idList) {
         sysAttachmentService.delete(idList);
-
         return Result.ok();
     }
 }

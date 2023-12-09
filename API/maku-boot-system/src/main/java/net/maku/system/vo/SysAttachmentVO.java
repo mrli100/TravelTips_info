@@ -38,4 +38,7 @@ public class SysAttachmentVO implements Serializable {
     @JsonFormat(pattern = DateUtils.DATE_TIME_PATTERN)
     private Date createTime;
 
+    @Schema(description = "创建人")
+    private Long creator;
+
 }
