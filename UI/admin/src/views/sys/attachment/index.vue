@@ -43,6 +43,7 @@
 			</el-table-column>
 			<el-table-column prop="platform" label="存储平台" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="creator" label="创建人" header-align="center" align="center"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
 					<el-button type="primary" link @click="downloadHandle(scope.row.url, scope.row.name)">下载</el-button>
