@@ -27,7 +27,8 @@
 		<van-cell-group inset>
 			<van-field name="bg_image" label="图片介绍">
 				<template #input>
-					<van-uploader v-model="planMain.bg_image" :max-count="9" multiple/>
+					<van-uploader v-model="planMain.bg_image_url" :max-count="9" :max-size="isOverSize" @oversize="onOversize"
+						:before-delete="beforeDelete" :after-read="afterRead" multiple />
 				</template>
 			</van-field>
 		</van-cell-group>
@@ -62,6 +63,8 @@
 </template>
 
 <script setup lang="ts">
+import { attachUpload } from '@/api/sys/attachment'
+import constant from '@/utils/constant'
 //** 静态资源 */
 import { ref, onMounted } from 'vue'
 import { showToast } from 'vant'
@@ -76,22 +79,66 @@ const planMain = ref({
 	"img": "",
 	"destination": "",
 	"type": 1,
-	"bg_image": [],
-	"createTime": "2021-01-01",
-	"endTime": "2021-01-01",
-	"updateTime": "2021-01-01"
+	"bg_image": "",
+	"bg_image_url": [],
+	"createTime": constant.nowTime(new Date()),
+	"endTime": constant.nowTime(new Date()),
+	"updateTime": constant.nowTime(new Date())
 })
+
+//** 文件上传操作 */
+const fileMaxSize = 5 * 1024 * 1024;
+const fileMapVal = ref(new Map());
+const isOverSize = (file) => {
+	return file.size >= fileMaxSize;
+};
+
+const onOversize = (file) => {
+	showToast('图片大小不能超过5MB');
+};
+
+//上传文件代码
+const afterRead = (file) => {
+	//多个上传
+	if (file instanceof Array) {
+		//循环输出列表文件
+		for (let i = 0; i < file.length; i++) {
+			console.log("列表的单个上傳的文件", file[i]);
+			attachUpload(file[i]).then((datas) => {
+				if (datas.code == 0) {
+					fileMapVal.value.set(file[i].objectUrl, datas.data.url);
+				}
+			})
+		}
+	} else {
+		//单个上传
+		attachUpload(file).then((datas) => {
+			if (datas.code == 0) {
+				fileMapVal.value.set(file.objectUrl, datas.data.url);
+			}
+		})
+	}
+	return true;
+};
+
+//删除文件代码
+const beforeDelete = (file) => {
+	fileMapVal.value.delete(file.objectUrl)
+	return true
+};
+
+
 
 //** 开始时间选择 */
 const showStartTimePicker = ref(false)
 const onStartConfirm = (date) => {
-	planMain.value.createTime = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+	planMain.value.createTime = constant.nowTime(date);
 	showStartTimePicker.value = false;
 };
 const showEndTimePicker = ref(false)
 const onEndConfirm = (date) => {
 	showEndTimePicker.value = false;
-	planMain.value.endTime = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+	planMain.value.endTime = constant.nowTime(date);
 };
 //** 地区选择 */
 const showArea = ref(false);
@@ -107,10 +154,13 @@ onMounted(() => {
 	let windowsWidth = window.innerWidth
 })
 
-//** 表单测试 */
-let form = {}
-const addContextDivWidth = ref(80)
+//** 表单提交 */
 const onSubmit = (values) => {
+	let fileArr = [];
+	fileMapVal.value.forEach((value, key) => {
+		fileArr.push(value)
+	})
+	values.bg_image = JSON.stringify(fileArr)
 	console.log('submit', values);
 };
 // 变量定义

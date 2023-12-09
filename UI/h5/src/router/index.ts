@@ -48,7 +48,7 @@ const router = createRouter({
 });
 
 //需要登录列表
-const useLoginList = ["/user"];
+const useLoginList = ["/user", "/gonglve/routers/add"];
 
 router.beforeEach(async (_to, _from, next) => {
   // start progress bar

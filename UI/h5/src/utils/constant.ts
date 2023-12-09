@@ -20,4 +20,11 @@ export default {
     DEV: import.meta.env.DEV,
     SSR: import.meta.env.SSR,
   },
+  nowTime: (date) => {
+    let month = date.getMonth() + 1;
+    month = String(month).padStart(2, "0");
+    let day = date.getDate();
+    day = String(month).padStart(2, "0");
+    return date.getFullYear() + "-" + month + "-" + day;
+  },
 };

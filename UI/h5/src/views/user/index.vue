@@ -75,12 +75,11 @@ import tabbar from "@/views/tabbar/index.vue";
 import { useUserStore } from '@/store/modules/user'
 const userStore = useUserStore()
 
-console.log(JSON.stringify(userStore), userStore)
+// console.log(JSON.stringify(userStore), userStore)
 
 const logout = () => {
 	userStore.logoutAction().then(() => {
 		// router.push({ path: '/home' })
-
 		// 刷新页面
 		location.reload()
 	})
