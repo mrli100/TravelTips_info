@@ -41,7 +41,7 @@ storage:
     type: tencent
     domain: https://travel-tips-1251586900.cos.ap-nanjing.myqcloud.com
   tencent:
-    access-key: XXX
-    secret-key: XXX
+    access-key: AKIDHQPglfwCTl0893uc9TgpqpmiiikmYjpi
+    secret-key: sa8Ue3K4qjhdQAi9Uh6Z7hHtaGtVCpPp
     region: ap-nanjing
     bucket-name: travel-tips-1251586900

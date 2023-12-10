@@ -1,9 +1,6 @@
 <template>
 	<el-dialog v-model="visible" :title="!dataForm.id ? '新增' : '修改'" :close-on-click-modal="false">
 		<el-form ref="dataFormRef" :model="dataForm" :rules="dataRules" label-width="100px" @keyup.enter="submitHandle()">
-			<el-form-item label="id" prop="id">
-				<el-input v-model="dataForm.id" placeholder="id"></el-input>
-			</el-form-item>
 			<el-form-item label="用户id" prop="userId">
 				<el-input v-model="dataForm.userId" placeholder="用户id"></el-input>
 			</el-form-item>
@@ -19,6 +16,9 @@
 			<el-form-item label="出生年月" prop="birthday">
 				<el-date-picker type="date" placeholder="出生年月" v-model="dataForm.birthday" format="YYYY-MM-DD"
 					value-format="YYYY-MM-DD"></el-date-picker>
+			</el-form-item>
+			<el-form-item label="身份证" prop="idcard">
+				<el-input v-model="dataForm.idcard" placeholder="身份证"></el-input>
 			</el-form-item>
 		</el-form>
 		<template #footer>
