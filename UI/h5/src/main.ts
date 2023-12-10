@@ -6,7 +6,7 @@ import router from "./router";
 import { createRouterScroller } from "vue-router-better-scroller";
 //瀑布流
 import VueGridWaterfall from "@fcli/vue-grid-waterfall";
-
+import "@vant/touch-emulator";
 //导入vant样式
 import "vant/es/toast/style";
 import "vant/es/dialog/style";

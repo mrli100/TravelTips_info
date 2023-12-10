@@ -37,6 +37,7 @@
 			@selection-change="selectionChangeHandle"
 		>
 			<el-table-column type="selection" header-align="center" align="center" width="50"></el-table-column>
+			<el-table-column prop="id" label="id" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="username" label="用户名" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="realName" label="姓名" header-align="center" align="center"></el-table-column>
 			<fast-table-column prop="gender" label="性别" dict-type="user_gender"></fast-table-column>

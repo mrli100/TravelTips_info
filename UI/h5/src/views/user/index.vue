@@ -1,7 +1,7 @@
 <template>
 	<van-row class="user-settings">
 		<van-col span="24" class="settings">
-			<van-icon name="setting-o" size="1.6rem" />
+			<van-icon @click="toDetail" name="setting-o" size="1.6rem" />
 		</van-col>
 	</van-row>
 	<van-row class="user-info">
@@ -14,7 +14,7 @@
 				<span>ID: {{ userStore.user.userId }}</span>
 			</van-col>
 			<van-col span="24" class="introduce">
-				<span>简介：{{ userStore.user.signature }}</span>
+				<span>{{ userStore.user.signature }}</span>
 			</van-col>
 			<van-col span="24" class="introduce">
 				<var-badge type="info" class="label" v-for="(item, i) in userStore.user.tags" :key="i" :value="item" />
@@ -73,8 +73,14 @@
 <script  setup lang="ts">
 import tabbar from "@/views/tabbar/index.vue";
 import { useUserStore } from '@/store/modules/user'
-const userStore = useUserStore()
+//** 路由跳转 */
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const toDetail = () => {
+	router.push({ path: '/user/detail' })
+}
 
+const userStore = useUserStore()
 // console.log(JSON.stringify(userStore), userStore)
 
 const logout = () => {

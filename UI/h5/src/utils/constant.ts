@@ -24,7 +24,7 @@ export default {
     let month = date.getMonth() + 1;
     month = String(month).padStart(2, "0");
     let day = date.getDate();
-    day = String(month).padStart(2, "0");
+    day = String(day).padStart(2, "0");
     return date.getFullYear() + "-" + month + "-" + day;
   },
 };

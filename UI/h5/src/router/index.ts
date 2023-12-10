@@ -39,6 +39,11 @@ const routes = [
     name: "user",
     component: () => import("@/views/user/index.vue"),
   },
+  {
+    path: "/user/detail",
+    name: "user_detail",
+    component: () => import("@/views/user/detail/index.vue"),
+  },
 ];
 
 // 创建路由实例并传递 `routes` 配置
@@ -48,7 +53,7 @@ const router = createRouter({
 });
 
 //需要登录列表
-const useLoginList = ["/user", "/gonglve/routers/add"];
+const useLoginList = ["/user", "/gonglve/routers/add", "/user/detail"];
 
 router.beforeEach(async (_to, _from, next) => {
   // start progress bar
