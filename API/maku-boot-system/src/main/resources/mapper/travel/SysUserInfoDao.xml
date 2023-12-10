@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.maku.travel.dao.SysUserInfoDao">
+
+    <resultMap type="net.maku.travel.entity.SysUserInfoEntity" id="sysUserInfoMap">
+        <result property="id" column="id"/>
+        <result property="userId" column="user_id"/>
+        <result property="signature" column="signature"/>
+        <result property="tags" column="tags"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="extendedconfig" column="extendedconfig"/>
+        <result property="version" column="version"/>
+        <result property="birthday" column="birthday"/>
+        <result property="deleted" column="deleted"/>
+        <result property="idcard" column="idcard"/>
+        <result property="creator" column="creator"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updater" column="updater"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+</mapper>

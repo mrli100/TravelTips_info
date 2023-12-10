@@ -8,9 +8,9 @@ import lombok.AllArgsConstructor;
 import net.maku.framework.common.utils.Result;
 import net.maku.framework.security.user.SecurityUser;
 import net.maku.system.convert.SysUserConvert;
-import net.maku.system.entity.SysUserInfoEntity;
-import net.maku.system.service.SysUserInfoService;
 import net.maku.system.vo.SysUserVO;
+import net.maku.travel.entity.SysUserInfoEntity;
+import net.maku.travel.service.SysUserInfoService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -45,9 +45,16 @@ public class ApiController {
         if (null != one) {
             map.put("signature", one.getSignature());
             map.put("tags", one.getTags().split(","));
+            map.put("tags", one.getTags().split(","));
+            map.put("birthday", one.getBirthday());
+            map.put("extendedconfig", one.getExtendedconfig());
+            map.put("idcard", one.getIdcard());
         } else {
             map.put("signature", "该用户太懒了，没有什么介绍。");
             map.put("tags", "");
+            map.put("birthday", "");
+            map.put("extendedconfig", "{}");
+            map.put("idcard", "");
         }
         return Result.ok(map);
     }

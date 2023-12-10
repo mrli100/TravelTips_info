@@ -1,27 +1,27 @@
-package net.maku.system.service.impl;
+package net.maku.travel.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import lombok.AllArgsConstructor;
 import net.maku.framework.common.utils.PageResult;
 import net.maku.framework.mybatis.service.impl.BaseServiceImpl;
-import net.maku.system.convert.SysUserInfoConvert;
-import net.maku.system.dao.SysUserInfoDao;
-import net.maku.system.entity.SysUserInfoEntity;
-import net.maku.system.query.SysUserInfoQuery;
-import net.maku.system.service.SysUserInfoService;
-import net.maku.system.vo.SysUserInfoVO;
+import net.maku.travel.convert.SysUserInfoConvert;
+import net.maku.travel.entity.SysUserInfoEntity;
+import net.maku.travel.query.SysUserInfoQuery;
+import net.maku.travel.vo.SysUserInfoVO;
+import net.maku.travel.dao.SysUserInfoDao;
+import net.maku.travel.service.SysUserInfoService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * 用户信息表
+ * 用户信息
  *
  * @author 阿沐 babamu@126.com
- * @since 1.0.0 2023-12-05
+ * @since 1.0.0 2023-12-10
  */
 @Service
 @AllArgsConstructor

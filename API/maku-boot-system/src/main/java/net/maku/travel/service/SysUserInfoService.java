@@ -1,18 +1,18 @@
-package net.maku.system.service;
+package net.maku.travel.service;
 
 import net.maku.framework.common.utils.PageResult;
 import net.maku.framework.mybatis.service.BaseService;
-import net.maku.system.entity.SysUserInfoEntity;
-import net.maku.system.query.SysUserInfoQuery;
-import net.maku.system.vo.SysUserInfoVO;
+import net.maku.travel.vo.SysUserInfoVO;
+import net.maku.travel.query.SysUserInfoQuery;
+import net.maku.travel.entity.SysUserInfoEntity;
 
 import java.util.List;
 
 /**
- * 用户信息表
+ * 用户信息
  *
  * @author 阿沐 babamu@126.com
- * @since 1.0.0 2023-12-05
+ * @since 1.0.0 2023-12-10
  */
 public interface SysUserInfoService extends BaseService<SysUserInfoEntity> {
 

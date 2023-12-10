@@ -17,7 +17,7 @@
         </dependency>
         <dependency>
             <groupId>net.maku</groupId>
-            <artifactId>maku-boot-new</artifactId>
+            <artifactId>maku-boot-travel</artifactId>
             <version>${revision}</version>
         </dependency>
 <!--        <dependency>

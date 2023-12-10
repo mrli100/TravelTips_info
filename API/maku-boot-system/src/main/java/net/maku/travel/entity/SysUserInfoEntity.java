@@ -1,16 +1,15 @@
-package net.maku.system.entity;
+package net.maku.travel.entity;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-
+import lombok.EqualsAndHashCode;
+import com.baomidou.mybatisplus.annotation.*;
 import java.util.Date;
 
 /**
- * 用户信息表
+ * 用户信息
  *
  * @author 阿沐 babamu@126.com
- * @since 1.0.0 2023-12-05
+ * @since 1.0.0 2023-12-10
  */
 
 @Data
@@ -43,14 +42,29 @@ public class SysUserInfoEntity {
 	private Integer tenantId;
 
 	/**
+	* 扩展配置
+	*/
+	private String extendedconfig;
+
+	/**
 	* 版本号
 	*/
 	private Integer version;
 
 	/**
+	* 出生年月
+	*/
+	private Date birthday;
+
+	/**
 	* 删除标识  0：正常   1：已删除
 	*/
 	private Integer deleted;
+
+	/**
+	* 身份证
+	*/
+	private String idcard;
 
 	/**
 	* 创建者

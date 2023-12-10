@@ -1,4 +1,4 @@
-package net.maku.traveltips.utils;
+package net.maku.travel.utils;
 
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.http.HttpUtil;
