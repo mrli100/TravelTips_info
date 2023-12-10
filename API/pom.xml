@@ -17,7 +17,7 @@
     </parent>
 
     <modules>
-        <module>maku-boot-new</module>
+        <module>maku-boot-travel</module>
         <module>maku-boot-system</module>
         <module>maku-boot-module</module>
         <module>maku-boot-api</module>
