@@ -8,10 +8,11 @@
 		<van-cell-group title="用户信息">
 			<van-cell title="头像">
 				<template #right-icon>
-					<van-uploader preview-full-image v-model="updateParm.avatar" :after-read="afterRead" :max-count="1" />
+					<van-uploader preview-full-image name="avatar" v-model="updateParm.avatar" :after-read="afterRead"
+						:max-count="1" />
 				</template>
 			</van-cell>
-			<van-cell title="昵称" is-link to="/OrderList" :value="userStore.user.realName" />
+			<van-cell title="昵称" is-link @click="in_realName_show = true" :value="userStore.user.realName" />
 			<van-cell title="签名" is-link to="/OrderList" :value="userStore.user.signature" />
 			<van-cell title="性别">
 				<template #right-icon>
@@ -32,6 +33,10 @@
 			</van-button>
 		</van-cell-group>
 	</van-form>
+	<!-- 輸入昵稱 -->
+	<van-dialog @confirm="in_realName_confirm" v-model:show="in_realName_show" title="请输入昵称" show-cancel-button>
+		<van-field v-model="in_realName" placeholder="请输入昵称" />
+	</van-dialog>
 	<van-row>
 		<van-col span="24">
 			<tabbar>底部聊天</tabbar>
@@ -69,6 +74,14 @@ const uploadImage = (val) => {
 const afterRead = (file) => {
 	console.log("afterRead", file);
 };
+//**编辑输入框内容 */
+const in_realName_show = ref(false)
+const in_realName = ref(userStore.user.realName)
+const in_realName_confirm = () => {
+	console.log('in_realName_confirm', in_realName.value)
+}
+
+
 </script>
 
 <style lang="less" scoped></style>
