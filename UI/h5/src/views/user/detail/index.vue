@@ -1,7 +1,7 @@
 <template>
 	<van-row>
 		<van-col span="24">
-			<van-nav-bar title="添加线路" left-text="返回" left-arrow @click-left="onClickLeft" />
+			<van-nav-bar title="用户信息修改" left-text="返回" left-arrow @click-left="onClickLeft" />
 		</van-col>
 	</van-row>
 	<van-form @submit="onSubmit">
@@ -25,7 +25,8 @@
 			<van-cell title="生日" is-link value="1994-07-25" />
 		</van-cell-group>
 		<van-cell-group title="系统设置">
-			<van-cell title="登出" is-link />
+			<van-cell title="修改密码" is-link />
+			<van-cell title="退出登录" is-link />
 		</van-cell-group>
 		<van-cell-group inset>
 			<van-button round block type="primary" native-type="submit">
