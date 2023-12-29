@@ -29,9 +29,9 @@
 			<van-cell title="退出登录" is-link />
 		</van-cell-group>
 		<van-cell-group inset>
-			<van-button round block type="primary" native-type="submit">
+<!-- 			<van-button round block type="primary" native-type="submit">
 				保存
-			</van-button>
+			</van-button> -->
 		</van-cell-group>
 	</van-form>
 	<!-- 輸入昵稱 -->
@@ -48,6 +48,8 @@
 import { ref, onMounted } from 'vue'
 import tabbar from "@/views/tabbar/index.vue";
 import { useUserStore } from '@/store/modules/user'
+import { updateSysUserApi } from '@/api/travel/sysUserInfo'
+import { attachUpload } from '@/api/sys/attachment'
 const onClickLeft = () => history.back();
 const userStore = useUserStore()
 //**静态资源 */
@@ -74,11 +76,38 @@ const uploadImage = (val) => {
 //上传文件代码
 const afterRead = (file) => {
 	console.log("afterRead", file);
+	//单个上传
+	attachUpload(file).then((datas) => {
+		if (datas.code == 0) {
+			let dataFrom = {}
+			dataFrom.realName = in_realName.value
+			dataFrom.username = userStore.user.username
+			dataFrom.mobile = userStore.user.mobile
+			dataFrom.orgId = userStore.user.orgId
+			dataFrom.avatar = datas.data.url
+			// "realName": in_realName.value, "mobile": userStore.user.mobile, "username": userStore.user.username, "orgId": userStore.user.orgId
+			updateSysUserApi(dataFrom).then(() => {
+				console.log("修改成功")
+			})
+			fileMapVal.value.set(file.objectUrl, datas.data.url);
+		}
+	})
 };
 //**编辑输入框内容 */
 const in_realName_show = ref(false)
 const in_realName = ref(userStore.user.realName)
 const in_realName_confirm = () => {
+	console.log(userStore.user)
+	let dataFrom = {}
+	dataFrom.realName = in_realName.value
+	dataFrom.username = userStore.user.username
+	dataFrom.mobile = userStore.user.mobile
+	dataFrom.orgId = userStore.user.orgId
+	// "realName": in_realName.value, "mobile": userStore.user.mobile, "username": userStore.user.username, "orgId": userStore.user.orgId
+	updateSysUserApi(dataFrom).then(() => {
+		console.log("修改成功")
+	})
+
 	console.log('in_realName_confirm', in_realName.value)
 }
 

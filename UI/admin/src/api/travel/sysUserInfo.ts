@@ -11,3 +11,7 @@ export const useSysUserInfoSubmitApi = (dataForm: any) => {
 		return service.post('/travel/sysUserInfo', dataForm)
 	}
 }
+
+export const updateSysUserApi = (dataForm: any) => {
+	return service.put('/travel/sysUserInfo/update', dataForm)
+}

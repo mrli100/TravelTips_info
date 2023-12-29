@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import net.maku.framework.common.utils.Result;
 import net.maku.framework.security.user.SecurityUser;
 import net.maku.system.convert.SysUserConvert;
+import net.maku.system.entity.SysUserEntity;
+import net.maku.system.service.SysUserService;
 import net.maku.system.vo.SysUserVO;
 import net.maku.travel.entity.SysUserInfoEntity;
 import net.maku.travel.service.SysUserInfoService;
@@ -24,23 +26,26 @@ import java.util.Map;
 @Tag(name = "API接口集合")
 public class ApiController {
     private final SysUserInfoService sysUserInfoService;
+    private final SysUserService sysUserService;
 
     @GetMapping("/user/info")
     @Operation(summary = "登录用户")
     public Result<Map> info() {
         SysUserVO user = SysUserConvert.INSTANCE.convert(SecurityUser.getUser());
+        SysUserEntity byId = sysUserService.getById(user.getId());
         Map map = new HashMap<>();
-        map.put("userId", user.getId());
-        map.put("username", user.getUsername());
-        map.put("realName", user.getRealName());
-        map.put("email", user.getEmail());
-        map.put("mobile", user.getMobile());
-        map.put("gender", user.getGender());
-        map.put("avatar", user.getAvatar());
+        map.put("userId", byId.getId());
+        map.put("username", byId.getUsername());
+        map.put("realName", byId.getRealName());
+        map.put("email", byId.getEmail());
+        map.put("mobile", byId.getMobile());
+        map.put("gender", byId.getGender());
+        map.put("avatar", byId.getAvatar());
+        map.put("orgId", byId.getOrgId());
 
         //查询用户信息
         LambdaQueryWrapper<SysUserInfoEntity> query = new LambdaQueryWrapper<SysUserInfoEntity>();
-        query.eq(SysUserInfoEntity::getUserId, user.getId());
+        query.eq(SysUserInfoEntity::getUserId, byId.getId());
         SysUserInfoEntity one = sysUserInfoService.getOne(query);
         if (null != one) {
             map.put("signature", one.getSignature());
@@ -58,5 +63,6 @@ public class ApiController {
         }
         return Result.ok(map);
     }
+
 
 }
