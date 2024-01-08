@@ -57,7 +57,9 @@
 	</van-row>
 	<van-divider />
 	<van-cell-group class="user-group" inset>
-		<van-cell title="我的点赞" icon="records" is-link to="/OrderList" /></van-cell-group>
+		<van-cell title="草稿箱" icon="todo-list" is-link to="/OrderList" />
+		<van-cell title="我的点赞" icon="records" is-link to="/OrderList" />
+	</van-cell-group>
 	<van-cell-group inset>
 		<van-cell title="我的行程" icon="exchange" is-link />
 		<van-cell title="我的路线" icon="gold-coin" is-link />
