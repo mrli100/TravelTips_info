@@ -65,6 +65,8 @@
 <script setup lang="ts">
 import { attachUpload } from '@/api/sys/attachment'
 import constant from '@/utils/constant'
+//** 添加API接口 */
+import { usePlanMainApi, usePlanMainSubmitApi } from '@/api/travel/planMain'
 //** 静态资源 */
 import { ref, onMounted } from 'vue'
 import { showToast } from 'vant'
@@ -161,6 +163,9 @@ const onSubmit = (values) => {
 		fileArr.push(value)
 	})
 	values.bg_image = JSON.stringify(fileArr)
+	usePlanMainSubmitApi(values).then(() => {
+		showToast('操作成功');
+	})
 	console.log('submit', values);
 };
 // 变量定义
