@@ -1,13 +1,11 @@
 package net.maku.travel.vo;
 
-import io.swagger.v3.oas.annotations.media.Schema;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-
-import java.io.Serializable;
-
 import net.maku.framework.common.utils.DateUtils;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -31,11 +29,11 @@ public class TPlanTripMainVO implements Serializable {
     private String planDesc;
 
     @Schema(description = "计划开始时间")
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateUtils.DATE_PATTERN, timezone = "UTC")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateUtils.DATE_PATTERN, timezone = "UTC")
     private Date planStartTime;
 
     @Schema(description = "计划结束时间")
-    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateUtils.DATE_PATTERN, timezone = "UTC")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = DateUtils.DATE_PATTERN, timezone = "UTC")
     private Date planEndTime;
 
     @Schema(description = "目的地")

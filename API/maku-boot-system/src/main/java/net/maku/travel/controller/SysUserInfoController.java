@@ -72,7 +72,12 @@ public class SysUserInfoController {
     @PreAuthorize("hasAuthority('travel:sysUserInfo:update')")
     public Result<String> update(@RequestBody @Valid SysUserInfoVO vo) {
         UserDetail user = SecurityUser.getUser();
-        vo.setUserId(user.getId());
+        Integer superAdmin = user.getSuperAdmin();
+        //判断是否为管理员
+        Integer admin = Integer.valueOf(1);
+        if (!superAdmin.equals(admin)) {
+            vo.setUserId(user.getId());
+        }
         sysUserInfoService.update(vo);
         return Result.ok();
     }

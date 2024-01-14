@@ -15,17 +15,18 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+
 import java.util.List;
 
 /**
-* 计划路线
-*
-* @author 阿沐 babamu@126.com
-* @since 1.0.0 2023-12-10
-*/
+ * 计划路线
+ *
+ * @author 阿沐 babamu@126.com
+ * @since 1.0.0 2023-12-10
+ */
 @RestController
 @RequestMapping("travel/planMain")
-@Tag(name="计划路线")
+@Tag(name = "计划路线")
 @AllArgsConstructor
 public class TPlanTripMainController {
     private final TPlanTripMainService tPlanTripMainService;
@@ -33,7 +34,7 @@ public class TPlanTripMainController {
     @GetMapping("page")
     @Operation(summary = "分页")
     @PreAuthorize("hasAuthority('travel:planMain:page')")
-    public Result<PageResult<TPlanTripMainVO>> page(@ParameterObject @Valid TPlanTripMainQuery query){
+    public Result<PageResult<TPlanTripMainVO>> page(@ParameterObject @Valid TPlanTripMainQuery query) {
         PageResult<TPlanTripMainVO> page = tPlanTripMainService.page(query);
 
         return Result.ok(page);
@@ -42,7 +43,7 @@ public class TPlanTripMainController {
     @GetMapping("{id}")
     @Operation(summary = "信息")
     @PreAuthorize("hasAuthority('travel:planMain:info')")
-    public Result<TPlanTripMainVO> get(@PathVariable("id") Long id){
+    public Result<TPlanTripMainVO> get(@PathVariable("id") Long id) {
         TPlanTripMainEntity entity = tPlanTripMainService.getById(id);
 
         return Result.ok(TPlanTripMainConvert.INSTANCE.convert(entity));
@@ -51,7 +52,8 @@ public class TPlanTripMainController {
     @PostMapping
     @Operation(summary = "保存")
     @PreAuthorize("hasAuthority('travel:planMain:save')")
-    public Result<String> save(@RequestBody TPlanTripMainVO vo){
+    public Result<String> save(@RequestBody TPlanTripMainVO vo) {
+        vo.setState(0);
         tPlanTripMainService.save(vo);
 
         return Result.ok();
@@ -60,7 +62,7 @@ public class TPlanTripMainController {
     @PutMapping
     @Operation(summary = "修改")
     @PreAuthorize("hasAuthority('travel:planMain:update')")
-    public Result<String> update(@RequestBody @Valid TPlanTripMainVO vo){
+    public Result<String> update(@RequestBody @Valid TPlanTripMainVO vo) {
         tPlanTripMainService.update(vo);
 
         return Result.ok();
@@ -69,7 +71,7 @@ public class TPlanTripMainController {
     @DeleteMapping
     @Operation(summary = "删除")
     @PreAuthorize("hasAuthority('travel:planMain:delete')")
-    public Result<String> delete(@RequestBody List<Long> idList){
+    public Result<String> delete(@RequestBody List<Long> idList) {
         tPlanTripMainService.delete(idList);
 
         return Result.ok();

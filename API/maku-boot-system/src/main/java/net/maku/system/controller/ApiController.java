@@ -63,6 +63,39 @@ public class ApiController {
         }
         return Result.ok(map);
     }
+    @GetMapping("/user/travelInfo")
+    @Operation(summary = "查询个人旅游信息资料")
+    public Result<Map> travelInfo() {
+        SysUserVO user = SysUserConvert.INSTANCE.convert(SecurityUser.getUser());
+        SysUserEntity byId = sysUserService.getById(user.getId());
+        Map map = new HashMap<>();
+        map.put("userId", byId.getId());
+        map.put("username", byId.getUsername());
+        map.put("realName", byId.getRealName());
+        map.put("email", byId.getEmail());
+        map.put("mobile", byId.getMobile());
+        map.put("gender", byId.getGender());
+        map.put("avatar", byId.getAvatar());
+        map.put("orgId", byId.getOrgId());
 
-
+        //查询用户信息
+        LambdaQueryWrapper<SysUserInfoEntity> query = new LambdaQueryWrapper<SysUserInfoEntity>();
+        query.eq(SysUserInfoEntity::getUserId, byId.getId());
+        SysUserInfoEntity one = sysUserInfoService.getOne(query);
+        if (null != one) {
+            map.put("signature", one.getSignature());
+            map.put("tags", one.getTags().split(","));
+            map.put("tags", one.getTags().split(","));
+            map.put("birthday", one.getBirthday());
+            map.put("extendedconfig", one.getExtendedconfig());
+            map.put("idcard", one.getIdcard());
+        } else {
+            map.put("signature", "该用户太懒了，没有什么介绍。");
+            map.put("tags", "");
+            map.put("birthday", "");
+            map.put("extendedconfig", "{}");
+            map.put("idcard", "");
+        }
+        return Result.ok(map);
+    }
 }

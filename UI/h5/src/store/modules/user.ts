@@ -4,7 +4,7 @@ import {
   useMobileLoginApi,
   useLogoutApi,
 } from "@/api/auth";
-import { useUserInfoApi } from "@/api/sys/user";
+import { useUserInfoApi, useUserTravelInfoApi } from "@/api/sys/user";
 import cache from "@/utils/cache";
 import { useAuthorityListApi } from "@/api/sys/menu";
 
@@ -17,6 +17,10 @@ export const useUserStore = defineStore("userStore", {
       username: "",
       avatar: "",
     },
+    // 用户旅游信息
+    userTravel: {
+      id: "",
+    },
     // 权限列表
     authorityList: [],
     // 访问token
@@ -27,6 +31,9 @@ export const useUserStore = defineStore("userStore", {
   actions: {
     setUser(val: any) {
       this.user = val;
+    },
+    setUserTravel(val: any) {
+      this.userTravel = val;
     },
     setToken(val: any) {
       this.token = val;
@@ -52,6 +59,11 @@ export const useUserStore = defineStore("userStore", {
     async getUserInfoAction() {
       const { data } = await useUserInfoApi();
       this.setUser(data);
+    },
+    // 获取用户攻略信息
+    async getUserTravelInfoAction() {
+      const { data } = await useUserTravelInfoApi();
+      this.setUserTravel(data);
     },
     // 获取权限
     async getAuthorityListAction() {

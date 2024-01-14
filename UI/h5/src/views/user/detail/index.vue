@@ -26,10 +26,10 @@
 		</van-cell-group>
 		<van-cell-group title="系统设置">
 			<van-cell title="修改密码" is-link />
-			<van-cell title="退出登录" is-link />
+			<van-cell title="退出登录" @click="loginOut" />
 		</van-cell-group>
 		<van-cell-group inset>
-<!-- 			<van-button round block type="primary" native-type="submit">
+			<!-- 			<van-button round block type="primary" native-type="submit">
 				保存
 			</van-button> -->
 		</van-cell-group>
@@ -112,6 +112,13 @@ const in_realName_confirm = () => {
 }
 
 
+//** 退出登录 */
+const loginOut = (Event) => {
+	userStore.logoutAction().then(() => {
+		// 刷新页面
+		location.reload()
+	})
+}
 </script>
 
 <style lang="less" scoped></style>

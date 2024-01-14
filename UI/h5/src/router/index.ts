@@ -64,6 +64,7 @@ router.beforeEach(async (_to, _from, next) => {
     if (!userStore.user.id) {
       try {
         await userStore.getUserInfoAction();
+        await userStore.getUserTravelInfoAction();
         await userStore.getAuthorityListAction();
       } catch (error) {
         // 请求异常，则跳转到登录页

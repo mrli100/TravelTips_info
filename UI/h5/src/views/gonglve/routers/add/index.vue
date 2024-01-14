@@ -7,12 +7,12 @@
 	<van-form @submit="onSubmit">
 		<!-- 名称标题 -->
 		<van-cell-group inset>
-			<van-field v-model="planMain.name" name="name" label="路线名称" placeholder="路线名称"
+			<van-field v-model="planMain.name" name="planName" label="路线名称" placeholder="路线名称"
 				:rules="[{ required: true, message: '请填写路线名称' }]" maxlength="20" />
 		</van-cell-group>
 		<!-- 简介信息 -->
 		<van-cell-group inset>
-			<van-field v-model="planMain.content" rows="4" name="content" autosize label="路线简介" placeholder="请描述线路简介信息"
+			<van-field v-model="planMain.content" rows="4" name="planDesc" autosize label="路线简介" placeholder="请描述线路简介信息"
 				type="textarea" maxlength="50" />
 		</van-cell-group>
 		<!-- 选择目的地 -->
@@ -25,7 +25,7 @@
 		</van-cell-group>
 		<!-- 背景图片 -->
 		<van-cell-group inset>
-			<van-field name="bg_image" label="图片介绍">
+			<van-field name="bgImage" label="图片介绍">
 				<template #input>
 					<van-uploader v-model="planMain.bg_image_url" :max-count="9" :max-size="isOverSize" @oversize="onOversize"
 						:before-delete="beforeDelete" :after-read="afterRead" multiple />
@@ -34,7 +34,7 @@
 		</van-cell-group>
 		<!-- 开始时间 -->
 		<van-cell-group inset>
-			<van-field v-model="planMain.createTime" is-link readonly name="createTime" label="开始时间" placeholder="点击选择时间"
+			<van-field v-model="planMain.createTime" is-link readonly name="planStartTime" label="开始时间" placeholder="点击选择时间"
 				@click="showStartTimePicker = true" />
 			<van-popup v-model:show="showStartTimePicker" position="bottom">
 				<van-calendar v-model:show="showStartTimePicker" @confirm="onStartConfirm" />
@@ -42,7 +42,7 @@
 		</van-cell-group>
 		<!-- 结束时间 -->
 		<van-cell-group inset>
-			<van-field v-model="planMain.endTime" is-link readonly name="endTime" label="结束时间" placeholder="点击选择时间"
+			<van-field v-model="planMain.endTime" is-link readonly name="planEndTime" label="结束时间" placeholder="点击选择时间"
 				@click="showEndTimePicker = true" />
 			<van-calendar v-model:show="showEndTimePicker" @confirm="onEndConfirm" />
 		</van-cell-group>
@@ -89,14 +89,14 @@ const planMain = ref({
 })
 
 //** 文件上传操作 */
-const fileMaxSize = 5 * 1024 * 1024;
+const fileMaxSize = 3 * 1024 * 1024;
 const fileMapVal = ref(new Map());
 const isOverSize = (file) => {
 	return file.size >= fileMaxSize;
 };
 
 const onOversize = (file) => {
-	showToast('图片大小不能超过5MB');
+	showToast('图片大小不能超过3MB');
 };
 
 //上传文件代码
@@ -162,7 +162,9 @@ const onSubmit = (values) => {
 	fileMapVal.value.forEach((value, key) => {
 		fileArr.push(value)
 	})
-	values.bg_image = JSON.stringify(fileArr)
+	values.bgImage = JSON.stringify(fileArr)
+	// values.planStartTime = values.planStartTime + " 00:00:00";
+	// values.planEndTime = values.planEndTime + " 00:00:00";
 	usePlanMainSubmitApi(values).then(() => {
 		showToast('操作成功');
 	})

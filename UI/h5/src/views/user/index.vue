@@ -57,13 +57,16 @@
 	</van-row>
 	<van-divider />
 	<van-cell-group class="user-group" inset>
-		<van-cell title="草稿箱" icon="todo-list" is-link to="/OrderList" />
+		<van-cell title="草稿箱" icon="todo-list" is-link>
+			<template #right-icon>
+				<var-badge type="danger" :value="userStore.userTravel.drafts.length" :max-value="99" />
+			</template>
+		</van-cell>
 		<van-cell title="我的点赞" icon="records" is-link to="/OrderList" />
 	</van-cell-group>
 	<van-cell-group inset>
 		<van-cell title="我的行程" icon="exchange" is-link />
 		<van-cell title="我的路线" icon="gold-coin" is-link />
-		<van-cell title="退出登录" icon="gold-coin" is-link />
 	</van-cell-group>
 	<van-row>
 		<van-col span="24">
@@ -75,6 +78,7 @@
 <script  setup lang="ts">
 import tabbar from "@/views/tabbar/index.vue";
 import { useUserStore } from '@/store/modules/user'
+import { ref, onMounted } from 'vue'
 //** 路由跳转 */
 import { useRouter } from 'vue-router'
 const router = useRouter()
@@ -82,12 +86,18 @@ const toDetail = () => {
 	router.push({ path: '/user/detail' })
 }
 
+//** 用户基本信息 */
+const travelInfo = ref({})
+
+
+onMounted(() => {
+	travelInfo.value = userStore.userTravel
+	console.log(travelInfo.value)
+})
 const userStore = useUserStore()
-// console.log(JSON.stringify(userStore), userStore)
 
 const logout = () => {
 	userStore.logoutAction().then(() => {
-		// router.push({ path: '/home' })
 		// 刷新页面
 		location.reload()
 	})

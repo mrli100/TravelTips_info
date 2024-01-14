@@ -4,6 +4,10 @@ export const useUserInfoApi = () => {
   return service.get("v1/user/info");
 };
 
+export const useUserTravelInfoApi = () => {
+  return service.get("travelV1/user/travelInfo");
+};
+
 export const updatePasswordApi = (data: any) => {
   return service.put("/sys/user/password", data);
 };
