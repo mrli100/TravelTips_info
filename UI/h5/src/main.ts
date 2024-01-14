@@ -1,4 +1,5 @@
 import { createApp } from "vue";
+import { ImagePreview } from 'vant';
 import "./style.css";
 import App from "./App.vue";
 import { createPinia } from "pinia";
@@ -16,6 +17,7 @@ import "vant/es/image-preview/style";
 const app = createApp(App);
 app.use(createPinia());
 app.use(router);
+app.use(ImagePreview);
 app.use(VueGridWaterfall);
 // 增强了 Vue Router v4 的滚动行为
 app.use(

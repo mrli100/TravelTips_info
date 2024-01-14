@@ -17,7 +17,7 @@
 			</template>
 			<template #image>
 				<var-swipe navigation class="swipe-example">
-					<var-swipe-item v-for="(itemImg, ij) in JSON.parse(item.bgImage)" :key="imgKey">
+					<var-swipe-item v-for="(itemImg) in JSON.parse(item.bgImage)" :key="itemImg">
 						<img class="swipe-example-image" :src="itemImg.trim()">
 					</var-swipe-item>
 				</var-swipe>
@@ -54,7 +54,6 @@ onMounted(() => {
 		limit: 10
 	}
 	usePlanMainApiPage(parms).then((res) => {
-		console.log(res)
 		if (res.code == 0) {
 			routerListData.value = res.data.list
 		}
