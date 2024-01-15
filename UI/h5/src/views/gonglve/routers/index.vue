@@ -6,7 +6,7 @@
 			</van-dropdown-menu>
 		</van-col>
 	</van-row>
-	<!-- 搜索内容 -->
+	<!-- 卡片列表 -->
 	<van-row>
 		<var-card v-for="(item, i) in routerListData" :key="i" :title="item.planName" :description="item.planDesc">
 			<template #extra>
@@ -16,10 +16,17 @@
 				</var-space>
 			</template>
 			<template #image>
-				<var-swipe navigation class="swipe-example">
+				<var-swipe :loop="false" class="swipe-example" @click="showImagePreview(JSON.parse(item.bgImage))">
 					<var-swipe-item v-for="(itemImg) in JSON.parse(item.bgImage)" :key="itemImg">
 						<img class="swipe-example-image" :src="itemImg.trim()">
 					</var-swipe-item>
+					<template #indicator="{ index, length }">
+						<div class="swipe-example-indicators">
+							<div class="swipe-example-indicator">
+								{{ (index + 1) + '/' + length }}
+							</div>
+						</div>
+					</template>
 				</var-swipe>
 			</template>
 		</var-card>
@@ -34,6 +41,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { showImagePreview } from 'vant';
 //** 添加API接口 */
 import { usePlanMainApiPage } from '@/api/travel/planMain'
 import tabbar from "@/views/tabbar/index.vue";
@@ -44,6 +52,9 @@ const option1 = [
 	{ text: '查看排序', value: 2 }
 ]
 const value1 = ref(0)
+
+//** 初始化参数 */
+const images = ref([])
 
 const routerListData = ref([])
 
@@ -59,6 +70,7 @@ onMounted(() => {
 		}
 	})
 })
+
 </script>
 <style lang="less" scoped>
 .swipe-example {
@@ -81,5 +93,15 @@ onMounted(() => {
 :deep(.van-list) {
 	height: 30vh;
 	overflow-y: scroll;
+}
+
+//图片轮播
+.swipe-example-indicators {
+	position: absolute;
+	display: flex;
+	bottom: 10px;
+	left: 95%;
+	background-color: rgb(184, 186, 187);
+	transform: translateX(-50%);
 }
 </style>

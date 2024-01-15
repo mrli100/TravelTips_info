@@ -57,7 +57,7 @@
 	</van-row>
 	<van-divider />
 	<van-cell-group class="user-group" inset>
-		<van-cell title="草稿箱" icon="todo-list" is-link>
+		<van-cell title="草稿箱" icon="todo-list" is-link to="/user/drafts">
 			<template #right-icon>
 				<var-badge type="danger" :value="userStore.userTravel.drafts.length" :max-value="99" />
 			</template>

@@ -44,6 +44,11 @@ const routes = [
     name: "user_detail",
     component: () => import("@/views/user/detail/index.vue"),
   },
+  {
+    path: "/user/drafts",
+    name: "user_drafts",
+    component: () => import("@/views/user/drafts/index.vue"),
+  },
 ];
 
 // 创建路由实例并传递 `routes` 配置
