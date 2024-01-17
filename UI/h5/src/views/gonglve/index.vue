@@ -16,7 +16,7 @@
 			<tabbar>底部聊天</tabbar>
 		</van-col>
 	</van-row>
-	<van-floating-bubble axis="xy" v-model:offset="floating_offset" magnetic="x" icon="plus" @click="onClick" />
+	<!-- <van-floating-bubble axis="xy" v-model:offset="floating_offset" magnetic="x" icon="plus" @click="onClick" /> -->
 	<!-- 选择发布内容 -->
 	<van-action-sheet v-model:show="addshow" :actions="actions" @select="onSelect" />
 </template>
@@ -25,9 +25,12 @@
 import { ref } from 'vue'
 import { showToast } from 'vant'
 
+// @ts-ignore
 import tabbar from "@/views/tabbar/index.vue";
 //攻略页面
+// @ts-ignore
 import travelPage from '@/views/gonglve/travle/index.vue'
+// @ts-ignore
 import routerPage from '@/views/gonglve/routers/index.vue'
 import router from '@/router';
 //变量定义
@@ -35,7 +38,7 @@ let active = ref(0)
 //气泡定位
 const floating_offset = ref({
 	x: window.innerWidth - 50,
-	y: (window.innerHeight - 110)
+	y: (window.innerHeight - 130)
 })
 const onClickTab = ({ title }) => {
 	showToast(title)

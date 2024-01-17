@@ -2,10 +2,10 @@
 	<div class="login-container">
 		<div class="login-form">
 			<account v-if="loginType === 'account'"></account>
-			<mobile v-if="loginType === 'mobile'"></mobile>
+			<!-- <mobile v-if="loginType === 'mobile'"></mobile> -->
 			<div class="login-more">
-				<el-button type="info" link @click="loginSwitch('account')">账号密码登录</el-button>
-				<el-button type="info" link @click="loginSwitch('mobile')">手机短信登录</el-button>
+				<!-- 				<el-button type="info" link @click="loginSwitch('account')">账号密码登录</el-button>
+				<el-button type="info" link @click="loginSwitch('mobile')">手机短信登录</el-button> -->
 			</div>
 		</div>
 	</div>
@@ -13,8 +13,10 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
-import Account from './account.vue'
-import Mobile from './mobile.vue'
+// @ts-ignore
+import account from './account.vue'
+// @ts-ignore
+// import Mobile from './mobile.vue'
 
 // 登录类型
 const loginType = ref('account')

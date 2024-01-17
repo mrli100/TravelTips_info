@@ -1,5 +1,5 @@
 import { createApp } from "vue";
-import { ImagePreview } from 'vant';
+import { ImagePreview } from "vant";
 import "./style.css";
 import App from "./App.vue";
 import { createPinia } from "pinia";
@@ -13,6 +13,13 @@ import "vant/es/toast/style";
 import "vant/es/dialog/style";
 import "vant/es/notify/style";
 import "vant/es/image-preview/style";
+
+//开启是否为调试状态
+import VConsole from "vconsole";
+// 如果你想在特定条件下开启vConsole，可以包裹条件判断语句
+if (process.env.NODE_ENV !== "production") {
+  const vConsole = new VConsole();
+}
 
 const app = createApp(App);
 app.use(createPinia());

@@ -2,10 +2,8 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 import vue from "@vitejs/plugin-vue";
 
-//依赖导入elementui
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
-import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
 import { VarletUIResolver } from "unplugin-vue-components/resolvers";
 
 //依赖导入vant
@@ -23,16 +21,12 @@ export default defineConfig({
   plugins: [
     vue(),
     AutoImport({
-      resolvers: [
-        ElementPlusResolver(),
-        VantResolver(),
-        VarletUIResolver({ autoImport: true }),
-      ],
+      resolvers: [VantResolver(), VarletUIResolver({ autoImport: true })],
       imports: ["vue", "vue-router"],
     }),
 
     Components({
-      resolvers: [ElementPlusResolver(), VantResolver(), VarletUIResolver()],
+      resolvers: [VantResolver(), VarletUIResolver()],
     }),
   ],
   server: {
