@@ -14,12 +14,20 @@ export const useUserStore = defineStore("userStore", {
     user: {
       id: "",
       superAdmin: 0,
+      userId: "",
       username: "",
       avatar: "",
+      realName: "",
+      mobile: "",
+      tags: "",
+      orgId: "",
+      signature: "",
     },
     // 用户旅游信息
     userTravel: {
       id: "",
+      //草稿箱
+      drafts: "",
     },
     // 权限列表
     authorityList: [],

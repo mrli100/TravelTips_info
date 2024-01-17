@@ -42,7 +42,7 @@ class Cache {
     Storage.setItem(CacheKey.ComponentSizeKey, value);
   };
 
-  setTheme = (value: ITheme) => {
+  setTheme = (value: any) => {
     SessionStorage.setItem(CacheKey.ThemeKey, value);
   };
 

@@ -1,12 +1,11 @@
 {
   "name": "h5",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "1.0.0",
   "scripts": {
     "dev": "vite --mode development",
-    "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "build": "vue-tsc --noEmit && vite build --mode production",
+    "preview": "vite preview",
+    "lint": "eslint --fix --ext .vue,.jsx,.ts,.tsx ."
   },
   "dependencies": {
     "@vant/area-data": "^1.5.1",

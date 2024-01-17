@@ -96,6 +96,7 @@ const isOverSize = (file) => {
 };
 
 const onOversize = (file) => {
+	console.log(file);
 	showToast('图片大小不能超过3MB');
 };
 
@@ -106,15 +107,15 @@ const afterRead = (file) => {
 		//循环输出列表文件
 		for (let i = 0; i < file.length; i++) {
 			console.log("列表的单个上傳的文件", file[i]);
-			attachUpload(file[i]).then((datas) => {
-				if (datas.code == 0) {
-					fileMapVal.value.set(file[i].objectUrl, datas.data.url);
+			attachUpload(file[i]).then((data: any) => {
+				if (data.code == 0) {
+					fileMapVal.value.set(file[i].objectUrl, data.data.url);
 				}
 			})
 		}
 	} else {
 		//单个上传
-		attachUpload(file).then((datas) => {
+		attachUpload(file).then((datas: any) => {
 			if (datas.code == 0) {
 				fileMapVal.value.set(file.objectUrl, datas.data.url);
 			}
@@ -159,7 +160,7 @@ onMounted(() => {
 //** 表单提交 */
 const onSubmit = (values) => {
 	let fileArr = [];
-	fileMapVal.value.forEach((value, key) => {
+	fileMapVal.value.forEach((value) => {
 		fileArr.push(value)
 	})
 	values.bgImage = JSON.stringify(fileArr)

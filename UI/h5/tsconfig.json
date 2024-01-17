@@ -29,7 +29,7 @@
     ],
     "jsx": "preserve",
     /* Linting */
-    "strict": true,
+    "strict": false,
     "noUnusedLocals": false,
     "noUnusedParameters": true,
     "noImplicitAny": false,

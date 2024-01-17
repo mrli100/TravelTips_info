@@ -3,7 +3,6 @@ export const isExternalLink = (path: string): boolean => {
 };
 
 export const validateEmail = (
-  rule: any,
   value: any,
   callback: (e?: Error) => any
 ) => {
@@ -18,7 +17,6 @@ export const validateEmail = (
 };
 
 export const validatePassword = (
-  rule: any,
   value: any,
   callback: (e?: Error) => any
 ) => {
@@ -32,7 +30,6 @@ export const validatePassword = (
 export const mobileRegExp = /^1[3456789]\d{9}$/;
 
 export const validateMobile = (
-  rule: any,
   value: any,
   callback: (e?: Error) => any
 ) => {

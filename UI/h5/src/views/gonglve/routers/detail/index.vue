@@ -51,7 +51,7 @@
 						</van-col>
 						<van-col span="24">
 							<div style="width: 300px;">
-								<van-space :align="text_align" fill class="jingdian">
+								<van-space :align="center" fill class="jingdian">
 									<label>08:00</label>
 									<van-image width="22" height="22" :src="img_jingdian" />
 									<div>{{ text }}</div>
@@ -59,7 +59,7 @@
 								</van-space>
 							</div>
 						</van-col>
-						<van-col span="24"><van-divider content-position="left">驾车{{kilometer}} | {{ time }}</van-divider></van-col>
+						<van-col span="24"><van-divider content-position="left">驾车{{ kilometer }} | {{ time }}</van-divider></van-col>
 					</van-row>
 
 
@@ -76,7 +76,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { showToast } from 'vant'
-import { text } from 'stream/consumers';
 const TMap = (window as any).TMap;
 const qq = (window as any).qq;
 const geolocation = new qq.maps.Geolocation('EUSBZ-CK76I-67MG7-UQ2OM-VY5KF-ZQFQJ', 'webAPP');
@@ -89,7 +88,6 @@ let qqmap = null;
 //** 静态资源 */
 import img_jingdian from '@/assets/icons/iconfont/png/jingdian.png'
 const text = ref('北京市海淀区');
-const text_align = ref('center')
 
 /** 驾车时间及路程 */
 const time = ref('30分钟')
@@ -122,8 +120,10 @@ const getMyLocation = () => {
 onMounted(() => {
 	let windowsHeight = window.innerHeight
 	let windowsWidth = window.innerWidth
+	// @ts-ignore
 	document.getElementsByClassName('qqmapInfo')[0].style.height = (windowsHeight / 2.3) + 'px'
 	//添加内容自适应
+	// @ts-ignore
 	document.getElementsByClassName('addContextDiv')[0].style.width = (windowsWidth - 80) + 'px'
 	initMap()
 	getMyLocation()
@@ -219,26 +219,29 @@ const onClickLocation = () => {
 		margin-left: 4px;
 	}
 }
-
 </style>
 <style lang="less">
-.jingdian{
-	.van-space-item:nth-child(1){
+.jingdian {
+	.van-space-item:nth-child(1) {
 		flex: 1;
 	}
-	.van-space-item:nth-child(2){
+
+	.van-space-item:nth-child(2) {
 		flex: 1;
 	}
-	.van-space-item:nth-child(3){
+
+	.van-space-item:nth-child(3) {
 		flex: 6;
 		width: 60%;
-		div{
+
+		div {
 			white-space: nowrap;
-    		text-overflow: ellipsis;
-    		overflow: hidden;
+			text-overflow: ellipsis;
+			overflow: hidden;
 		}
 	}
-	.van-space-item:nth-child(4){
+
+	.van-space-item:nth-child(4) {
 		flex: 1;
 	}
 }

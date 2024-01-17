@@ -64,7 +64,7 @@ onMounted(() => {
 		page: 1,
 		limit: 10
 	}
-	usePlanMainApiPage(parms).then((res) => {
+	usePlanMainApiPage(parms).then((res: any) => {
 		if (res.code == 0) {
 			routerListData.value = res.data.list
 		}

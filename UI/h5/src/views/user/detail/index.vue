@@ -77,9 +77,9 @@ const uploadImage = (val) => {
 const afterRead = (file) => {
 	console.log("afterRead", file);
 	//单个上传
-	attachUpload(file).then((datas) => {
+	attachUpload(file).then((datas: any) => {
 		if (datas.code == 0) {
-			let dataFrom = {}
+			let dataFrom: any = {}
 			dataFrom.realName = in_realName.value
 			dataFrom.username = userStore.user.username
 			dataFrom.mobile = userStore.user.mobile
@@ -89,7 +89,7 @@ const afterRead = (file) => {
 			updateSysUserApi(dataFrom).then(() => {
 				console.log("修改成功")
 			})
-			fileMapVal.value.set(file.objectUrl, datas.data.url);
+			// fileMapVal.value.set(file.objectUrl, datas.data.url);
 		}
 	})
 };
@@ -98,7 +98,7 @@ const in_realName_show = ref(false)
 const in_realName = ref(userStore.user.realName)
 const in_realName_confirm = () => {
 	console.log(userStore.user)
-	let dataFrom = {}
+	let dataFrom: any = {}
 	dataFrom.realName = in_realName.value
 	dataFrom.username = userStore.user.username
 	dataFrom.mobile = userStore.user.mobile
@@ -113,7 +113,7 @@ const in_realName_confirm = () => {
 
 
 //** 退出登录 */
-const loginOut = (Event) => {
+const loginOut = () => {
 	userStore.logoutAction().then(() => {
 		// 刷新页面
 		location.reload()

@@ -103,6 +103,7 @@ onMounted(() => {
 	lisRowtHeight = lisRowtHeight - itemTabElement.value.offsetHeight
 	//最后的50是tabbar
 	lisRowtHeight = lisRowtHeight - 50
+	// @ts-ignore
 	document.getElementsByClassName('van-list')[0].style.height = lisRowtHeight + 'px'
 })
 
