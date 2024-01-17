@@ -36,6 +36,7 @@
 <script  setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { showToast } from 'vant';
+// @ts-ignore
 import tabbar from "@/views/tabbar/index.vue";
 const onClickLeft = () => history.back();
 //**静态变量 */

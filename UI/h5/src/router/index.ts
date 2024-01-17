@@ -35,6 +35,11 @@ const routes = [
     component: () => import("@/views/gonglve/routers/add/index.vue"),
   },
   {
+    path: "/gonglve/routers/detail/add", //路线添加
+    name: "routers_add",
+    component: () => import("@/views/gonglve/routers/detail/index.vue"),
+  },
+  {
     path: "/user",
     name: "user",
     component: () => import("@/views/user/index.vue"),

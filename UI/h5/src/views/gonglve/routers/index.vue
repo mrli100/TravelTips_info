@@ -1,35 +1,42 @@
 <template>
 	<van-row>
 		<van-col span="24">
-			<van-dropdown-menu>
-				<van-dropdown-item v-model="value1" :options="option1" />
-			</van-dropdown-menu>
+			<div ref="component1">
+				<van-dropdown-menu>
+					<van-dropdown-item v-model="value1" :options="option1" />
+				</van-dropdown-menu>
+			</div>
 		</van-col>
 	</van-row>
 	<!-- 卡片列表 -->
 	<van-row>
-		<var-card v-for="(item, i) in routerListData" :key="i" :title="item.planName" :description="item.planDesc">
-			<template #extra>
-				<var-space>
-					<var-button text type="warning">查看</var-button>
-					<var-button text type="warning">收藏</var-button>
-				</var-space>
-			</template>
-			<template #image>
-				<var-swipe :loop="false" class="swipe-example" @click="showImagePreview(JSON.parse(item.bgImage))">
-					<var-swipe-item v-for="(itemImg) in JSON.parse(item.bgImage)" :key="itemImg">
-						<img class="swipe-example-image" :src="itemImg.trim()">
-					</var-swipe-item>
-					<template #indicator="{ index, length }">
-						<div class="swipe-example-indicators">
-							<div class="swipe-example-indicator">
-								{{ (index + 1) + '/' + length }}
-							</div>
-						</div>
+		<van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+			<van-list offset="400" v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+				<var-card v-for="(item, i) in routerListData" :key="i" :title="item.planName" :description="item.planDesc">
+					<template #extra>
+						<var-space>
+							<var-button text type="warning">查看</var-button>
+							<var-button text type="warning">收藏</var-button>
+						</var-space>
 					</template>
-				</var-swipe>
-			</template>
-		</var-card>
+					<template #image>
+						<var-swipe :loop="false" class="swipe-example" @click="showImagePreview(JSON.parse(item.bgImage))">
+							<var-swipe-item v-for="(itemImg) in JSON.parse(item.bgImage)" :key="itemImg">
+								<img class="swipe-example-image" :src="itemImg.trim()">
+							</var-swipe-item>
+							<template #indicator="{ index, length }">
+								<div class="swipe-example-indicators">
+									<div class="swipe-example-indicator">
+										{{ (index + 1) + '/' + length }}
+									</div>
+								</div>
+							</template>
+						</var-swipe>
+					</template>
+				</var-card>
+			</van-list>
+		</van-pull-refresh>
+
 	</van-row>
 	<!-- 底部导航 -->
 	<van-row>
@@ -41,10 +48,13 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { showToast } from 'vant';
 import { showImagePreview } from 'vant';
 //** 添加API接口 */
 import { usePlanMainApiPage } from '@/api/travel/planMain'
+// @ts-ignore
 import tabbar from "@/views/tabbar/index.vue";
+import { log } from "console";
 // 变量定义
 const option1 = [
 	{ text: '最新排序', value: 0 },
@@ -54,22 +64,60 @@ const option1 = [
 const value1 = ref(0)
 
 //** 初始化参数 */
+const component1 = ref(null)
 const images = ref([])
 
-const routerListData = ref([])
 
 //** 初始化方法  */
 onMounted(() => {
-	const parms = {
-		page: 1,
-		limit: 10
-	}
-	usePlanMainApiPage(parms).then((res: any) => {
-		if (res.code == 0) {
-			routerListData.value = res.data.list
-		}
-	})
+	//获取窗口高度
+	let windowsHeight = window.innerHeight
+	let lisRowtHeight = windowsHeight - component1.value.offsetHeight
+	//最后的50是tabbar
+	lisRowtHeight = lisRowtHeight - 100
+	// @ts-ignore
+	document.getElementsByClassName('van-list')[0].style.height = lisRowtHeight + 'px'
 })
+
+//** 无线下拉列表 */
+const routerListData = ref([])
+const loading = ref(false)
+const finished = ref(false)
+const refreshing = ref(false)
+const parms = ref({
+	page: 1,
+	limit: 10
+})
+const onLoad = () => {
+	setTimeout(() => {
+		if (refreshing.value) {
+			routerListData.value = []
+			refreshing.value = false
+		}
+		usePlanMainApiPage(parms.value).then((res: any) => {
+			if (res.code == 0) {
+				if (res.data.list.length == 0) {
+					finished.value = true
+				} else {
+					for (let item of res.data.list) {
+						routerListData.value.push(item);
+					}
+					parms.value.page = parms.value.page += 1
+				}
+			}
+			// console.log(res, routerListData.value)
+		})
+		loading.value = false
+	}, 1000)
+}
+const onRefresh = () => {
+	// 清空列表数据
+	finished.value = false
+	// 重新加载数据
+	loading.value = true
+	parms.value.page = 1
+	onLoad()
+}
 
 </script>
 <style lang="less" scoped>
