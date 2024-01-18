@@ -46,6 +46,7 @@
 </template>
 <script  setup lang="ts">
 import { ref, onMounted } from 'vue'
+// @ts-ignore
 import tabbar from "@/views/tabbar/index.vue";
 import { useUserStore } from '@/store/modules/user'
 import { updateSysUserApi } from '@/api/travel/sysUserInfo'

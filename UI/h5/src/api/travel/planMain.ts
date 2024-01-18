@@ -8,6 +8,10 @@ export const usePlanMainApiPage = (parms) => {
   return service.get("/travel/planMain/page", { params: parms });
 };
 
+export const usePlanMainApiQuery = (parms) => {
+  return service.get("/travel/planMain/query", { params: parms });
+};
+
 export const usePlanMainSubmitApi = (dataForm: any) => {
   if (dataForm.id) {
     return service.put("/travel/planMain", dataForm);

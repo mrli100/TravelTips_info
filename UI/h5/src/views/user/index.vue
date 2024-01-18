@@ -59,7 +59,7 @@
 	<van-cell-group class="user-group" inset>
 		<van-cell title="草稿箱" icon="todo-list" is-link to="/user/drafts">
 			<template #right-icon>
-				<var-badge type="danger" :value="userStore.userTravel.drafts.length" :max-value="99" />
+				<var-badge type="danger" :value="userStore.userTravel.drafts" :max-value="99" />
 			</template>
 		</van-cell>
 		<van-cell title="我的点赞" icon="records" is-link to="/OrderList" />
@@ -76,6 +76,7 @@
 </template>
 
 <script  setup lang="ts">
+// @ts-ignore
 import tabbar from "@/views/tabbar/index.vue";
 import { useUserStore } from '@/store/modules/user'
 import { ref, onMounted } from 'vue'
@@ -92,7 +93,6 @@ const travelInfo = ref({})
 
 onMounted(() => {
 	travelInfo.value = userStore.userTravel
-	console.log(travelInfo.value)
 })
 const userStore = useUserStore()
 

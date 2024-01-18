@@ -4,6 +4,14 @@ export const use${FunctionName}Api = (id: number) => {
 	return service.get('/${moduleName}/${functionName}/' + id)
 }
 
+export const use${FunctionName}ApiPage = (parms) => {
+	return service.get('/${moduleName}/${functionName}/page', { params: parms });
+};
+
+export const use${FunctionName}Query = (parms) => {
+	return service.get('/${moduleName}/${functionName}/query', { params: parms });
+};
+
 export const use${FunctionName}SubmitApi = (dataForm: any) => {
 	if (dataForm.id) {
 		return service.put('/${moduleName}/${functionName}', dataForm)

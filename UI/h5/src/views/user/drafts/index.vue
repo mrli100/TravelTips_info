@@ -12,8 +12,8 @@
 			<van-col span="24">
 				<van-pull-refresh v-model="refreshing" @refresh="onRefresh">
 					<van-list offset="400" v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-						<var-cell :key="item" v-for="item in list">
-							<var-cell title="这是单元格" description="描述">
+						<var-cell :key="item" v-for="item in routerListData">
+							<var-cell :title="item.planName" :description="item.planDesc">
 								<template #extra>
 									<van-icon name="edit" size="1.5rem" @click="editClick" />
 								</template>
@@ -35,19 +35,16 @@
 </template>
 <script  setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { showToast } from 'vant';
+import { useRouter } from 'vue-router'
+//** 添加API接口 */
+import { usePlanMainApiQuery } from '@/api/travel/planMain'
 // @ts-ignore
 import tabbar from "@/views/tabbar/index.vue";
 const onClickLeft = () => history.back();
 //**静态变量 */
-//查询列表
-const list = ref([])
-const loading = ref(false)
-const finished = ref(false)
-const refreshing = ref(false)
-
 //返回组件
 const backComponent = ref(null)
+const router = useRouter()
 
 //** 初始化方法 */
 onMounted(() => {
@@ -61,23 +58,40 @@ onMounted(() => {
 })
 
 const editClick = () => {
-	console.log('编辑')
+	router.push({ path: '/gonglve/routers/detail/edit' })
 }
 
+//** 无线下拉列表 */
+const routerListData = ref([])
+const loading = ref(false)
+const finished = ref(false)
+const refreshing = ref(false)
+//** 查询参数 */
+const parms = ref({
+	page: 1,
+	limit: 10
+})
 const onLoad = () => {
 	setTimeout(() => {
 		if (refreshing.value) {
-			list.value = []
+			routerListData.value = []
 			refreshing.value = false
 		}
-		for (let i = 0; i < 10; i++) {
-			list.value.push(list.value.length + 1)
-			showToast('加载' + list.value.length)
-		}
+		usePlanMainApiQuery(parms.value).then((res: any) => {
+			if (res.code == 0) {
+				console.log()
+				if (parms.value.page > res.data.pages) {
+					finished.value = true
+				} else {
+					for (let item of res.data.list) {
+						routerListData.value.push(item);
+					}
+					parms.value.page = parms.value.page += 1
+				}
+			}
+			// console.log(res, routerListData.value)
+		})
 		loading.value = false
-		if (list.value.length >= 60) {
-			finished.value = true
-		}
 	}, 1000)
 }
 const onRefresh = () => {

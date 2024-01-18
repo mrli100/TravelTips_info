@@ -10,32 +10,32 @@
 	</van-row>
 	<!-- 卡片列表 -->
 	<van-row>
-		<van-list offset="400" v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-			<var-card v-for="(item, i) in routerListData" :key="i" :title="item.planName" :description="item.planDesc">
-				<template #extra>
-					<var-space>
-						<var-button text type="warning">查看</var-button>
-						<var-button text type="warning">收藏</var-button>
-					</var-space>
-				</template>
-				<template #image>
-					<var-swipe :loop="false" class="swipe-example" @click="showImagePreview(JSON.parse(item.bgImage))" navigation="hover">
-						<var-swipe-item v-for="(itemImg) in JSON.parse(item.bgImage)" :key="itemImg">
-							<img class="swipe-example-image" :src="itemImg.trim()">
-						</var-swipe-item>
-						<template #indicator="{ index, length }">
-							<div class="swipe-example-indicators">
-								<div class="swipe-example-indicator">
-									{{ (index + 1) + '/' + length }}
+		<van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+			<van-list offset="400" v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+				<var-card v-for="(item, i) in routerListData" :key="i" :title="item.planName" :description="item.planDesc">
+					<template #extra>
+						<var-space>
+							<var-button text type="warning">查看</var-button>
+							<var-button text type="warning">收藏</var-button>
+						</var-space>
+					</template>
+					<template #image>
+						<var-swipe :loop="false" class="swipe-example" @click="showImagePreview(JSON.parse(item.bgImage))">
+							<var-swipe-item v-for="(itemImg) in JSON.parse(item.bgImage)" :key="itemImg">
+								<img class="swipe-example-image" :src="itemImg.trim()">
+							</var-swipe-item>
+							<template #indicator="{ index, length }">
+								<div class="swipe-example-indicators">
+									<div class="swipe-example-indicator">
+										{{ (index + 1) + '/' + length }}
+									</div>
 								</div>
-							</div>
-						</template>
-					</var-swipe>
-				</template>
-			</var-card>
-		</van-list>
-
-
+							</template>
+						</var-swipe>
+					</template>
+				</var-card>
+			</van-list>
+		</van-pull-refresh>
 	</van-row>
 	<!-- 底部导航 -->
 	<van-row>
@@ -49,13 +49,11 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import { showToast } from 'vant';
 import { showImagePreview } from 'vant';
 //** 添加API接口 */
-import { usePlanMainApiPage } from '@/api/travel/planMain'
+import { usePlanMainApiQuery } from '@/api/travel/planMain'
 // @ts-ignore
 import tabbar from "@/views/tabbar/index.vue";
-import { log } from "console";
 // 变量定义
 const option1 = [
 	{ text: '最新排序', value: 0 },
@@ -67,7 +65,6 @@ const value1 = ref(0)
 //** 初始化参数 */
 const component1 = ref(null)
 const component2 = ref(null)
-const images = ref([])
 
 
 //** 初始化方法  */
@@ -86,15 +83,23 @@ onMounted(() => {
 const routerListData = ref([])
 const loading = ref(false)
 const finished = ref(false)
+const refreshing = ref(false)
+//** 查询参数 */
 const parms = ref({
 	page: 1,
 	limit: 10
 })
 const onLoad = () => {
 	setTimeout(() => {
-		usePlanMainApiPage(parms.value).then((res: any) => {
+		if (refreshing.value) {
+			routerListData.value = []
+			refreshing.value = false
+		}
+
+		usePlanMainApiQuery(parms.value).then((res: any) => {
 			if (res.code == 0) {
-				if (res.data.list.length == 0) {
+				console.log()
+				if (parms.value.page > res.data.pages) {
 					finished.value = true
 				} else {
 					for (let item of res.data.list) {

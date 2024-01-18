@@ -30,14 +30,22 @@ const routes = [
     component: () => import("@/views/gonglve/index.vue"),
   },
   {
-    path: "/gonglve/routers/add", //路线添加
+    //路线主要信息添加
+    path: "/gonglve/routers/add",
     name: "routers_add",
     component: () => import("@/views/gonglve/routers/add/index.vue"),
   },
   {
-    path: "/gonglve/routers/detail/add", //路线添加
+    //路线添加
+    path: "/gonglve/routers/detail/add",
     name: "routers_add",
     component: () => import("@/views/gonglve/routers/detail/index.vue"),
+  },
+  {
+    //路线編輯
+    path: "/gonglve/routers/detail/edit",
+    name: "routers_edit",
+    component: () => import("@/views/gonglve/routers/detail/edit.vue"),
   },
   {
     path: "/user",

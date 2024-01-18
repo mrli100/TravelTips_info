@@ -67,8 +67,10 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { showToast } from 'vant'
+// @ts-ignore
 import tabbar from "@/views/tabbar/index.vue";
 //引入组件
+// @ts-ignore
 import cardList from '@/views/team/components/cardList.vue'
 //变量定义
 const value = ''
