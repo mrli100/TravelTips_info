@@ -23,13 +23,29 @@ public class PageResult<T> implements Serializable {
     @Schema(description = "列表数据")
     private List<T> list;
 
+    @Schema(description = "总页数")
+    private int pages;
+
     /**
      * 分页
-     * @param list   列表数据
-     * @param total  总记录数
+     *
+     * @param list  列表数据
+     * @param total 总记录数
      */
     public PageResult(List<T> list, long total) {
         this.list = list;
-        this.total = (int)total;
+        this.total = (int) total;
+    }
+
+    /**
+     * 分页
+     *
+     * @param list  列表数据
+     * @param total 总记录数
+     */
+    public PageResult(List<T> list, long total, long pages) {
+        this.list = list;
+        this.total = (int) total;
+        this.pages = (int) pages;
     }
 }

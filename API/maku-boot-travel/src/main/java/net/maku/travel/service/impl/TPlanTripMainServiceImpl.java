@@ -31,10 +31,10 @@ public class TPlanTripMainServiceImpl extends BaseServiceImpl<TPlanTripMainDao, 
     public PageResult<TPlanTripMainVO> page(TPlanTripMainQuery query) {
         IPage<TPlanTripMainEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 
-        return new PageResult<>(TPlanTripMainConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+        return new PageResult<>(TPlanTripMainConvert.INSTANCE.convertList(page.getRecords()), page.getTotal(), page.getPages());
     }
 
-    private LambdaQueryWrapper<TPlanTripMainEntity> getWrapper(TPlanTripMainQuery query){
+    private LambdaQueryWrapper<TPlanTripMainEntity> getWrapper(TPlanTripMainQuery query) {
         LambdaQueryWrapper<TPlanTripMainEntity> wrapper = Wrappers.lambdaQuery();
 
         return wrapper;

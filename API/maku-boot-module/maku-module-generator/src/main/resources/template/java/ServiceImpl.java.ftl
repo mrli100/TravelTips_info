@@ -31,7 +31,7 @@ public class ${ClassName}ServiceImpl extends BaseServiceImpl<${ClassName}Dao, ${
     public PageResult<${ClassName}VO> page(${ClassName}Query query) {
         IPage<${ClassName}Entity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 
-        return new PageResult<>(${ClassName}Convert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+        return new PageResult<>(${ClassName}Convert.INSTANCE.convertList(page.getRecords()), page.getTotal(), page.getPages());
     }
 
     private LambdaQueryWrapper<${ClassName}Entity> getWrapper(${ClassName}Query query){
