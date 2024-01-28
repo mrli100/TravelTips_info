@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
 	<el-form ref="loginFormRef" :model="loginForm" :rules="loginRules" @keyup.enter="onLogin">
 		<div class="login-title">登录</div>
 		<el-form-item prop="mobile">
@@ -17,19 +17,16 @@
 
 <script setup lang="ts">
 import { ref, reactive } from 'vue'
-import { User, Key } from '@element-plus/icons-vue'
 import { useUserStore } from '@/store/modules/user'
 import { useSendCodeApi } from '@/api/auth'
 import { useRouter } from 'vue-router'
 import { mobileRegExp } from '@/utils/validate'
-import { ElMessage } from 'element-plus'
 
 const userStore = useUserStore()
 
 // 发送短信验证码
 const sendCode = () => {
 	if (!mobileRegExp.test(loginForm.mobile)) {
-		ElMessage.error('请输入正确的手机号')
 		return
 	}
 
@@ -118,4 +115,4 @@ const onLogin = () => {
 		letter-spacing: 8px;
 	}
 }
-</style>
+</style> -->

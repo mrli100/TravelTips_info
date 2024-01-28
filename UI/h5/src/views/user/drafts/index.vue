@@ -15,7 +15,7 @@
 						<var-cell :key="item" v-for="item in routerListData">
 							<var-cell :title="item.planName" :description="item.planDesc">
 								<template #extra>
-									<van-icon name="edit" size="1.5rem" @click="editClick" />
+									<van-icon name="edit" size="1.5rem" @click="editClick(item)" />
 								</template>
 								<template #icon>
 									<var-badge type="info" value="路线" class="label" />
@@ -57,8 +57,8 @@ onMounted(() => {
 	document.getElementsByClassName('van-list')[0].style.height = lisRowtHeight + 'px'
 })
 
-const editClick = () => {
-	router.push({ path: '/gonglve/routers/detail/edit' })
+const editClick = (item) => {
+	router.push({ path: '/gonglve/routers/detail/edit', query: { id: item.id } })
 }
 
 //** 无线下拉列表 */

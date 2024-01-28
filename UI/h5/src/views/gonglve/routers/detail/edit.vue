@@ -76,6 +76,8 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { showToast } from 'vant'
+import router from '@/router';
+
 const TMap = (window as any).TMap;
 const qq = (window as any).qq;
 const geolocation = new qq.maps.Geolocation('EUSBZ-CK76I-67MG7-UQ2OM-VY5KF-ZQFQJ', 'webAPP');
@@ -118,6 +120,8 @@ const getMyLocation = () => {
 
 //** 初始化参数 */
 onMounted(() => {
+	console.error('User ID: ', router);
+	console.error('User ID: ', router.currentRoute.value.query);
 	let windowsHeight = window.innerHeight
 	let windowsWidth = window.innerWidth
 	// @ts-ignore
