@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.maku.travel.dao.TPlanTripDetailDao">
+
+    <resultMap type="net.maku.travel.entity.TPlanTripDetailEntity" id="tPlanTripDetailMap">
+        <result property="id" column="id"/>
+        <result property="planId" column="plan_id"/>
+        <result property="tripDay" column="trip_day"/>
+        <result property="tripName" column="trip_name"/>
+        <result property="tripType" column="trip_type"/>
+        <result property="description" column="description"/>
+        <result property="tripDayNotice" column="trip_day_notice"/>
+        <result property="reachTime" column="reach_time"/>
+        <result property="stopTime" column="stop_time"/>
+        <result property="estimateCost" column="estimate_cost"/>
+        <result property="notes" column="notes"/>
+        <result property="bgImage" column="bg_image"/>
+        <result property="address" column="address"/>
+        <result property="location" column="location"/>
+        <result property="displayIndex" column="display_index"/>
+        <result property="distance" column="distance"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="version" column="version"/>
+        <result property="deleted" column="deleted"/>
+        <result property="creator" column="creator"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updater" column="updater"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+</mapper>
