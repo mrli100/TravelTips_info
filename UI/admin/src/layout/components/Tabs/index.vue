@@ -2,7 +2,27 @@
 	<div class="tabs-container">
 		<div class="tabs-item">
 			<el-tabs v-model="activeTabName" :class="tabsStyleClass" @tab-click="tabClick" @tab-remove="tabRemove">
-				<el-tab-pane v-for="tab in tabsStore.visitedViews" :key="tab" :label="tab.title" :name="tab.path" :closable="!isAffix(tab)"></el-tab-pane>
+				<el-tab-pane v-for="tab in tabsStore.visitedViews" :key="tab" :label="tab.title" :name="tab.path" :closable="!isAffix(tab)">
+					<template #label>
+						<el-dropdown
+							:id="tab.path"
+							ref="dropdownRef"
+							trigger="contextmenu"
+							placement="bottom-end"
+							@visible-change="handleChange($event, tab)"
+							@command="onClose"
+						>
+							<span>{{ tab.title }}</span>
+							<template #dropdown>
+								<el-dropdown-menu>
+									<el-dropdown-item :icon="Close" command="close">{{ $t('app.close') }}</el-dropdown-item>
+									<el-dropdown-item :icon="CircleClose" command="closeOthers">{{ $t('app.closeOthers') }}</el-dropdown-item>
+									<el-dropdown-item :icon="CircleCloseFilled" command="closeAll">{{ $t('app.closeAll') }}</el-dropdown-item>
+								</el-dropdown-menu>
+							</template>
+						</el-dropdown>
+					</template>
+				</el-tab-pane>
 			</el-tabs>
 		</div>
 		<el-dropdown class="tabs-action" trigger="click" placement="bottom-end" @command="onClose">
@@ -119,6 +139,20 @@ const onClose = (type: string) => {
 			break
 	}
 }
+
+// 保证右键标签页只会弹出当前一个下拉框
+const dropdownRef = ref()
+const handleChange = (visible: boolean, tab: any) => {
+	if (!visible) {
+		return
+	}
+	dropdownRef.value.forEach((item: { id: string; handleClose: () => void }) => {
+		if (item.id === tab.path) {
+			return
+		}
+		item.handleClose()
+	})
+}
 </script>
 
 <style lang="scss" scoped>
@@ -169,6 +203,9 @@ const onClose = (type: string) => {
 			background: rgba(0, 0, 0, 0.02);
 		}
 		&.is-active {
+			.el-dropdown {
+				color: var(--el-color-primary) !important;
+			}
 			color: var(--el-color-primary);
 			background-color: var(--el-color-primary-light-9);
 			border-bottom: var(--el-border-color-light) 2px solid;
@@ -202,6 +239,9 @@ const onClose = (type: string) => {
 		}
 
 		&.is-active {
+			.el-dropdown {
+				color: var(--el-color-primary) !important;
+			}
 			color: var(--el-color-primary) !important;
 			background-color: var(--el-color-primary-light-9) !important;
 			border-bottom: var(--el-color-primary) 2px solid;

@@ -34,7 +34,7 @@ const captchaBase64 = ref()
 
 const loginForm = reactive({
 	username: constant.env.PROD ? '' : 'admin',
-	password: constant.env.PROD ? '' : 'admin',
+	password: constant.env.PROD ? '' : 'admin@123',
 	key: '',
 	captcha: ''
 })
