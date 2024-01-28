@@ -3,6 +3,7 @@ package ${package}.${moduleName}.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
+import net.maku.framework.common.constant.Constant;
 import net.maku.framework.security.user.SecurityUser;
 import net.maku.framework.security.user.UserDetail;
 import ${package}.framework.common.utils.PageResult;
