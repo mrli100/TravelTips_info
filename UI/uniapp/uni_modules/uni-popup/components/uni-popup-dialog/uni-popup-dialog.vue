@@ -254,7 +254,7 @@
 	}
 
 	.uni-popup__success {
-		color: #4cd964;
+		color: #FFA676;
 	}
 
 	.uni-popup__warn {

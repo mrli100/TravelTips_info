@@ -1,0 +1,84 @@
+page {
+	background: #f8f8f8;
+}
+
+.container {
+	width: 100%;
+	padding-bottom: 60px;
+}
+
+.list {
+	width: calc(100% - 30rpx);
+	margin: 15rpx;
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-column-gap: 15rpx;
+	grid-row-gap: 15rpx;
+}
+
+.list .list-item {
+	width: 100%;
+	flex-direction: column;
+	justify-content: center;
+	background: #fff;
+	border-radius: 30rpx;
+	position: relative;
+}
+
+.list .list-item .del {
+	position: absolute;
+	top: 20rpx;
+	right: 20rpx;
+	width: 48rpx;
+	height: 48rpx;
+	justify-content: center;
+	background: #f8f8f8;
+	border-radius: 50%;
+}
+
+.list .list-item .del image {
+	width: 24rpx;
+	height: 24rpx;
+}
+
+.list .list-item .img {
+	width: 200rpx;
+	height: 200rpx;
+	margin: 30rpx 0;
+}
+
+.list .list-item .name {
+	font-size: 32rpx;
+	font-weight: bold;
+}
+
+.list .list-item .doc text {
+	color: #999;
+	font-size: 20rpx;
+	margin: 0 15rpx;
+}
+
+.list .list-item .btn {
+	width: calc(100% - 60rpx);
+	padding: 30rpx;
+	justify-content: space-between;
+}
+
+.list-item .btn .btn-item {
+	width: calc(50% - 15rpx);
+	height: 70rpx;
+	line-height: 70rpx;
+	text-align: center;
+	font-size: 20rpx;
+	font-weight: bold;
+	border-radius: 35rpx;
+	color: #000;
+}
+
+.list-item .btn .bg1 {
+	background: #f8f8f8;
+}
+
+.list-item .btn .bg2 {
+	background: #FFA676;
+}

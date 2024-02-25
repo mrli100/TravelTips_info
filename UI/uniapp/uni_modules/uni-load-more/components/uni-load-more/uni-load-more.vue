@@ -81,15 +81,15 @@
 			},
 			iconType: {
 				type: String,
-				default: 'auto'
+				default: 'snow'
 			},
 			iconSize: {
 				type: Number,
-				default: 24
+				default: 18
 			},
 			color: {
 				type: String,
-				default: '#777777'
+				default: '#000'
 			},
 			contentText: {
 				type: Object,
@@ -103,7 +103,7 @@
 			},
 			showText: {
 				type: Boolean,
-				default: true
+				default: false
 			}
 		},
 		data() {
@@ -158,7 +158,7 @@
 		display: flex;
 		/* #endif */
 		flex-direction: row;
-		height: 40px;
+		height: 60px;
 		align-items: center;
 		justify-content: center;
 	}

@@ -1,0 +1,184 @@
+page {
+	background: #f8f8f8;
+}
+
+.container {
+	width: 100%;
+	padding-bottom: 60px;
+}
+
+.nav-bar {
+	position: fixed;
+	z-index: 99;
+	top: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+}
+
+.nav-bar .blck-box {
+	width: 44px;
+	height: 44px;
+	justify-content: center;
+}
+
+.nav-bar .blck-box image {
+	width: 40rpx;
+	height: 40rpx;
+}
+
+.bg-box {
+	width: 100%;
+	height: 600rpx;
+	position: relative;
+	z-index: -1;
+}
+
+.bg-box .bg-img {
+	width: 100%;
+	height: 100%;
+}
+
+.num-box {
+	position: absolute;
+	top: 440rpx;
+	left: 30rpx;
+	right: 30rpx;
+	height: 60rpx;
+	width: calc(100% - 60rpx);
+	display: flex;
+	align-items: flex-end;
+}
+
+.num-box .num {
+	font-size: 60rpx;
+	line-height: 60rpx;
+	font-weight: 900;
+}
+
+.num-box .txt {
+	margin: 0 5rpx 0 20rpx;
+	color: #999;
+	font-size: 22rpx;
+	line-height: 42rpx;
+}
+
+.num-box image {
+	margin-bottom: 12rpx;
+	width: 22rpx;
+	height: 22rpx;
+}
+
+.box {
+	z-index: 2;
+	margin: 0 30rpx 15rpx;
+	width: calc(100% - 120rpx);
+	padding: 30rpx;
+	background: #fff;
+	border-radius: 30rpx;
+}
+
+.box .box-title {
+	font-size: 32rpx;
+	font-weight: bold;
+}
+
+.box .box-doc {
+	padding: 15rpx 0 30rpx;
+	font-size: 26rpx;
+	font-weight: bold;
+	color: #999;
+}
+
+.box .box-doc text {
+	margin: 0 30rpx 0 10rpx;
+	font-size: 20rpx;
+	font-weight: 300;
+}
+
+.data-box {
+	width: 100%;
+	justify-content: space-between;
+}
+
+.data-box .data-item {
+	flex-direction: column;
+	justify-content: center;
+}
+
+.data-box .data-item .data-round {
+	width: 88rpx;
+	height: 88rpx;
+	border-radius: 50%;
+	flex-direction: column;
+	justify-content: center;
+	color: #FFA676;
+	font-size: 26rpx;
+	font-weight: bolder;
+}
+
+.data-box .data-item .data-round image {
+	width: 32rpx;
+	height: 32rpx;
+}
+
+.data-box .data-item .data-txt {
+	margin-top: 20rpx;
+	color: #999;
+	font-size: 20rpx;
+}
+
+.list-box {
+	margin-top: 20rpx;
+	width: 100%;
+	font-weight: bold;
+	justify-content: space-between;
+}
+
+.list-box .t0 {
+	font-size: 32rpx;
+}
+
+.list-box .t1 {
+	color: #333;
+	font-size: 26rpx;
+}
+
+.list-box .t2 {
+	margin-top: 10rpx;
+	color: #999;
+	font-size: 20rpx;
+	font-weight: 300;
+}
+
+.tips-popup {
+	width: 550rpx;
+	border-radius: 30rpx;
+	background: #fff;
+	flex-direction: column;
+}
+
+.tips-popup .tips-popup-t1 {
+	padding: 30rpx 0 20rpx;
+	color: #333;
+	font-size: 26rpx;
+	font-weight: bold;
+}
+
+.tips-popup .tips-popup-t2 {
+	width: calc(100% - 60rpx);
+	margin-top: 10rpx;
+	color: #444;
+	font-size: 22rpx;
+}
+
+.tips-popup .tips-popup-btn {
+	margin-top: 30rpx;
+	width: 100%;
+	padding: 30rpx 0;
+	color: #FFA676;
+	font-size: 24rpx;
+	font-weight: bold;
+	justify-content: center;
+	border-top: 2rpx solid #f8f8f8;
+}

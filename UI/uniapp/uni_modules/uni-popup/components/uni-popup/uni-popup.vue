@@ -84,7 +84,7 @@
 			},
 			maskBackgroundColor: {
 				type: String,
-				default: 'rgba(0, 0, 0, 0.4)'
+				default: 'rgba(0, 0, 0, 0.6)'
 			},
 		},
 

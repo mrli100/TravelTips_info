@@ -1,129 +1,73 @@
-# hello-uniapp
+## 免费分享
 
-`uni-app`框架示例，一套代码，同时发行到iOS、Android、H5、小程序等多个平台，请使用手机在下方扫码快速体验`uni-app`的强大功能。[官方文档](https://uniapp.dcloud.net.cn/)
+简洁、实用圈子前端，极大地降低了产品的研发和技术成本。
 
-## 快速上手
-hello-uniapp 示例工程可以通过两种方式创建， 一种是 HBuilderX, 配套 IDE，集成开发；另一种是 CLI 创建；推荐前者。
-### 通过 HBuilderX 可视化界面创建（推荐）
+主打简约精美UI，助力企业实现私域运营，最终实现快速积累客户、会员数据分析、智能转化客户、有效提高销售、提升会员运营的效果。
 
-可视化的方式比较简单，HBuilderX内置相关环境，开箱即用，无需配置nodejs。
+我们深知做好一件事已经不容易，运营好站点更不容易，我们欢迎更多有社区站点运营的朋友，加入我们的讨论交流群，一同探索交流。
 
-开始之前，开发者需先下载安装如下工具：
+## 安装、交流、讨论、BUG修复请加群，微信 nzkd01
 
-- HBuilderX：[官方IDE下载地址](https://www.dcloud.io/hbuilderx.html)
 
-HBuilderX是通用的前端开发工具，但为`uni-app`做了特别强化，请下载App开发版。
+## 体验
+后台：https://demo.lnksns.vip/admin/index.html  
 
-由于截图在 github 不便浏览，参见官方文档 [HBuilderX 可视化界面创建](https://uniapp.dcloud.net.cn/quickstart?id=_1-%e9%80%9a%e8%bf%87-hbuilderx-%e5%8f%af%e8%a7%86%e5%8c%96%e7%95%8c%e9%9d%a2)
+帐号密码：admin
+## 小程序
+![小程序](https://lfs.k.topthink.com/lfs/37e0adb7a6a2560fa549f554b583981ff6018bcc5b8f8b610f46d6996129fdad.dat)
 
-### 通过 vue-cli 创建
+## 系统亮点
+UI精美，流畅体验
 
-```
-npm install -g @vue/cli
-```
+精致美观的UI页面，少即是多，用户可轻松上手操作，带来简单、舒适的用户体验，精心打磨，只为给你带来不一样的产品。
 
-#### 创建uni-app
+框架为uni-app可适配多端应用。
 
-**使用正式版**（对应HBuilderX最新正式版）
+## 功能列表
+1、动态支持发文字、图集、视频；
 
-```
-vue create -p dcloudio/uni-preset-vue my-project
-```
+2、回复支持emoji表情，支持二级回复；
 
-**使用alpha版**（对应HBuilderX最新alpha版）
+3、支持快速获取微信头像、昵称；
 
-```
-vue create -p dcloudio/uni-preset-vue#alpha my-alpha-project
-```
+4、支持调用微信手机号验证；
 
-此时，会提示选择项目模板，选择 `hello uni-app` 项目模板，如下所示：
+5、支持每日签到积分；
 
-<div>
-<img src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/h5-cli-01.png" width="300">
-</div>
+6、支持选择圈子；
 
-创建好后，进入项目目录
-```
-cd my-project
-```
+7、更多功能请下载发现。。。。
 
-执行该命令运行到 h5 端
-```
-npm run dev:h5
-```
+![输入图片说明](https://gitee.com/snq3344/lnksns/raw/master/md/T1.png)
+![输入图片说明](https://gitee.com/snq3344/lnksns/raw/master/md/T2.png)
 
-欢迎提 issues，推荐到[官方社区](https://ask.dcloud.net.cn/explore/)提问。
+## 小程序
+> 下载程序
+> 解压后进入lnk-applet目录
+> 使用HBuilder X 构建、发布
 
-## 扫码体验
+## 版权信息
+🔐 下载、安装学习使用无需付费。
+本项目包含的第三方源码和二进制文件之版权信息另行标注。
 
-<div class="quick">
-    <p>一套代码编到10个平台，这不是梦想。眼见为实，扫描10个二维码，亲自体验最全面的跨平台效果！</p>
-    <div style="display: flex;">
-      <a href="//m3w.cn/uniapp" target="_blank" class="clear-style barcode-view">
-        <div class="barcode-img-box">
-          <img src="https://web-assets.dcloud.net.cn/unidoc/zh/uni-android.png" width="160" />
-        </div>
-        <b>Android版</b>
-      </a>
-      <a href="https://itunes.apple.com/cn/app/hello-uni-app/id1417078253?mt=8" target="_blank" class="clear-style barcode-view">
-        <div class="barcode-img-box">
-          <img src="https://web-assets.dcloud.net.cn/unidoc/zh/uni-h5.png" width="160" />
-        </div>
-        <b>iOS版</b>
-      </a>
-      <a href="https://hellouniapp.dcloud.net.cn/" target="_blank" class="clear-style barcode-view">
-        <div class="barcode-img-box">
-          <img src="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/bb3ef7c0-517d-11eb-bdc1-8bd33eb6adaa.png" width="160" />
-        </div>
-        <b>H5版</b>
-      </a>
-      <a href="//m3w.cn/uniapp" target="_blank" class="clear-style barcode-view">
-        <div class="barcode-img-box"><img src="//img.cdn.aliyun.dcloud.net.cn/guide/uniapp/gh_33446d7f7a26_430.jpg" width="160" /></div>
-        <b>微信小程序版</b>
-      </a>
-      <a href="//m3w.cn/uniapp" target="_blank" class="clear-style barcode-view">
-        <div class="barcode-img-box"><img src="https://web-assets.dcloud.net.cn/unidoc/zh/alipay1.png" width="160" /></div>
-        <b>支付宝小程序版</b>
-      </a>
-    </div>
-    <div class="flex-img-group-view" style="margin-top: 20px;">
-      <a href="//m3w.cn/uniapp" target="_blank" class="clear-style barcode-view">
-        <div class="barcode-img-box"><img src="https://web-assets.dcloud.net.cn/unidoc/zh/baidu-uniapp.png" width="160" /></div>
-        <b>百度小程序版</b>
-      </a>
-      <a href="//m3w.cn/uniapp" target="_blank" class="clear-style barcode-view">
-        <div class="barcode-img-box">
-          <img src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/mp-toutiao.png" width="160" />
-        </div>
-        <b>字节跳动小程序版</b>
-      </a>
-      <a href="//m3w.cn/uniapp" target="_blank" class="clear-style barcode-view">
-        <div class="barcode-img-box">
-          <img src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/hello-uni-qq.png" width="160" />
-        </div>
-        <b>QQ小程序版</b>
-      </a>
-      <a href="//m3w.cn/uniapp" target="_blank" class="clear-style barcode-view">
-        <div class="barcode-img-box">
-          <img src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/hello-uni-qa-union.png" width="160" />
-        </div>
-        <b>快应用</b>
-      </a>
-      <a href="https://so.mp.360.cn/mp.html?appid=qh4j181qqtru354st6" target="_blank" class="clear-style barcode-view">
-        <div class="barcode-img-box">
-          <img src="https://img.cdn.aliyun.dcloud.net.cn/guide/uniapp/hello-uni-mp-360-qr.png" width="160" />
-        </div>
-        <b>360小程序</b>
-      </a>
-    </div>
-    <p>
-        <em>注：某些平台不能提交简单demo，故补充了一些其他功能；hello uni-app示例代码可从[github](https://github.com/dcloudio/hello-uniapp)获取</em></br>
-        <em>快应用仅支持 vivo 、oppo、华为</em></br>
-        <em>360小程序仅 windows平台支持，需要在360浏览器中打开</em></br>
-    </p>
-</div>
-
-`uni-app`官网文档详见[https://uniapp.dcloud.io](https://uniapp.dcloud.io)
-
-更多uni-app的模板、示例详见[插件市场](https://ext.dcloud.net.cn/)
-
+## 特别鸣谢
+💕 感谢巨人提供肩膀，排名不分先后
+- [Thinkphp](http://www.thinkphp.cn/)
+- [FastAdmin](https://gitee.com/karson/fastadmin)
+- [Vue](https://github.com/vuejs/core)
+- [vue-next-admin](https://gitee.com/lyt-top/vue-next-admin)
+- [Element Plus](https://github.com/element-plus/element-plus)
+- [TypeScript](https://github.com/microsoft/TypeScript)
+- [vue-router](https://github.com/vuejs/vue-router-next)
+- [vite](https://github.com/vitejs/vite)
+- [LnkAdmin](https://gitee.com/DengJe/LiteAdmin)
+- [Pinia](https://github.com/vuejs/pinia)
+- [qinghang-qz](https://ext.dcloud.net.cn/plugin?id=15190)
+- [Axios](https://github.com/axios/axios)
+- [nprogress](https://github.com/rstacruz/nprogress)
+- [screenfull](https://github.com/sindresorhus/screenfull.js)
+- [mitt](https://github.com/developit/mitt)
+- [sass](https://github.com/sass/sass)
+- [wangEditor](https://github.com/wangeditor-team/wangEditor)
+- [echarts](https://github.com/apache/echarts)
+- [vueuse](https://github.com/vueuse/vueuse)
