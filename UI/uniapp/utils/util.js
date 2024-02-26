@@ -10,12 +10,12 @@ function navigateTo(res) {
 		// #endif
 		// #ifndef APP || H5
 		login().then(function(e) {
-			if(e){
+			if (e) {
 				uni.navigateTo({
 					url: res.url
 				});
-			}else{
-				uni.setStorageSync('tourl',res.url)
+			} else {
+				uni.setStorageSync('tourl', res.url)
 				uni.navigateTo({
 					url: '/pages/login/login'
 				});
@@ -23,7 +23,7 @@ function navigateTo(res) {
 		});
 		// #endif
 
-	}else{
+	} else {
 		uni.navigateTo({
 			url: res.url
 		})
@@ -93,13 +93,13 @@ function loginNowNew() {
 	});
 }
 
-function login(){
+function login() {
 	return new Promise((resolve, reject) => {
 		// #ifdef MP-WEIXIN
-			let platform = 'weixin';
-			let type = 1;
+		let platform = 'weixin';
+		let type = 1;
 		// #endif
-		
+
 		uni.login({
 			provider: platform,
 			success: function(code) {
@@ -108,13 +108,13 @@ function login(){
 					type: type,
 				}, 'POST').then(function(res) {
 					console.log(res);
-					
+
 					if (res.error == 500003) {
 						uni.setStorageSync('is_new_login', res.data);
 						resolve(false);
 					} else if (res.error == 500001) {
 						resolve(false);
-					} else  {
+					} else {
 						uni.setStorageSync('is_new_login', null);
 						uni.setStorageSync('user_info', res.data.info);
 						uni.setStorageSync('user_token', res.data.token);
@@ -129,11 +129,11 @@ function login(){
 
 
 function Newlogin() {
-		
+
 	login().then(function(e) {
-		if(e){
+		if (e) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	});
@@ -143,7 +143,7 @@ function Newlogin() {
 
 
 function request(url, data = {}, method = "GET") {
-	
+
 	// #ifdef APP
 	data['platform'] = 'app';
 	// #endif
@@ -151,16 +151,20 @@ function request(url, data = {}, method = "GET") {
 	data['platform'] = 'mp-weixin';
 	// #endif
 	//data['platform'] = uni.getSystemInfoSync().uniPlatform;
-	
+	let haaderObj = {
+		'Content-Type': 'application/json'
+	}
+	//判断是否有登录信息
+	let access_token = uni.getStorageSync('access_token');
+	if (access_token) {
+		haaderObj.Authorization = access_token;
+	}
 	return new Promise(function(resolve, reject) {
 		uni.request({
 			url,
 			data,
 			method,
-			header: {
-				'Content-Type': 'application/json',
-				'token': uni.getStorageSync('user_token')
-			},
+			header: haaderObj,
 			success: function(res) {
 				if (res.statusCode == 200) {
 					if (res.data.error == 500002) {
@@ -171,11 +175,11 @@ function request(url, data = {}, method = "GET") {
 						// #endif
 						// #ifndef APP || H5
 						login().then(function(e) {
-							if(e){
+							if (e) {
 								request(url, data, method).then((res) => {
 									resolve(res);
 								})
-							}else{
+							} else {
 								//uni.setStorageSync('tourl',res.url)
 								uni.navigateTo({
 									url: '/pages/login/login'
@@ -191,6 +195,10 @@ function request(url, data = {}, method = "GET") {
 					} else {
 						resolve(res.data);
 					}
+				} else if (res.statusCode == 401) {
+					uni.redirectTo({
+						url: 'pages/login/login'
+					});
 				} else {
 					reject(res.errMsg);
 				}
@@ -205,11 +213,11 @@ function request(url, data = {}, method = "GET") {
 function lnkUploadFile(filePath, type = 1) {
 	return new Promise(function(resolve, reject) {
 		let upUrl = '';
-		if(type==1){
+		if (type == 1) {
 			upUrl = api.uploadsUrl;
-		}else if(type==3){
+		} else if (type == 3) {
 			upUrl = api.uploadsActiveUrl;
-		}else{
+		} else {
 			upUrl = api.uploadsVideoUrl;
 		}
 		let key = uni.getStorageSync('is_new_login');
@@ -220,9 +228,9 @@ function lnkUploadFile(filePath, type = 1) {
 			header: {
 				'token': uni.getStorageSync('user_token')
 			},
-			formData:{
+			formData: {
 				key: key,
-				platform:uni.getSystemInfoSync().uniPlatform
+				platform: uni.getSystemInfoSync().uniPlatform
 			},
 			success: function(res) {
 				let data = JSON.parse(res.data);
@@ -386,13 +394,13 @@ function identityIDCard(code) {
 	var idCardReg = /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/;
 	var errorMsg = ""; //错误提示信息
 	var isPass = true; //身份证验证是否通过（true通过、false未通过）
- 
+
 	//如果身份证不满足格式正则表达式
 	if (!idCardReg.test(code)) {
 		errorMsg = "身份证格式有误！";
 		isPass = false;
 	}
- 
+
 	//区域数组中不包含需验证的身份证前两位
 	else if (!city[code.substr(0, 2)]) {
 		errorMsg = "身份证地址编码有误！";
@@ -428,7 +436,7 @@ function identityIDCard(code) {
 	return returnParam;
 }
 
-function showShareMenu(){
+function showShareMenu() {
 	// #ifdef MP
 	uni.showShareMenu();
 	// #endif

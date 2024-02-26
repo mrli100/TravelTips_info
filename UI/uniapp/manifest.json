@@ -52,11 +52,7 @@
             "urlCheck" : false
         },
         "usingComponents" : true,
-        "permission" : {
-            "scope.userLocation" : {
-                "desc" : "你的位置信息将用于小程序位置接口的效果展示"
-            }
-        },
+        "permission" : {},
         "requiredPrivateInfos" : [ "chooseLocation", "getLocation", "chooseAddress" ]
     },
     "mp-alipay" : {
@@ -71,5 +67,10 @@
     "uniStatistics" : {
         "enable" : false
     },
-    "vueVersion" : "2"
+    "vueVersion" : "2",
+    "h5" : {
+        "sdkConfigs" : {
+            "maps" : {}
+        }
+    }
 }
