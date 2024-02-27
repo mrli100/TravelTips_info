@@ -25,11 +25,6 @@
       "types": ["vite-plugin-svg-icons/client"]
     }
   },
-  "include": [
-    "admin/src/**/*.ts",
-    "admin/src/**/*.d.ts",
-    "admin/src/**/*.tsx",
-    "admin/src/**/*.vue"
-  ],
+  "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.vue"],
   "exclude": ["node_modules"]
 }

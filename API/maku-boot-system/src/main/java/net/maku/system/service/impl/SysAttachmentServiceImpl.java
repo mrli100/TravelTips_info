@@ -31,6 +31,7 @@ public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, 
     @Override
     public PageResult<SysAttachmentVO> page(SysAttachmentQuery query) {
         IPage<SysAttachmentEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
+
         return new PageResult<>(SysAttachmentConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
     }
 
@@ -45,12 +46,14 @@ public class SysAttachmentServiceImpl extends BaseServiceImpl<SysAttachmentDao, 
     @Override
     public void save(SysAttachmentVO vo) {
         SysAttachmentEntity entity = SysAttachmentConvert.INSTANCE.convert(vo);
+
         baseMapper.insert(entity);
     }
 
     @Override
     public void update(SysAttachmentVO vo) {
         SysAttachmentEntity entity = SysAttachmentConvert.INSTANCE.convert(vo);
+
         updateById(entity);
     }
 
