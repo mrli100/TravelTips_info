@@ -89,6 +89,9 @@ public class DataScopeInnerInterceptor implements InnerInterceptor {
         noInitFilterTables.add("SYS_USER_POST");
         noInitFilterTables.add("SYS_USER_ROLE");
         noInitFilterTables.add("SYS_USER_TOKEN");
+        //第三方登录
+        noInitFilterTables.add("SYS_THIRD_LOGIN");
+        noInitFilterTables.add("SYS_THIRD_LOGIN_CONFIG");
     }
 
     @Override

@@ -23,6 +23,9 @@
 # 克隆项目
 git clone https://gitee.com/makunet/maku-admin.git
 
+# 安装依赖
+npm config set registry https://registry.npmmirror.com
+
 # 进入项目
 cd maku-admin
 
