@@ -15,12 +15,12 @@
             <artifactId>maku-framework</artifactId>
             <version>${revision}</version>
         </dependency>
-        <dependency>
+<!--        <dependency>
             <groupId>net.maku</groupId>
             <artifactId>maku-boot-system</artifactId>
-            <version>3.5.0</version>
+            <version>${revision}</version>
             <scope>compile</scope>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
 </project>
