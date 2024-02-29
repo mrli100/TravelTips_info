@@ -27,4 +27,7 @@ public class SysAccountLoginVO implements Serializable {
 
     @Schema(description = "验证码")
     private String captcha;
+
+    @Schema(description = "是否加密")
+    private boolean notEncryption;
 }

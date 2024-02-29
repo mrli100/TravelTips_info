@@ -3,6 +3,7 @@ const AppTitle = 'lnksns'; //你的APP标题
 const AppCopyrightCn = '邻客互动 版权所有'; //设置中显示的信息
 const AppCopyrightEn = 'Copyright ©️ www.lnksns.vip All Rights Reserved.'; //设置中显示的信息
 const RootUrl = 'https://api.traveltips.com.cn'; //后端接口地址
+// const RootUrl = 'http://localhost:8081'; //后端接口地址
 const ApiRootUrl = RootUrl + '/';
 const ImgRootUrl = RootUrl + '/static/images/';
 const ApiAppCenterUrl = RootUrl + '/appcenter/api/'; //插件
@@ -12,6 +13,9 @@ module.exports = {
 	loginEmpowerUrl: ApiRootUrl + 'sys/auth/login',
 	//刷新token地址
 	user_token_refreshToken: ApiRootUrl + 'sys/auth/token?refreshToken=',
+	//获取用户信息
+	getUserInfo: ApiRootUrl + 'sys/user/info',
+	getTravelUserInfo: ApiRootUrl + 'travelV1/user/travelInfo',
 
 	// 微信授权登录
 	wxEmpowerUrl: ApiRootUrl + 'user/wx_empower',

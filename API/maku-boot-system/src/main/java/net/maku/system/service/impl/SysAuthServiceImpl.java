@@ -51,9 +51,15 @@ public class SysAuthServiceImpl implements SysAuthService {
 
         Authentication authentication;
         try {
+            String password = "";
+            //判断是否加密
+            if (!login.isNotEncryption()) {
+                password = Sm2Util.decrypt(login.getPassword());
+            } else {
+                password = login.getPassword();
+            }
             // 用户认证
-            authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(login.getUsername(), Sm2Util.decrypt(login.getPassword())));
+            authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(login.getUsername(), password));
         } catch (BadCredentialsException e) {
             throw new ServerException("用户名或密码错误");
         }
@@ -75,8 +81,7 @@ public class SysAuthServiceImpl implements SysAuthService {
         Authentication authentication;
         try {
             // 用户认证
-            authentication = authenticationManager.authenticate(
-                    new MobileAuthenticationToken(login.getMobile(), login.getCode()));
+            authentication = authenticationManager.authenticate(new MobileAuthenticationToken(login.getMobile(), login.getCode()));
         } catch (BadCredentialsException e) {
             throw new ServerException("手机号或验证码错误");
         }

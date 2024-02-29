@@ -126,6 +126,16 @@ function login() {
 	})
 }
 
+function getUserInfo() {
+	return new Promise((resolve, reject) => {
+		this.request(api.getUserInfo, {}, 'GET').then(function(res) {
+			uni.setStorageSync('user_info', res.data);
+		});
+		this.request(api.getTravelUserInfo, {}, 'GET').then(function(res) {
+			uni.setStorageSync('user_travel_info', res.data);
+		});
+	})
+}
 
 
 function Newlogin() {
@@ -449,6 +459,7 @@ module.exports = {
 	userRefreshInfo,
 	getMessageCount,
 	navigateTo,
+	getUserInfo,
 	loginNowNew,
 	request,
 	getNewToken,

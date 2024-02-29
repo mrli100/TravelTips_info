@@ -49,10 +49,7 @@
 	const util = require('@/utils/util');
 	import wInput from '@/components/watch-login/watch-input.vue' //input
 	import wButton from '@/components/watch-login/watch-button.vue' //button
-	import btnlogin from '@/components//watch-login/butlogin';
-	import {
-		SM2
-	} from "@/uni_modules/sm-crypto"
+	import btnlogin from '@/components/watch-login/butlogin';
 	export default {
 		data() {
 			return {
@@ -192,6 +189,7 @@
 					username: this.phoneData,
 					password: this.passData,
 					key: '',
+					notEncryption: 'true',
 					captcha: ''
 				}, 'POST').then(function(res) {
 					console.log(res, "res=")
@@ -203,6 +201,7 @@
 					} else {
 						uni.setStorageSync('access_token', res.data.access_token);
 						uni.setStorageSync('refresh_token', res.data.refresh_token);
+						util.getUserInfo();
 						let tourl = uni.getStorageSync('tourl');
 						if (tourl) {
 							uni.setStorageSync('tourl', '');
