@@ -1,5 +1,6 @@
 package net.maku.travel.controller;
 
+import com.alibaba.fastjson.JSONObject;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
@@ -63,7 +64,11 @@ public class TAppConfigController {
         Map rtnMap = new HashMap();
         List<TAppConfigEntity> list = tAppConfigService.list();
         list.stream().forEach(item -> {
-            rtnMap.put(item.getKeyname(), item.getValue());
+            try {
+                rtnMap.put(item.getKeyname(), JSONObject.parse(item.getValue()));
+            } catch (Exception e) {
+                rtnMap.put(item.getKeyname(), item.getValue());
+            }
         });
         return Result.ok(rtnMap);
     }
