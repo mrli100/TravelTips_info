@@ -2,3 +2,4 @@
 auth:
   ignore_urls:
     - /new/**
+    - /travel/t_app_config/get

@@ -5,7 +5,7 @@
 			:style="{paddingTop: statusBarHeight+'px',background: 'rgba(255, 255, 255,'+navbarTrans+')'}">
 			<view class="nav-item df">
 				<image v-if="navbarTrans>=1" :src="user_info.avatar"></image>
-				<view v-if="navbarTrans>=1" class="name">{{ user_info.name }}</view>
+				<view v-if="navbarTrans>=1" class="name">{{ user_info.realName }}</view>
 			</view>
 		</view>
 		<!-- User Info -->
@@ -29,13 +29,13 @@
 				</view>
 			</view>
 			<view class="info-box">
-				<view class="name ohto" data-url="center/means" @click="navigateToFun">{{ user_info.name }}</view>
+				<view class="name ohto" data-url="center/means" @click="navigateToFun">{{ user_info.realName }}</view>
 				<view v-if="user_info.career" class="tips ohto" data-url="center/means" @click="navigateToFun">
 					@{{ user_info.career }}
 				</view>
 				<view class="tag-box df" data-url="center/means" @click="navigateToFun">
 					<view class="df">
-						<image v-if="user_info.gender == 1" src="/static/img/nan.png"></image>
+						<image v-if="user_info.gender == 0" src="/static/img/nan.png"></image>
 						<image v-else src="/static/img/nv.png"></image>
 					</view>
 					<view class="df" v-if="user_info.age">{{ user_info.age }}</view>
@@ -50,13 +50,15 @@
 						<text class="t1">{{ user_info.follow }}</text>
 						<text>关注</text>
 					</view>
-					<view v-if="config.lnk_jf_open==1" class="num-item df" data-url="center/integral" @click="navigateToFun">
+					<view v-if="config.lnk_jf_open==1" class="num-item df" data-url="center/integral"
+						@click="navigateToFun">
 						<text class="t1">{{ user_info.integral_usable }}</text>
 						<text>积分</text>
 					</view>
 				</view>
 			</view>
-			<view v-if="config.lnk_jf_open==1 && config.lnk_jf_qd_value>0" class="dk-box df" data-url="center/integral" @click="navigateToFun">
+			<view v-if="config.lnk_jf_open==1 && config.lnk_jf_qd_value>0" class="dk-box df" data-url="center/integral"
+				@click="navigateToFun">
 				<view class="df">
 					<image class="icon" src="/static/img/qd.png"></image>
 					<text v-if="user_info.is_clockin">已领取，明日打卡继续领</text>
@@ -66,7 +68,7 @@
 			</view>
 		</view>
 		<!-- shop helper -->
-		<view v-if="config.app.busass && config.app.busass.is_open" class="shophelper">
+		<!-- 		<view v-if="config.app.busass && config.app.busass.is_open" class="shophelper">
 			<uni-section class="mb-10" title="商企助手">
 				<template v-if="config.app.userauth.is_open" v-slot:right>
 					<view data-url="userauth/auth" @click="navigateToFun">去认证</view>
@@ -100,7 +102,7 @@
 				</view>
 
 			</view>
-		</view>
+		</view> -->
 		<!-- Circle Box -->
 		<view class="circle">
 			<view class="circle-title">加入的圈子</view>
@@ -185,26 +187,28 @@
 				isFun: true,
 				loadStatus: 'more',
 				isdt: true,
-				isUser:true,
+				isUser: true,
 			}
 		},
 		async onLoad() {
+			console.warn("ok...............")
 			util.showShareMenu();
-			this.config = uni.getStorageSync('config');
+			// this.config = uni.getStorageSync('config');
 			await this.$onLaunched;
-			this.userRefreshInfo();
+			// this.userRefreshInfo();
 			if (!this.isUser) return;
 			if (this.isUserInfo) this.user_info = uni.getStorageSync('user_info');
 			if (!this.isUserInfo && this.isdt) {
 				this.userCircle();
 				this.userPublishContent();
 			}
+			console.warn("ok.............2..")
 		},
 		onShow() {
 			let userInfo = uni.getStorageSync('user_info');
 			if (userInfo == '' || userInfo == null || typeof(userInfo) == "undefined") {
 				this.isUser = false;
-			}else{
+			} else {
 				this.isUser = true;
 			}
 			if (!this.isUser) return;
