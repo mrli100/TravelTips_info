@@ -3,10 +3,38 @@ const AppTitle = 'lnksns'; //你的APP标题
 const AppCopyrightCn = '邻客互动 版权所有'; //设置中显示的信息
 const AppCopyrightEn = 'Copyright ©️ www.lnksns.vip All Rights Reserved.'; //设置中显示的信息
 // const RootUrl = 'https://api.traveltips.com.cn'; //后端接口地址
-const RootUrl = 'http://localhost:8082'; //后端接口地址
+const RootUrl = 'http://localhost:8081'; //后端接口地址
 const ApiRootUrl = RootUrl + '/';
 const ImgRootUrl = RootUrl + '/static/images/';
 const ApiAppCenterUrl = RootUrl + '/appcenter/api/'; //插件
+
+
+uni.addInterceptor('request', {
+	invoke(args) {
+		// request 触发前拼接 url 
+		// args.url = 'https://www.example.com/' + args.url
+		// console.log("addInterceptor.invoke", args)
+	},
+	success(args) {
+		// 请求成功后，修改code值为1
+		// args.data.code = 1
+		// console.log("addInterceptor.success", args)
+	},
+	fail(err) {
+		// console.log('interceptor-fail', err)
+	},
+	complete(res) {
+		// console.log('interceptor-complete', res)
+	}
+})
+
+// uni.addInterceptor({
+// 	returnValue(args) {
+// 		console.log("addInterceptor.returnValue", args)
+// 		// 只返回 data 字段
+// 		return args.data
+// 	}
+// })
 
 module.exports = {
 	//登陆
@@ -18,15 +46,18 @@ module.exports = {
 	getTravelUserInfo: ApiRootUrl + 'travelV1/user/travelInfo',
 	// 获取配置
 	configUrl: ApiRootUrl + 'travel/t_app_config/get',
-	
-	
-	
+	// 未读消息数量
+	getMessageCountUrl: ApiRootUrl + 'v1/message/get_message_count',
+	// 用户通知
+	messageCountUrl: ApiRootUrl + 'v1/message/user_message_count',
+
+
 	// 微信授权登录
 	wxEmpowerUrl: ApiRootUrl + 'user/wx_empower',
 	// 刷新用户资料
 	userRefreshInfoUrl: ApiRootUrl + 'user/user_refresh_info',
 	// 编辑用户资料
-	editUserInfoUrl: ApiRootUrl + 'user/edit_user_info',
+	editUserInfoUrl: ApiRootUrl + 'travel/sysUserInfo',
 	// 用户绑定手机号
 	userBindMobileUrl: ApiRootUrl + 'user/user_bind_mobile',
 	// 用户刷新IP
@@ -79,10 +110,7 @@ module.exports = {
 	getMessageUrl: ApiRootUrl + 'message/get_message',
 	// 读消息
 	readMessageUrl: ApiRootUrl + 'message/read_message',
-	// 未读消息数量
-	getMessageCountUrl: ApiRootUrl + 'message/get_message_count',
-	// 用户通知
-	messageCountUrl: ApiRootUrl + 'message/user_message_count',
+
 	// 获取条款
 	clauseUrl: ApiRootUrl + 'clause/details',
 

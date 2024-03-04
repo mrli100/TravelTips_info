@@ -23,9 +23,15 @@
 			<el-table-column prop="tenantId" label="租户ID" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="extendedconfig" label="扩展配置" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="birthday" label="出生年月" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="career" label="职业" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="weixinOpenid" label="微信openid" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="idcard" label="身份证" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="addressIp" label="登录地址" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="creator" label="创建者" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="addressLat" label="纬度" header-align="center" align="center"></el-table-column>
 			<el-table-column prop="createTime" label="创建时间" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="addressLng" label="经度" header-align="center" align="center"></el-table-column>
+			<el-table-column prop="age" label="年龄" header-align="center" align="center"></el-table-column>
 			<el-table-column label="操作" fixed="right" header-align="center" align="center" width="150">
 				<template #default="scope">
 					<el-button v-auth="'travel:sysUserInfo:update'" type="primary" link @click="addOrUpdateHandle(scope.row.id)">修改</el-button>

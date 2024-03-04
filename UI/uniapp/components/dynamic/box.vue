@@ -292,8 +292,8 @@
 
 	.card-item-info .item-info-quantity image {
 		margin-left: 30rpx;
-		width: 48rpx;
-		height: 48rpx;
+		width: 40rpx;
+		height: 40rpx;
 	}
 
 	.card-item-info .item-info-quantity text {

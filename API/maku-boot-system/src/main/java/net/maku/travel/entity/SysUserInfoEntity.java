@@ -9,7 +9,7 @@ import java.util.Date;
  * 用户信息
  *
  * @author 阿沐 babamu@126.com
- * @since 1.0.0 2023-12-10
+ * @since 1.0.0 2024-03-04
  */
 
 @Data
@@ -57,9 +57,19 @@ public class SysUserInfoEntity {
 	private Date birthday;
 
 	/**
+	* 职业
+	*/
+	private String career;
+
+	/**
 	* 删除标识  0：正常   1：已删除
 	*/
 	private Integer deleted;
+
+	/**
+	* 微信openid
+	*/
+	private String weixinOpenid;
 
 	/**
 	* 身份证
@@ -67,14 +77,34 @@ public class SysUserInfoEntity {
 	private String idcard;
 
 	/**
+	* 登录地址
+	*/
+	private String addressIp;
+
+	/**
 	* 创建者
 	*/
 	private Integer creator;
 
 	/**
+	* 纬度
+	*/
+	private String addressLat;
+
+	/**
 	* 创建时间
 	*/
 	private Date createTime;
+
+	/**
+	* 经度
+	*/
+	private String addressLng;
+
+	/**
+	* 年龄
+	*/
+	private String age;
 
 	/**
 	* 更新者

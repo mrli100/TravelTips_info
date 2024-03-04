@@ -306,7 +306,7 @@
 							is_pop = true;
 							that.tips_title = '未找到动态或动态异常！';
 						} else {
-							that.info = res.data;
+							that.info = res.data;							
 							that.dynamicComment();
 						}
 					} else if (res.error == 600502) {
@@ -593,7 +593,9 @@
 		},
 		onShareTimeline(res) {
 			return {
-				title: app.globalData.shareTitle
+				title: this.info.content,
+				imageUrl: this.info.type == 1 ? this.info.img[0].url : this.info.type == 2 ? this.info.video.img : '',
+				path: '/pages/dynamic/details?id=' + this.id
 			}
 		},
 	}

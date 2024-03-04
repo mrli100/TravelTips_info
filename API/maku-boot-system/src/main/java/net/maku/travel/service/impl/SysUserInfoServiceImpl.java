@@ -21,7 +21,7 @@ import java.util.List;
  * 用户信息
  *
  * @author 阿沐 babamu@126.com
- * @since 1.0.0 2023-12-10
+ * @since 1.0.0 2024-03-04
  */
 @Service
 @AllArgsConstructor
@@ -31,7 +31,7 @@ public class SysUserInfoServiceImpl extends BaseServiceImpl<SysUserInfoDao, SysU
     public PageResult<SysUserInfoVO> page(SysUserInfoQuery query) {
         IPage<SysUserInfoEntity> page = baseMapper.selectPage(getPage(query), getWrapper(query));
 
-        return new PageResult<>(SysUserInfoConvert.INSTANCE.convertList(page.getRecords()), page.getTotal());
+        return new PageResult<>(SysUserInfoConvert.INSTANCE.convertList(page.getRecords()), page.getTotal(), page.getPages());
     }
 
     private LambdaQueryWrapper<SysUserInfoEntity> getWrapper(SysUserInfoQuery query){

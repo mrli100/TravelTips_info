@@ -12,10 +12,16 @@
         <result property="extendedconfig" column="extendedconfig"/>
         <result property="version" column="version"/>
         <result property="birthday" column="birthday"/>
+        <result property="career" column="career"/>
         <result property="deleted" column="deleted"/>
+        <result property="weixinOpenid" column="weixin_openid"/>
         <result property="idcard" column="idcard"/>
+        <result property="addressIp" column="address_ip"/>
         <result property="creator" column="creator"/>
+        <result property="addressLat" column="address_lat"/>
         <result property="createTime" column="create_time"/>
+        <result property="addressLng" column="address_lng"/>
+        <result property="age" column="age"/>
         <result property="updater" column="updater"/>
         <result property="updateTime" column="update_time"/>
     </resultMap>

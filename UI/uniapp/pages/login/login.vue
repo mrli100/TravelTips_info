@@ -1,9 +1,9 @@
 <template>
 	<view>
 		<!-- #ifdef MP-WEIXIN -->
-		<btnlogin :zheshow='zheshow' />
+		<!-- <btnlogin :zheshow='zheshow' /> -->
 		<!-- #endif -->
-		<!-- #ifdef APP || H5 -->
+		<!-- #ifdef APP || H5 || MP-WEIXIN -->
 		<view class="login">
 			<view class="content">
 				<!-- 头部logo -->
@@ -259,7 +259,7 @@
 				uni.showToast({
 					icon: 'none',
 					position: 'bottom',
-					title: '正在登录微信'
+					title: '...'
 				});
 			},
 			login_weibo() {

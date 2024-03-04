@@ -1,5 +1,8 @@
 package net.maku.system.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import net.maku.framework.common.utils.PageResult;
 import net.maku.framework.mybatis.service.BaseService;
 import net.maku.system.entity.SysUserEntity;
@@ -56,4 +59,6 @@ public interface SysUserService extends BaseService<SysUserEntity> {
      * 导出用户信息表格
      */
     void export();
+
+    boolean updateInfo(SysUserEntity sysUserEntity);
 }

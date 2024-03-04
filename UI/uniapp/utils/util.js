@@ -217,13 +217,22 @@ function request(url, data = {}, method = "GET") {
 						} else {
 							//判断是否失效，否则刷新token
 							let userToken = uni.getStorageSync('refresh_token');
-							if (userToken != '' && userToken && null && typeof(userToken) !=
+							if (userToken != '' && userToken != null && typeof(userToken) !=
 								"undefined") {
-								console.log(userToken, userToken)
-								debugger
-								request(api.user_token_refreshToken + userToken, {}, "GET").then((
+								request(api.user_token_refreshToken + userToken, {}, "POST").then((
 									res) => {
 									console.log("res=", res)
+									if (res.code == 400) {
+										uni.redirectTo({
+											url: '/pages/login/login'
+										});
+									}
+									uni.setStorageSync('access_token', res.data
+										.access_token);
+									uni.showToast({
+										title: "系统超时,请刷新重试!",
+										icon: 'error'
+									})
 								})
 							}
 						}

@@ -1,5 +1,8 @@
 package net.maku.system.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.fhs.trans.service.impl.TransService;
@@ -25,6 +28,7 @@ import net.maku.system.service.*;
 import net.maku.system.vo.SysUserBaseVO;
 import net.maku.system.vo.SysUserExcelVO;
 import net.maku.system.vo.SysUserVO;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -58,7 +62,7 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
         // 分页查询
         IPage<SysUserEntity> page = getPage(query);
         params.put(Constant.PAGE, page);
-        
+
         // 数据列表
         List<SysUserEntity> list = baseMapper.getList(params);
 
@@ -238,6 +242,12 @@ public class SysUserServiceImpl extends BaseServiceImpl<SysUserDao, SysUserEntit
         transService.transBatch(userExcelVOS);
         // 写到浏览器打开
         ExcelUtils.excelExport(SysUserExcelVO.class, "system_user_excel" + DateUtils.format(new Date()), null, userExcelVOS);
+    }
+
+    @Override
+    public boolean updateInfo(SysUserEntity sysUserEntity) {
+        // 更新用户
+        return updateById(sysUserEntity);
     }
 
 }

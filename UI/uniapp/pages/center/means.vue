@@ -16,7 +16,7 @@
 			<image class="camera-icon" src="/static/img/pz.png"></image>
 		</button>
 		<view class="title-label">昵称</view>
-		<input class="input-box" @blur="nameBlur" v-model="name" cursor-spacing="10" type="nickname" maxlength="16"
+		<input class="input-box" @blur="nameBlur" v-model="realName" cursor-spacing="10" type="nickname" maxlength="16"
 			placeholder="不能超过16个字哦" />
 		<view class="df sp">
 			<view class="title-label w50">性别</view>
@@ -24,10 +24,10 @@
 		</view>
 		<view class="df sp">
 			<view class="gender-box df w50 sp">
-				<view @click="genderClick(0)" class="gender-item df" :class="{'active-1':gender==0}">
+				<view @click="genderClick(0)" class="gender-item df" :class="{'active-1':gender==1}">
 					<image src="/static/img/nv.png"></image>
 				</view>
-				<view @click="genderClick(1)" class="gender-item df" :class="{'active-2':gender==1}">
+				<view @click="genderClick(1)" class="gender-item df" :class="{'active-2':gender==0}">
 					<image src="/static/img/nan.png"></image>
 				</view>
 			</view>
@@ -112,7 +112,7 @@
 		data() {
 			return {
 				statusBarHeight: app.globalData.statusBarHeight,
-				name: '...',
+				realName: '...',
 				avatar: '',
 				gender: 0,
 				career: '',
@@ -126,7 +126,7 @@
 		},
 		onLoad() {
 			let user_info = uni.getStorageSync('user_info');
-			this.name = user_info.name;
+			this.realName = user_info.realName;
 			this.avatar = user_info.avatar;
 			this.gender = user_info.gender;
 			this.career = user_info.career;
@@ -136,29 +136,29 @@
 		},
 		methods: {
 			nameBlur() {
-				if (this.name != uni.getStorageSync('user_info').name) {
+				if (this.realName != uni.getStorageSync('user_info').realName) {
 					this.userUpInfo();
 				}
 			},
 			userUpInfo() {
 				let that = this;
 				let user_info = uni.getStorageSync('user_info');
-				if (user_info.name != that.name || user_info.avatar != that.avatar || user_info.gender != that.gender ||
+				if (user_info.realName != that.realName || user_info.avatar != that.avatar || user_info.gender != that.gender ||
 					user_info.career != that.career || user_info.age != that.age) {
 					util.request(api.editUserInfoUrl, {
 						avatar: that.avatar,
-						name: that.name,
+						realName: that.realName,
 						gender: that.gender,
 						career: that.career,
 						age: that.age,
-					}, 'post').then(function(res) {
-						user_info.name = that.name;
+					}, 'PUT').then(function(res) {
+						user_info.realName = that.realName;
 						user_info.avatar = that.avatar;
 						user_info.gender = that.gender;
 						user_info.career = that.career;
 						user_info.age = that.age;
 						uni.setStorageSync('user_info', user_info);
-						that.tips_title = res.msg;
+						that.tips_title = res.data;
 						that.$refs.tipsPopup.open();
 						setTimeout(function() {
 							that.$refs.tipsPopup.close();
@@ -187,6 +187,7 @@
 				this.$refs.agePopup.close();
 			},
 			onChooseAvatar(e) {
+				debugger
 				let that = this;
 				var filePath = e.detail.avatarUrl;
 				if (filePath) {

@@ -29,5 +29,7 @@ public class ${ClassName}Query extends Query {
     </#if>
     private ${field.attrType} ${field.attrName};
 
+    @Schema(description = "创建者")
+    private Integer creator;
 </#list>
 }
