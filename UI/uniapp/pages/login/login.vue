@@ -112,7 +112,6 @@
 							icon: 'error'
 						})
 					} else {
-						uni.setStorageSync('is_new_login', null);
 						uni.setStorageSync('user_info', res.data.info);
 						uni.setStorageSync('user_token', res.data.token);
 						let tourl = uni.getStorageSync('tourl');

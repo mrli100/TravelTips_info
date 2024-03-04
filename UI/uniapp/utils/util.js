@@ -33,9 +33,8 @@ function navigateTo(res) {
 }
 
 function userRefreshInfo() {
-	let userInfo = uni.getStorageSync('user_info');
-	if (userInfo == '' || userInfo == null || typeof(userInfo) == "undefined") {
-
+	let userToken = uni.getStorageSync('user_token');
+	if (userToken == '' || userToken == null || typeof(userToken) == "undefined") {
 		request(api.userRefreshInfoUrl).then(function(res) {
 			uni.setStorageSync('user_info', res.data.info);
 			uni.setStorageSync('user_token', res.data.token);
@@ -177,7 +176,7 @@ function request(url, data = {}, method = "GET") {
 			header: haaderObj,
 			success: function(res) {
 				if (res.statusCode == 200) {
-					if (res.data.error == 500002) {
+					if (res.data.code == 500002) {
 						// #ifdef APP || H5
 						uni.navigateTo({
 							url: '/pages/login/login'
@@ -190,9 +189,14 @@ function request(url, data = {}, method = "GET") {
 									resolve(res);
 								})
 							} else {
-								//uni.setStorageSync('tourl',res.url)
-								uni.navigateTo({
-									url: '/pages/login/login'
+								uni.redirectTo({
+									url: '/pages/login/login',
+									function(e) {
+										console.error(e)
+									},
+									function(e) {
+										console.error(e)
+									}
 								});
 							}
 						});
@@ -202,13 +206,30 @@ function request(url, data = {}, method = "GET") {
 						// 		resolve(res);
 						// 	})
 						// })
+					} else if (res.data.code == 401) {
+						//判断是否存在用户信息
+						let userInfo = uni.getStorageSync('user_info');
+						if (userInfo == '' || userInfo == null || typeof(userInfo) ==
+							"undefined") {
+							uni.redirectTo({
+								url: '/pages/login/login'
+							});
+						} else {
+							//判断是否失效，否则刷新token
+							let userToken = uni.getStorageSync('refresh_token');
+							if (userToken != '' && userToken && null && typeof(userToken) !=
+								"undefined") {
+								console.log(userToken, userToken)
+								debugger
+								request(api.user_token_refreshToken + userToken, {}, "GET").then((
+									res) => {
+									console.log("res=", res)
+								})
+							}
+						}
 					} else {
 						resolve(res.data);
 					}
-				} else if (res.statusCode == 401) {
-					uni.redirectTo({
-						url: 'pages/login/login'
-					});
 				} else {
 					reject(res.errMsg);
 				}
