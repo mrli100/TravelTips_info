@@ -1,7 +1,7 @@
-const AppName = 'lnksns'; //你的APP名称
-const AppTitle = 'lnksns'; //你的APP标题
-const AppCopyrightCn = '邻客互动 版权所有'; //设置中显示的信息
-const AppCopyrightEn = 'Copyright ©️ www.lnksns.vip All Rights Reserved.'; //设置中显示的信息
+const AppName = 'TravelTips'; //你的APP名称
+const AppTitle = 'TravelTips'; //你的APP标题
+const AppCopyrightCn = '旅行攻略Tips 版权所有'; //设置中显示的信息
+const AppCopyrightEn = 'Copyright ©️ www.traveltips.com.cn All Rights Reserved.'; //设置中显示的信息
 // const RootUrl = 'https://api.traveltips.com.cn'; //后端接口地址
 const RootUrl = 'http://localhost:8081'; //后端接口地址
 const ApiRootUrl = RootUrl + '/';

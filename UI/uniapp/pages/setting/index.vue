@@ -9,14 +9,15 @@
 					<image src="/static/img/back.png"></image>
 				</view>
 			</button>
-			<button v-if="config.app.userauth.is_open" class="list df" data-url="userauth/auth" @click="navigateToFun">
+			<button v-if="config.app_userauth_is_open" class="list df" data-url="userauth/auth" @click="navigateToFun">
 				<image class="icon" src="/static/img/setting/51.png"></image>
 				<view class="list-item df bb1">
 					<view class="title">商企认证</view>
 					<image src="/static/img/back.png"></image>
 				</view>
 			</button>
-			<button v-if="config.app.usercircle.is_open" class="list df" data-url="center/circle" @click="navigateToFun">
+			<button v-if="config.app_usercircle_is_open" class="list df" data-url="center/circle"
+				@click="navigateToFun">
 				<image class="icon" src="/static/img/tabbar/22.png"></image>
 				<view class="list-item df bb1">
 					<view class="title">管理圈子</view>
@@ -71,7 +72,7 @@
 					<image src="/static/img/back.png"></image>
 				</view>
 			</button>
-<!-- 			<button class="list df" @click="toGw" v-if="config.lnk_gw">
+			<!-- 			<button class="list df" @click="toGw" v-if="config.lnk_gw">
 				<image class="icon" src="/static/img/setting/9.png"></image>
 				<view class="list-item df">
 					<view class="title">访问官网</view>
@@ -110,15 +111,10 @@
 			}
 		},
 		onLoad() {
-			this.getConfig();
+			this.config = uni.getStorageSync('config');
+			console.log(this.config)
 		},
 		methods: {
-			getConfig() {
-				let that = this;
-				util.request(api.configUrl).then(function(res) {
-					that.config = res.data;
-				})
-			},
 			navigateToFun(e) {
 				let url = e.currentTarget.dataset.url;
 				uni.navigateTo({

@@ -30,8 +30,11 @@
 			</view>
 			<view class="info-box">
 				<view class="name ohto" data-url="center/means" @click="navigateToFun">{{ user_info.realName }}</view>
-				<view v-if="user_info.career" class="tips ohto" data-url="center/means" @click="navigateToFun">
+				<!-- 			<view v-if="user_info.career" class="tips ohto" data-url="center/means" @click="navigateToFun">
 					@{{ user_info.career }}
+				</view> -->
+				<view v-if="user_info.signature" class="tips" data-url="center/means" @click="navigateToFun">
+					{{ user_info.signature }}
 				</view>
 				<view class="tag-box df" data-url="center/means" @click="navigateToFun">
 					<view class="df">
@@ -191,9 +194,10 @@
 			}
 		},
 		async onLoad() {
-			console.warn("ok...............")
+			// console.warn("ok...............")
 			util.showShareMenu();
-			// this.config = uni.getStorageSync('config');
+			util.getUserInfo();
+			this.config = uni.getStorageSync('config');
 			await this.$onLaunched;
 			// this.userRefreshInfo();
 			if (!this.isUser) return;
@@ -202,7 +206,7 @@
 				this.userCircle();
 				this.userPublishContent();
 			}
-			console.warn("ok.............2..")
+			// console.warn("ok.............2..")
 		},
 		onShow() {
 			let userInfo = uni.getStorageSync('user_info');

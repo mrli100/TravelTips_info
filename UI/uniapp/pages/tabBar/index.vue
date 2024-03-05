@@ -14,6 +14,11 @@
 		</view>
 		<!-- Content Box -->
 		<view class="content-box" :style="{paddingTop: statusBarHeight+44+'px'}">
+			<view v-if="config.lnk_jf_qd_value>0 && !is_clockin" class="qiandao">
+				<image src="/static/img/qd.svg"/>
+				每日打卡签到，领{{config.lnk_jf_qd_value}}积分
+				<button data-url="center/integral" @click="navigateToFun">立即打卡</button>
+			</view>
 			<view class="empty-box" v-if="isEmpty">
 				<image v-if="typeidx==0" :src="insetUrl+'5.png'" mode="aspectFill" />
 				<image v-else :src="insetUrl+'4.png'" mode="aspectFill" />
@@ -25,12 +30,13 @@
 			</view>
 			<block v-else v-for="(item,idx) in list" :key="item.id">
 				<!-- #ifdef MP-WEIXIN -->
-				<view v-if="item.ad_type==2">
+				<view style="padding: 0 30rpx;" v-if="item.ad_type==2">
 					<ad :unit-id="item.ad_value"></ad>
 				</view>
 				<!-- #endif -->
 
 				<dynamicBox :item="item" :idx="idx" @likeback="likeclick"></dynamicBox>
+				<view style="border-bottom: 1px solid #efefef;margin: 0 30rpx 20rpx 30rpx;"></view>
 			</block>
 		</view>
 		<uni-load-more v-if="loadStatus != 'no-more'" :status="loadStatus"></uni-load-more>
@@ -59,6 +65,10 @@
 				isEmpty: false,
 				isFun: true,
 				loadStatus: 'more',
+				config:[],
+				is_clockin: true,
+				
+				
 			}
 		},
 		onPullDownRefresh() {
@@ -73,10 +83,13 @@
 			this.recommendDynamic();
 		},
 		onShow() {
+			this.config = uni.getStorageSync('config');
 			let userInfo = uni.getStorageSync('user_info');
 			if (userInfo != '' && userInfo != null && typeof(userInfo) != "undefined") {
+				this.is_clockin = userInfo.is_clockin;
 				this.getMessageCount();
 			}
+
 			// if (uni.getStorageSync('user_info') && uni.getStorageSync('user_info').city != '未知') {
 			// 	this.typearr[2] = uni.getStorageSync('user_info').city;
 			// } else if (uni.getStorageSync('config').lnk_city) {
@@ -160,4 +173,35 @@
 
 <style>
 	@import url("/static/css/tabbar/index.css");
+	
+	.qiandao{
+		background-color: #FFA676;
+		height: 110rpx;
+		margin: 10rpx 30rpx;
+		border-radius: 10rpx;
+		display: flex;
+		font-size: 26rpx;
+		line-height: 110rpx;
+		font-weight: bold;
+		color: #333;
+	}
+	.qiandao image{
+		width: 60rpx;
+		height: 60rpx;
+		margin: 25rpx 40rpx;
+		margin: 25rpx 10rpx 25rpx 40rpx;
+	}
+	.qiandao button{
+		height: 60rpx;
+		font-size: 28rpx;
+		width: 180rpx;
+		line-height: 60rpx;
+		margin: 25rpx;
+		position: absolute;
+		right: 6%;
+		font-weight: bold;
+		border-radius: 60rpx;
+		color: #333;
+	}
+	
 </style>

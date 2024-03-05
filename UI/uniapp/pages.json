@@ -6,21 +6,21 @@
 			"enablePullDownRefresh": true,
 			"navigationStyle": "custom"
 		}
-	},{
+	}, {
 		"path": "pages/login/login",
 		"style": {
 			"navigationBarTitleText": "登陆",
 			"backgroundColor": "#f8f8f8",
 			"navigationBarBackgroundColor": "#f8f8f8"
 		}
-	},{
+	}, {
 		"path": "pages/userauth/auth",
 		"style": {
 			"navigationBarTitleText": "认证信息",
 			"backgroundColor": "#f8f8f8",
 			"navigationBarBackgroundColor": "#f8f8f8"
 		}
-	},{
+	}, {
 		"path": "pages/tabbar/circle",
 		"style": {
 			"navigationBarTitleText": "",
@@ -200,28 +200,38 @@
 		"selectedColor": "#000000",
 		"list": [{
 			"pagePath": "pages/tabbar/index",
-			"selectedIconPath": "static/img/tabbar/1.png",
-			"iconPath": "static/img/tabbar/11.png",
+			"selectedIconPath": "static/img/tabbar/home1.png",
+			"iconPath": "static/img/tabbar/home.png",
 			"text": "首页"
 		}, {
 			"pagePath": "pages/tabbar/circle",
-			"selectedIconPath": "static/img/tabbar/2.png",
-			"iconPath": "static/img/tabbar/22.png",
+			"selectedIconPath": "static/img/tabbar/circle1.png",
+			"iconPath": "static/img/tabbar/circle.png",
 			"text": "圈子"
+		}, {
+			"pagePath": "pages/tabbar/circle",
+			"selectedIconPath": "static/img/tabbar/gonglve1.png",
+			"iconPath": "static/img/tabbar/gonglve.png",
+			"text": "攻略"
 		}, {
 			"pagePath": "pages/tabbar/add",
 			"selectedIconPath": "static/img/tabbar/add.png",
 			"iconPath": "static/img/tabbar/add.png",
 			"text": ""
 		}, {
+			"pagePath": "pages/tabbar/circle",
+			"selectedIconPath": "static/img/tabbar/zudui1.png",
+			"iconPath": "static/img/tabbar/zudui.png",
+			"text": "搭子"
+		}, {
 			"pagePath": "pages/tabbar/notice",
-			"selectedIconPath": "static/img/tabbar/3.png",
-			"iconPath": "static/img/tabbar/33.png",
+			"selectedIconPath": "static/img/tabbar/msg1.png",
+			"iconPath": "static/img/tabbar/msg.png",
 			"text": "消息"
 		}, {
 			"pagePath": "pages/tabbar/center",
-			"selectedIconPath": "static/img/tabbar/4.png",
-			"iconPath": "static/img/tabbar/44.png",
+			"selectedIconPath": "static/img/tabbar/me1.png",
+			"iconPath": "static/img/tabbar/me.png",
 			"text": "我的"
 		}]
 	},
