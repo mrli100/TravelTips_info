@@ -32,6 +32,28 @@
 			"backgroundColorBottom": "#ffffff"
 		}
 	}, {
+		"path": "pages/tabbar/gonglve",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": true,
+			"navigationBarTextStyle": "white",
+			"navigationStyle": "custom",
+			"backgroundColor": "#101010",
+			"backgroundColorTop": "#101010",
+			"backgroundColorBottom": "#ffffff"
+		}
+	}, {
+		"path": "pages/tabbar/zudui",
+		"style": {
+			"navigationBarTitleText": "",
+			"enablePullDownRefresh": true,
+			"navigationBarTextStyle": "white",
+			"navigationStyle": "custom",
+			"backgroundColor": "#101010",
+			"backgroundColorTop": "#101010",
+			"backgroundColorBottom": "#ffffff"
+		}
+	}, {
 		"path": "pages/tabbar/add",
 		"style": {
 			"navigationBarTitleText": "",
@@ -209,7 +231,7 @@
 			"iconPath": "static/img/tabbar/circle.png",
 			"text": "圈子"
 		}, {
-			"pagePath": "pages/tabbar/circle",
+			"pagePath": "pages/tabbar/gonglve",
 			"selectedIconPath": "static/img/tabbar/gonglve1.png",
 			"iconPath": "static/img/tabbar/gonglve.png",
 			"text": "攻略"
@@ -219,7 +241,7 @@
 			"iconPath": "static/img/tabbar/add.png",
 			"text": ""
 		}, {
-			"pagePath": "pages/tabbar/circle",
+			"pagePath": "pages/tabbar/zudui",
 			"selectedIconPath": "static/img/tabbar/zudui1.png",
 			"iconPath": "static/img/tabbar/zudui.png",
 			"text": "搭子"

@@ -221,11 +221,11 @@ function request(url, data = {}, method = "GET") {
 								"undefined") {
 								request(api.user_token_refreshToken + userToken, {}, "POST").then((
 									res) => {
-									console.log("res=", res)
 									if (res.code == 400) {
 										uni.redirectTo({
 											url: '/pages/login/login'
 										});
+										return;
 									}
 									uni.setStorageSync('access_token', res.data
 										.access_token);

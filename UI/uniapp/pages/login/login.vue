@@ -191,7 +191,6 @@
 					notEncryption: 'true',
 					captcha: ''
 				}, 'POST').then(function(res) {
-					console.log(res, "res=")
 					if (res.code == 500) {
 						uni.showToast({
 							title: res.msg,
@@ -216,43 +215,6 @@
 
 
 				});
-				// getLogin()
-				// 	.then(res => {
-				// 		//console.log(res)
-				// 		//简单验证下登录（不安全）
-				// 		if (_this.phoneData == res.data.username && _this.passData == res.data.password) {
-				// 			let userdata = {
-				// 				"username": res.data.username,
-				// 				"nickname": res.data.nickname,
-				// 				"accesstoken": res.data.accesstoken,
-				// 			} //保存用户信息和accesstoken
-				// 			_this.$store.dispatch("setUserData", userdata); //存入状态
-				// 			try {
-				// 				uni.setStorageSync('setUserData', userdata); //存入缓存
-				// 			} catch (e) {
-				// 				// error
-				// 			}
-				// 			uni.showToast({
-				// 				icon: 'success',
-				// 				position: 'bottom',
-				// 				title: '登录成功'
-				// 			});
-				// 			uni.reLaunch({
-				// 				url: '../../../pages/index',
-				// 			});
-				// 		} else {
-				// 			_this.passData = ""
-				// 			uni.showToast({
-				// 				icon: 'error',
-				// 				position: 'bottom',
-				// 				title: '账号或密码错误，账号admin密码admin'
-				// 			});
-				// 		}
-				// 		uni.hideLoading();
-				// 	}).catch(err => {
-				// 		uni.hideLoading();
-				// 	})
-
 			},
 			login_weixin() {
 				//微信登录
