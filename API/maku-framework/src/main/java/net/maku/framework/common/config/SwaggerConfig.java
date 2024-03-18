@@ -20,7 +20,15 @@ public class SwaggerConfig {
     public GroupedOpenApi userApi() {
         String[] paths = {"/**"};
         String[] packagedToMatch = {"net.maku"};
-        return GroupedOpenApi.builder().group("MakuBoot")
+        return GroupedOpenApi.builder().group("管理后台模块")
+                .pathsToMatch(paths)
+                .packagesToScan(packagedToMatch).build();
+    }
+    @Bean
+    public GroupedOpenApi travelApi() {
+        String[] paths = {"/travel/**"};
+        String[] packagedToMatch = {"net.maku"};
+        return GroupedOpenApi.builder().group("前端模块")
                 .pathsToMatch(paths)
                 .packagesToScan(packagedToMatch).build();
     }
@@ -28,16 +36,15 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI customOpenAPI() {
         Contact contact = new Contact();
-        contact.setName("阿沐 babamu@126.com");
-
+        contact.setName("travelTips");
         return new OpenAPI().info(new Info()
-                .title("MakuBoot")
-                .description("MakuBoot")
+                .title("后台接口")
+                .description("后台接口文档")
                 .contact(contact)
                 .version("3.0")
-                .termsOfService("https://maku.net")
+                .termsOfService("https://traveltips.com.cn")
                 .license(new License().name("MIT")
-                        .url("https://maku.net")));
+                        .url("https://traveltips.com.cn")));
     }
 
 }
