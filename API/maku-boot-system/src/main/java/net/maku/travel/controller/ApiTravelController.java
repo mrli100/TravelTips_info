@@ -19,7 +19,7 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping("travelV1")
+@RequestMapping("travel")
 @AllArgsConstructor
 @Tag(name = "API接口集合")
 public class ApiTravelController {

@@ -11,3 +11,4 @@ auth:
     - /sys/third/render/**
     - /upload/**
     - /
+    - /travel/t_app_config/get

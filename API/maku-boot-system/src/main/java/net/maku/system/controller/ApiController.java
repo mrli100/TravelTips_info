@@ -28,9 +28,9 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("v1")
+@RequestMapping("travel")
 @AllArgsConstructor
-@Tag(name = "API接口集合")
+@Tag(name = "用户信息API接口集合")
 public class ApiController {
     private final SysLogLoginService sysLogLoginService;
     private final SysUserInfoService sysUserInfoService;
@@ -59,7 +59,6 @@ public class ApiController {
             String address = list.get(0).getAddress();
             String[] addressArr = address.split(" ");
             map.put("province", addressArr.length == 4 ? addressArr[2] : addressArr[addressArr.length - 1]);
-
         } else {
             map.put("province", "未知");
         }
