@@ -1,15 +1,18 @@
-package net.maku.system.controller;
+package net.maku.travel.controller;
 
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
-import net.maku.framework.common.utils.HttpContextUtils;
-import net.maku.framework.common.utils.IpUtils;
+import net.maku.framework.common.utils.PageResult;
 import net.maku.framework.common.utils.Result;
+import net.maku.framework.operatelog.annotations.OperateLog;
+import net.maku.framework.operatelog.enums.OperateTypeEnum;
 import net.maku.framework.security.user.SecurityUser;
+import net.maku.framework.security.user.UserDetail;
 import net.maku.system.convert.SysUserConvert;
 import net.maku.system.entity.SysLogLoginEntity;
 import net.maku.system.entity.SysUserEntity;
@@ -17,11 +20,13 @@ import net.maku.system.service.SysLogLoginService;
 import net.maku.system.service.SysUserService;
 import net.maku.system.vo.SysUserVO;
 import net.maku.travel.entity.SysUserInfoEntity;
+import net.maku.travel.query.TPlanTripMainQuery;
 import net.maku.travel.service.SysUserInfoService;
-import org.springframework.http.HttpHeaders;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import net.maku.travel.service.TPlanTripMainService;
+import net.maku.travel.vo.TPlanTripMainVO;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -35,9 +40,11 @@ public class ApiController {
     private final SysLogLoginService sysLogLoginService;
     private final SysUserInfoService sysUserInfoService;
     private final SysUserService sysUserService;
+    private final TPlanTripMainService tPlanTripMainService;
+    private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/user/info")
-    @Operation(summary = "登录用户")
+    @Operation(summary = "查询登录用户信息")
     public Result<Map> info() {
         SysUserVO user = SysUserConvert.INSTANCE.convert(SecurityUser.getUser());
         SysUserEntity byId = sysUserService.getById(user.getId());
@@ -91,6 +98,25 @@ public class ApiController {
         return Result.ok(map);
     }
 
+    @PostMapping("/user/register")
+    @Operation(summary = "用户注册")
+    @OperateLog(type = OperateTypeEnum.INSERT)
+    @PreAuthorize("hasAuthority('sys:user:save')")
+    public Result<String> save(@RequestBody @Valid SysUserVO vo) {
+        // 新增密码不能为空
+        if (StrUtil.isBlank(vo.getPassword())) {
+            return Result.error("密码不能为空");
+        }
+
+        // 密码加密
+        vo.setPassword(passwordEncoder.encode(vo.getPassword()));
+
+        // 保存
+        sysUserService.save(vo);
+
+        return Result.ok();
+    }
+
     @GetMapping("/message/user_message_count")
     @Operation(summary = "查询用户消息数量")
     public Result<Map> travelInfo() {
@@ -98,6 +124,22 @@ public class ApiController {
         SysUserEntity byId = sysUserService.getById(user.getId());
         Map map = new HashMap<>();
         map.put("data", "0");
+        return Result.ok(map);
+    }
+
+
+    @GetMapping("/travelInfo")
+    @Operation(summary = "查询个人旅游信息资料")
+    public Result<Map> travelUserInfo() {
+        UserDetail user = SecurityUser.getUser();
+        Map map = new HashMap<>();
+
+        //查詢草稿箱的内容
+        TPlanTripMainQuery query = new TPlanTripMainQuery();
+        query.setPage(1);
+        query.setLimit(10);
+        PageResult<TPlanTripMainVO> page = tPlanTripMainService.page(query);
+        map.put("drafts", page.getTotal());
         return Result.ok(map);
     }
 }
