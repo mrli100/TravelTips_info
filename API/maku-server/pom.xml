@@ -10,31 +10,37 @@
     <packaging>jar</packaging>
 
     <dependencies>
+
+        <dependency>
+            <groupId>net.maku</groupId>
+            <artifactId>maku-boot-gen</artifactId>
+            <version>${revision}</version>
+        </dependency>
         <dependency>
             <groupId>net.maku</groupId>
             <artifactId>maku-boot-system</artifactId>
             <version>${revision}</version>
         </dependency>
-<!--        <dependency>
-            <groupId>net.maku</groupId>
-            <artifactId>maku-module-quartz</artifactId>
-            <version>${revision}</version>
-        </dependency>-->
-        <dependency>
-            <groupId>net.maku</groupId>
-            <artifactId>maku-module-generator</artifactId>
-            <version>${revision}</version>
-        </dependency>
-<!--        <dependency>
-            <groupId>net.maku</groupId>
-            <artifactId>maku-module-message</artifactId>
-            <version>${revision}</version>
-        </dependency>-->
-<!--        <dependency>
-            <groupId>net.maku</groupId>
-            <artifactId>maku-module-monitor</artifactId>
-            <version>${revision}</version>
-        </dependency>-->
+        <!--        <dependency>
+                    <groupId>net.maku</groupId>
+                    <artifactId>maku-module-quartz</artifactId>
+                    <version>${revision}</version>
+                </dependency>-->
+        <!--        <dependency>
+                    <groupId>net.maku</groupId>
+                    <artifactId>maku-module-generator</artifactId>
+                    <version>${revision}</version>
+                </dependency>-->
+        <!--        <dependency>
+                    <groupId>net.maku</groupId>
+                    <artifactId>maku-module-message</artifactId>
+                    <version>${revision}</version>
+                </dependency>-->
+        <!--        <dependency>
+                    <groupId>net.maku</groupId>
+                    <artifactId>maku-module-monitor</artifactId>
+                    <version>${revision}</version>
+                </dependency>-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

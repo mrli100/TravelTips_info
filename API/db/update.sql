@@ -1,4 +1,4 @@
-create table traveltips.t_app_sns_circle
+create table traveltips.t_circle
 (
     id          bigint unsigned auto_increment
         primary key,

@@ -1,0 +1,5 @@
+
+
+# 需要指定对应的模板
+generator:
+  template: /template/maku-boot

@@ -17,6 +17,7 @@
     </parent>
 
     <modules>
+        <module>maku-boot-gen</module>
         <module>maku-boot-system</module>
         <module>maku-boot-module</module>
         <module>maku-boot-api</module>

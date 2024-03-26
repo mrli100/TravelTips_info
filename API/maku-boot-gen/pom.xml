@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>net.maku</groupId>
+        <artifactId>maku-boot</artifactId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>maku-boot-gen</artifactId>
+    <packaging>jar</packaging>
+
+
+    <properties>
+        <skipTests>true</skipTests>
+        <mybatisplus.version>3.5.3.1</mybatisplus.version>
+        <hutool.version>5.8.11</hutool.version>
+        <oracle.version>11.2.0.3</oracle.version>
+        <freemarker.version>2.3.31</freemarker.version>
+        <dameng.version>8.1.2.141</dameng.version>
+        <clickhouse.version>0.3.2</clickhouse.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>net.maku</groupId>
+            <artifactId>maku-framework</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <version>${freemarker.version}</version>
+        </dependency>
+    </dependencies>
+
+</project>
