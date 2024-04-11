@@ -12,3 +12,4 @@ auth:
     - /upload/**
     - /
     - /travel/t_app_config/get
+    - /travel/t_pain_log/add

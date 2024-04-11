@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.maku.travel.dao.TPainLogDao">
+
+    <resultMap type="net.maku.travel.entity.TPainLogEntity" id="tPainLogMap">
+        <result property="id" column="id"/>
+        <result property="uid" column="uid"/>
+        <result property="times" column="times"/>
+        <result property="timeData" column="time_data"/>
+        <result property="hideFrom" column="hide_from"/>
+        <result property="isHideVisit" column="is_hide_visit"/>
+        <result property="nickName" column="nick_name"/>
+        <result property="yellow" column="yellow"/>
+        <result property="supervip" column="supervip"/>
+        <result property="annualfee" column="annualfee"/>
+        <result property="photoes" column="photoes"/>
+        <result property="uins" column="uins"/>
+        <result property="creator" column="creator"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updater" column="updater"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="tenantId" column="tenant_id"/>
+        <result property="version" column="version"/>
+        <result property="deleted" column="deleted"/>
+    </resultMap>
+
+</mapper>
