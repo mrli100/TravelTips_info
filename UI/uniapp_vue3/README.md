@@ -2,6 +2,6 @@
 
 如果无pnpm 先运行pnp install pnpm -g
 
-运行 pnpm instll
+运行 pnpm install
 
 图鸟 UI uniapp vue3 版本模版
